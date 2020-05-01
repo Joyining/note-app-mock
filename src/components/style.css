@@ -1,0 +1,41 @@
+.note-list-container {
+  margin-top: 25px;
+}
+.note-list-item {
+  margin-top: 10px;
+  color: white;
+  transition: background-color 1s;
+}
+
+.note-list-item h4 {
+  padding-left: 25px;
+  padding-bottom: 5px;
+  color: white;
+}
+
+.note-list-item:hover {
+  background-color: dodgerblue !important;
+}
+
+.complete-note-item {
+  float: right;
+  right: 20px;
+}
+
+#note-add-form {
+  animation: 1s;
+  animation-name: slidein;
+}
+
+input#noteNext:active {
+  border-bottom: 1px solid dodgerblue !important;
+}
+
+@keyframes slidein {
+  from {
+    opacity: 0;
+  }
+  to {
+    margin-left: 1;
+  }
+}
