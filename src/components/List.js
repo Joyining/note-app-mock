@@ -6,10 +6,13 @@ import ListItem from "./ListItem";
 import "./style.css";
 
 class List extends Component {
-  state = {
-    showForm: false,
-    formValue: "",
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      showForm: false,
+      formValue: "",
+    };
+  }
 
   inputChange = (e) => {
     this.setState({ formValue: e.target.value });
@@ -46,11 +49,11 @@ class List extends Component {
     }
   };
   renderNote() {
-    const { data } = this.props;
-    console.log(data);
-    const notes = _.map(data, (item) => {
-      console.log(item);
-      return <ListItem key={item.id} noteId={item.id} note={item.data()} />;
+    const { stateNotes } = this.props;
+    console.log(stateNotes);
+    const notes = _.map(stateNotes, (note) => {
+      console.log(note);
+      return <ListItem key={note.id} noteId={note.id} note={note.data()} />;
     });
     if (!_.isEmpty(notes)) {
       return notes;
@@ -82,10 +85,11 @@ class List extends Component {
   }
 }
 
-const mapStateToProps = ({ data }) => {
-  return {
-    data,
-  };
+const mapStateToProps = (state) => {
+  console.log(state); // {notes: Array(10)}
+  const stateNotes = state.notes;
+  console.log(stateNotes); // (10) [n, n, n, n, n, n, n, n, n, n]
+  return { stateNotes };
 };
 
 export default connect(mapStateToProps, actions)(List);
