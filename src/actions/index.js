@@ -17,12 +17,11 @@ export const completeNote = (completeNote) => async (dispatch) => {
     console.log("delete data successful");
   });
 };
-// 沒有監聽到資料新增或刪除事件
 export const fetchNotes = () => async (dispatch) => {
   var db = firebase.firestore();
   var ref = db.collection("notes");
 
-  ref.get().then((querySnapshot) => {
+  ref.onSnapshot((querySnapshot) => {
     console.log(querySnapshot);
     dispatch({
       type: FETCH_NOTES,
