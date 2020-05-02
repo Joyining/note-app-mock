@@ -1,5 +1,4 @@
-import { notesRef } from "../firebase";
-// import * as firebase from "../firebase";
+import "../firebase";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
 import { FETCH_NOTES } from "./types";
