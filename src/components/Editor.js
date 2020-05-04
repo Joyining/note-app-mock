@@ -15,7 +15,7 @@ class Editor extends Component {
         <p>current editing: {editingNote.toString()}</p>
         <form>
           <div>
-            <input id="NoteNext" type="text" />
+            <input id="" type="text" />
           </div>
         </form>
       </div>

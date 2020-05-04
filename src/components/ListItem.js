@@ -11,8 +11,12 @@ class ListItem extends Component {
   render() {
     const { noteId, note } = this.props;
     return (
-      <div key="noteName" className="col s10 offset-s1 note-list-item black">
-        <h4 onClick={() => this.edit(noteId)}>{note.title}</h4>
+      <div
+        key="noteName"
+        className="note-item"
+        onClick={() => this.edit(noteId)}
+      >
+        <p>{note.title}</p>
       </div>
     );
   }
