@@ -1,11 +1,11 @@
 import "../firebase";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
-import { FETCH_NOTES } from "./types";
+import { FETCH_NOTES, UPDATE_EDITING_NOTE } from "./types";
 
-export const addNote = (newNote) => async (dispatch) => {
+export const addNote = (noteId, newNote) => async (dispatch) => {
   var db = firebase.firestore();
-  var ref = db.collection("notes").doc();
+  var ref = db.collection("notes").doc(noteId);
   ref.set(newNote);
   console.log("add note !!!!");
 };
@@ -27,5 +27,12 @@ export const fetchNotes = () => async (dispatch) => {
       type: FETCH_NOTES,
       payload: querySnapshot.docs,
     });
+  });
+};
+
+export const updateEditingNote = (noteId) => async (dispatch) => {
+  dispatch({
+    type: UPDATE_EDITING_NOTE,
+    noteId: noteId,
   });
 };
