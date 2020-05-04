@@ -31,8 +31,11 @@ export const fetchNotes = () => async (dispatch) => {
 };
 
 export const updateEditingNote = (noteId) => async (dispatch) => {
+  var db = firebase.firestore();
+  var ref = db.collection("notes").doc(noteId);
   dispatch({
     type: UPDATE_EDITING_NOTE,
     noteId: noteId,
+    noteContent: ref.title ? ref.title : "",
   });
 };

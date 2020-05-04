@@ -34,6 +34,9 @@
   height: 50px;
   border: 1px solid burlywood;
 }
+.edit-area {
+  border: 1px solid chocolate;
+}
 
 @keyframes slidein {
   from {
