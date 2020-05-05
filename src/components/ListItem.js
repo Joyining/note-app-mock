@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { updateEditingNote } from "../actions";
+import parse from "html-react-parser";
 import "./style.css";
 
 class ListItem extends Component {
@@ -11,12 +12,8 @@ class ListItem extends Component {
   render() {
     const { noteId, note } = this.props;
     return (
-      <div
-        key="noteName"
-        className="note-item"
-        onClick={() => this.edit(noteId)}
-      >
-        <p>{note.title}</p>
+      <div id={noteId} className="note-item" onClick={() => this.edit(noteId)}>
+        {parse(note.content)}
       </div>
     );
   }
