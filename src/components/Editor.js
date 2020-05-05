@@ -1,29 +1,31 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { edit } from "../actions";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import "./style.css";
 
 class Editor extends Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   noteContent: "",
-    // };
   }
+
+  onchangeHandler = (value) => {
+    const { edit, editingNote } = this.props;
+    edit(editingNote.noteId, value);
+  };
 
   render() {
     const { editingNote } = this.props;
     return (
       <div className="editor-wrap">
-        <p>this is editor</p>
         <p>current editing: {editingNote.noteId}</p>
         <form>
           <div>
-            <input
-              id="edit-area"
-              type="text"
-              className="edit-area"
+            <ReactQuill
               value={editingNote.noteContent}
-            ></input>
+              onChange={this.onchangeHandler}
+            />
           </div>
         </form>
       </div>
@@ -39,4 +41,4 @@ const mapStateToProps = (state) => {
   return { editingNote };
 };
 
-export default connect(mapStateToProps)(Editor);
+export default connect(mapStateToProps, { edit })(Editor);

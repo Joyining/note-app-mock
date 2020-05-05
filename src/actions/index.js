@@ -9,14 +9,14 @@ export const addNote = (noteId, newNote) => async (dispatch) => {
   ref.set(newNote);
   console.log("add note !!!!");
 };
-export const completeNote = (completeNote) => async (dispatch) => {
-  var db = firebase.firestore();
-  var ref = db.collection("notes").doc(completeNote);
+// export const completeNote = (completeNote) => async (dispatch) => {
+//   var db = firebase.firestore();
+//   var ref = db.collection("notes").doc(completeNote);
 
-  ref.delete().then(() => {
-    console.log("delete data successful");
-  });
-};
+//   ref.delete().then(() => {
+//     console.log("delete data successful");
+//   });
+// };
 export const fetchNotes = () => async (dispatch) => {
   var db = firebase.firestore();
   var ref = db.collection("notes");
@@ -33,9 +33,20 @@ export const fetchNotes = () => async (dispatch) => {
 export const updateEditingNote = (noteId) => async (dispatch) => {
   var db = firebase.firestore();
   var ref = db.collection("notes").doc(noteId);
-  dispatch({
-    type: UPDATE_EDITING_NOTE,
-    noteId: noteId,
-    noteContent: ref.title ? ref.title : "",
+  // ref.get() returns a Promise
+  ref.get().then((doc) => {
+    dispatch({
+      type: UPDATE_EDITING_NOTE,
+      noteId: noteId,
+      noteContent: doc.data().content ? doc.data().content : "",
+    });
+  });
+};
+
+export const edit = (noteId, value) => async (dispatch) => {
+  var db = firebase.firestore();
+  var ref = db.collection("notes").doc(noteId);
+  ref.set({
+    content: value,
   });
 };
