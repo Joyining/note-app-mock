@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { updateEditingNote } from "../actions";
-import parse from "html-react-parser";
+import DOMPurify from "dompurify";
 import "./style.css";
 
 class ListItem extends Component {
@@ -12,9 +12,12 @@ class ListItem extends Component {
   render() {
     const { noteId, note } = this.props;
     return (
-      <div id={noteId} className="note-item" onClick={() => this.edit(noteId)}>
-        {parse(note.content)}
-      </div>
+      <div
+        id={noteId}
+        className="note-item"
+        onClick={() => this.edit(noteId)}
+        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(note.content) }}
+      ></div>
     );
   }
 }
