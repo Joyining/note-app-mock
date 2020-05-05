@@ -39,9 +39,9 @@ class List extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state); // {notes: Array(10)}
+  console.log(state);
   const stateNotes = state.notes;
-  console.log(stateNotes); // (10) [n, n, n, n, n, n, n, n, n, n]
+  console.log(stateNotes);
   return { stateNotes };
 };
 
