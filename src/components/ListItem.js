@@ -9,15 +9,22 @@ class ListItem extends Component {
     const { updateEditingNote } = this.props;
     updateEditingNote(noteId);
   };
+
   render() {
     const { noteId, note } = this.props;
     return (
       <div
         id={noteId}
-        className="note-item"
+        className="note-item-outer"
         onClick={() => this.edit(noteId)}
-        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(note.content) }}
-      ></div>
+      >
+        <div
+          className="note-item-inner"
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(note.content),
+          }}
+        ></div>
+      </div>
     );
   }
 }

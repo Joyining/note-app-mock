@@ -19,15 +19,14 @@ class Editor extends Component {
     const { editingNote } = this.props;
     return (
       <div className="editor-wrap">
-        <p>current editing: {editingNote.noteId}</p>
-        <form>
-          <div>
-            <ReactQuill
-              value={editingNote.noteContent}
-              onChange={this.onchangeHandler}
-            />
-          </div>
-        </form>
+        <p className="editor-top">current editing: {editingNote.noteId}</p>
+        <div>
+          <ReactQuill
+            value={editingNote.noteContent}
+            onChange={this.onchangeHandler}
+          />
+        </div>
+        <p className="editor-bottom">tag area</p>
       </div>
     );
   }

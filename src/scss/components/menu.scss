@@ -1,7 +1,10 @@
 .menu-wrap {
-  width: 33%;
-  border: 1px solid green;
   @import "../base/_base.scss";
+  flex: 0 0 241px;
+  // border: 1px solid green;
   background-color: $--cod-gray;
   color: $--white;
+  .add-btn {
+    background-color: $--evernote-green;
+  }
 }

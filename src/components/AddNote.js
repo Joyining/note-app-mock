@@ -18,7 +18,7 @@ class AddNote extends Component {
 
   render() {
     return (
-      <div className="" onClick={this.clickAddNote}>
+      <div className="add-btn" onClick={this.clickAddNote}>
         Add
       </div>
     );
