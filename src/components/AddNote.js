@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addNote, updateEditingNote } from "../actions";
 import { v4 as uuidv4 } from "uuid";
-import "./style.scss";
+import "../scss/components/menu.scss";
 
 class AddNote extends Component {
   constructor(props) {

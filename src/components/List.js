@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import _ from "lodash";
 import * as actions from "../actions";
 import ListItem from "./ListItem";
-import "./style.scss";
+import "../scss/components/list.scss";
 
 class List extends Component {
   constructor(props) {

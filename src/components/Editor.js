@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { edit } from "../actions";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import "./style.scss";
+import "../scss/components/editor.scss";
 
 class Editor extends Component {
   constructor(props) {
