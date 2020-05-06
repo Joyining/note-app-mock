@@ -17,9 +17,20 @@ class Editor extends Component {
 
   render() {
     const { editingNote } = this.props;
+    const dateObj = editingNote.lastModifiedTime
+      ? editingNote.lastModifiedTime.toDate()
+      : null;
+    const lastModifiedDay = dateObj
+      ? `${dateObj.getFullYear()}/${
+          dateObj.getMonth() + 1
+        }/${dateObj.getDate()}`
+      : "";
     return (
       <div className="editor-wrap">
-        <p className="editor-top">current editing: {editingNote.noteId}</p>
+        <p className="editor-top">
+          <p className="last-modified">Last Modified At: {lastModifiedDay}</p>
+          <p>current editing: {editingNote.noteId}</p>
+        </p>
         <div>
           <ReactQuill
             value={editingNote.noteContent}

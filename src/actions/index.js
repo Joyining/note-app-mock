@@ -21,7 +21,7 @@ export const fetchNotes = () => async (dispatch) => {
   var db = firebase.firestore();
   var ref = db.collection("notes");
 
-  ref.onSnapshot((querySnapshot) => {
+  ref.orderBy("lastModifiedTime", "desc").onSnapshot((querySnapshot) => {
     console.log(querySnapshot);
     dispatch({
       type: FETCH_NOTES,
@@ -35,10 +35,12 @@ export const updateEditingNote = (noteId) => async (dispatch) => {
   var ref = db.collection("notes").doc(noteId);
   // ref.get() returns a Promise
   ref.get().then((doc) => {
+    const data = doc.data();
     dispatch({
       type: UPDATE_EDITING_NOTE,
       noteId: noteId,
-      noteContent: doc.data().content ? doc.data().content : "",
+      noteContent: data.content ? data.content : "",
+      lastModifiedTime: data.lastModifiedTime ? data.lastModifiedTime : "",
     });
   });
 };
@@ -46,7 +48,8 @@ export const updateEditingNote = (noteId) => async (dispatch) => {
 export const edit = (noteId, value) => async (dispatch) => {
   var db = firebase.firestore();
   var ref = db.collection("notes").doc(noteId);
-  ref.set({
+  ref.update({
     content: value,
+    lastModifiedTime: new Date(),
   });
 };

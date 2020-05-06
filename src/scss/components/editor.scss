@@ -3,9 +3,13 @@
   flex-grow: 1;
   .editor-top,
   .editor-bottom {
-    background-color: $--evernote-green;
+    // background-color: $--evernote-green;
     height: 52px;
     box-sizing: border-box;
+    .last-modified {
+      color: $--silver-chalice;
+      font-size: 13px;
+    }
   }
   .quill {
     .ql-container {

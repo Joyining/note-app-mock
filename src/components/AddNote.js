@@ -12,7 +12,7 @@ class AddNote extends Component {
   clickAddNote = () => {
     const { addNote, updateEditingNote } = this.props;
     const noteId = uuidv4();
-    addNote(noteId, {});
+    addNote(noteId, { createdTime: new Date(), lastModifiedTime: new Date() });
     updateEditingNote(noteId);
   };
 
