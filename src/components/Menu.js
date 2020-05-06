@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import AddNote from "./AddNote.js";
-import "./style.css";
+import "./style.scss";
 
 class Menu extends Component {
   constructor(props) {
