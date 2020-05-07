@@ -3,7 +3,7 @@ export default (state = {}, action) => {
   // The reducer is actually a function that has two arguments — the initial state and action
   switch (action.type) {
     case FETCH_NOTES:
-      return action.payload;
+      return action.allNotes;
     default:
       return state;
   }

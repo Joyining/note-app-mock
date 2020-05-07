@@ -7,9 +7,9 @@ import "../scss/components/list.scss";
 
 class List extends Component {
   renderNote() {
-    const { stateNotes } = this.props;
-    console.log(stateNotes);
-    const notes = _.map(stateNotes, (note) => {
+    const { allNotes } = this.props;
+    console.log(allNotes);
+    const notes = _.map(allNotes, (note) => {
       console.log(note);
       return <ListItem key={note.id} noteId={note.id} note={note.data()} />;
     });
@@ -36,9 +36,9 @@ class List extends Component {
 
 const mapStateToProps = (state) => {
   console.log(state);
-  const stateNotes = state.notes;
-  console.log(stateNotes);
-  return { stateNotes };
+  const allNotes = state.allNotes;
+  console.log(allNotes);
+  return { allNotes };
 };
 
 export default connect(mapStateToProps, actions)(List);
