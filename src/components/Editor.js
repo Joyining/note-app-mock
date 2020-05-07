@@ -6,13 +6,11 @@ import "react-quill/dist/quill.snow.css";
 import "../scss/components/editor.scss";
 
 class Editor extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   onchangeHandler = (value) => {
     const { edit, editingNote } = this.props;
-    edit(editingNote.noteId, value);
+    if (editingNote.noteId) {
+      edit(editingNote.noteId, value);
+    }
   };
 
   render() {
@@ -27,13 +25,13 @@ class Editor extends Component {
       : "";
     return (
       <div className="editor-wrap">
-        <p className="editor-top">
+        <div className="editor-top">
           <p className="last-modified">Last Modified At: {lastModifiedDay}</p>
           <p>current editing: {editingNote.noteId}</p>
-        </p>
+        </div>
         <div>
           <ReactQuill
-            value={editingNote.noteContent}
+            value={editingNote.noteContent || ""}
             onChange={this.onchangeHandler}
           />
         </div>
@@ -46,8 +44,8 @@ class Editor extends Component {
 const mapStateToProps = (state) => {
   console.log(state);
   const editingNote = state.editingNote;
-  console.log(editingNote.noteId);
-  console.log(editingNote.noteContent);
+  // console.log(editingNote.noteId);
+  // console.log(editingNote.noteContent);
   return { editingNote };
 };
 

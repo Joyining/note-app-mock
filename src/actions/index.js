@@ -23,9 +23,17 @@ export const fetchNotes = () => async (dispatch) => {
 
   ref.orderBy("lastModifiedTime", "desc").onSnapshot((querySnapshot) => {
     console.log(querySnapshot);
+    const firstNoteData = querySnapshot.docs[0].data();
     dispatch({
       type: FETCH_NOTES,
-      payload: querySnapshot.docs,
+      allNotes: querySnapshot.docs,
+      firstNote: {
+        noteId: querySnapshot.docs[0].id,
+        noteContent: firstNoteData.content ? firstNoteData.content : "",
+        lastModifiedTime: firstNoteData.lastModifiedTime
+          ? firstNoteData.lastModifiedTime
+          : "",
+      },
     });
   });
 };
