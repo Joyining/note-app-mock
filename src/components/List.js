@@ -6,10 +6,6 @@ import ListItem from "./ListItem";
 import "../scss/components/list.scss";
 
 class List extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   renderNote() {
     const { stateNotes } = this.props;
     console.log(stateNotes);

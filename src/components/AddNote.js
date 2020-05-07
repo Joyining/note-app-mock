@@ -5,10 +5,6 @@ import { v4 as uuidv4 } from "uuid";
 import "../scss/components/menu.scss";
 
 class AddNote extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   clickAddNote = () => {
     const { addNote, updateEditingNote } = this.props;
     const noteId = uuidv4();
