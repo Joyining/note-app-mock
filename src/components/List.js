@@ -8,9 +8,7 @@ import "../scss/components/list.scss";
 class List extends Component {
   renderNote() {
     const { allNotes } = this.props;
-    console.log(allNotes);
     const notes = _.map(allNotes, (note) => {
-      console.log(note);
       return <ListItem key={note.id} noteId={note.id} note={note.data()} />;
     });
     if (!_.isEmpty(notes)) {
@@ -23,7 +21,8 @@ class List extends Component {
     );
   }
   componentDidMount() {
-    this.props.fetchNotes();
+    const { fetchNotes } = this.props;
+    fetchNotes();
   }
   render() {
     return (
@@ -35,9 +34,7 @@ class List extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   const allNotes = state.allNotes;
-  console.log(allNotes);
   return { allNotes };
 };
 
