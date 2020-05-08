@@ -6,22 +6,76 @@ import "react-quill/dist/quill.snow.css";
 import "../scss/components/editor.scss";
 
 class Editor extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      accumulatedOnchangeCount: 1,
+      localEditorValue: "",
+      localEditorValueId: "",
+    };
+  }
+
   onchangeHandler = (value) => {
-    const { edit, editingNote } = this.props;
+    let {
+      accumulatedOnchangeCount,
+      localEditorValueId,
+      localEditorValue,
+    } = this.state;
+    const { edit, editingNote, isEditing } = this.props;
+    console.log(`onChange !!!!!!! ${value}`);
+    console.log("before: " + accumulatedOnchangeCount);
+    console.log(editingNote.noteId);
+
+    if (isEditing !== true && isEditing !== false) {
+      this.setState({
+        accumulatedOnchangeCount: 1,
+        localEditorValue: value,
+        localEditorValueId: editingNote.noteId,
+      });
+    } else if (isEditing === true) {
+      this.setState({
+        accumulatedOnchangeCount: accumulatedOnchangeCount + 1,
+        localEditorValue: value,
+        localEditorValueId: editingNote.noteId,
+      });
+    } else if (isEditing === false) {
+      this.setState({
+        accumulatedOnchangeCount: 1,
+        localEditorValue: value,
+        localEditorValueId: editingNote.noteId,
+      });
+      if (localEditorValueId) {
+        edit(localEditorValueId, localEditorValue, isEditing);
+      }
+    }
+
+    console.log("after: " + accumulatedOnchangeCount); // 加一後，下一次才會生效
+
     if (editingNote.noteId) {
-      edit(editingNote.noteId, value);
+      if (accumulatedOnchangeCount === 1) {
+        this.setState({
+          localEditorValue: value,
+        });
+        edit(editingNote.noteId, value, isEditing);
+      } else if (
+        accumulatedOnchangeCount !== 0 &&
+        accumulatedOnchangeCount % 5 === 0
+      ) {
+        edit(editingNote.noteId, value, isEditing);
+      }
     }
   };
 
   render() {
-    const { editingNote } = this.props;
+    const { editingNote, isEditing } = this.props;
+    const { localEditorValue } = this.state;
     const dateObj = editingNote.lastModifiedTime
       ? editingNote.lastModifiedTime.toDate()
       : null;
     const lastModifiedDay = dateObj
       ? `${dateObj.getFullYear()}/${
           dateObj.getMonth() + 1
-        }/${dateObj.getDate()}`
+        }/${dateObj.getDate()}  ${dateObj.getHours()}:${dateObj.getMinutes()}:${dateObj.getSeconds()}`
       : "";
     return (
       <div className="editor-wrap">
@@ -31,7 +85,7 @@ class Editor extends Component {
         </div>
         <div>
           <ReactQuill
-            value={editingNote.noteContent || ""}
+            value={isEditing ? localEditorValue : editingNote.noteContent}
             onChange={this.onchangeHandler}
           />
         </div>
@@ -44,9 +98,10 @@ class Editor extends Component {
 const mapStateToProps = (state) => {
   console.log(state);
   const editingNote = state.editingNote;
+  const isEditing = state.isEditing;
   // console.log(editingNote.noteId);
   // console.log(editingNote.noteContent);
-  return { editingNote };
+  return { editingNote, isEditing };
 };
 
 export default connect(mapStateToProps, { edit })(Editor);
