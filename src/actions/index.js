@@ -17,12 +17,15 @@ export const addNote = (noteId, newNote) => async (dispatch) => {
 //     console.log("delete data successful");
 //   });
 // };
-export const fetchNotes = () => async (dispatch) => {
+export const fetchNotes = () => async (dispatch, getState) => {
+  // 若一開始用傳參數的方式將state裡的isEditing傳給fetchNotes， 他會一直是一開始的空物件
   var db = firebase.firestore();
   var ref = db.collection("notes");
 
   ref.orderBy("lastModifiedTime", "desc").onSnapshot((querySnapshot) => {
-    console.log(querySnapshot);
+    // 要在onSnapshot時拿到最新的isEditing
+    const state = getState();
+    console.log(state);
     const firstNoteData = querySnapshot.docs[0].data();
     dispatch({
       type: FETCH_NOTES,
@@ -34,6 +37,7 @@ export const fetchNotes = () => async (dispatch) => {
           ? firstNoteData.lastModifiedTime
           : "",
       },
+      isEditing: typeof state.isEditing !== "boolean" ? false : true,
     });
   });
 };
@@ -49,15 +53,32 @@ export const updateEditingNote = (noteId) => async (dispatch) => {
       noteId: noteId,
       noteContent: data.content ? data.content : "",
       lastModifiedTime: data.lastModifiedTime ? data.lastModifiedTime : "",
+      isEditing: false,
     });
   });
 };
 
-export const edit = (noteId, value) => async (dispatch) => {
+export const edit = (noteId, value, isEditing) => async (dispatch) => {
   var db = firebase.firestore();
   var ref = db.collection("notes").doc(noteId);
-  ref.update({
-    content: value,
-    lastModifiedTime: new Date(),
-  });
+  if (isEditing === false) {
+    // 如果前一次的Quill onChange是user click ListItem
+    // 則檢查value是否跟database裡的資料一樣
+    console.log("need to check sameContent");
+    ref.get().then((doc) => {
+      const content = doc.data().content;
+      var sameContent = value === content ? true : false;
+      if (!sameContent) {
+        ref.update({
+          content: value,
+          lastModifiedTime: new Date(),
+        });
+      }
+    });
+  } else {
+    ref.update({
+      content: value,
+      lastModifiedTime: new Date(),
+    });
+  }
 };
