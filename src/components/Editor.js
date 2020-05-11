@@ -9,66 +9,61 @@ class Editor extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      accumulatedOnchangeCount: 1,
+      // accumulatedOnchangeCount: 1,
       localEditorValue: "",
-      localEditorValueId: "",
+      localNoteId: "",
     };
   }
 
   onchangeHandler = (value) => {
     let {
-      accumulatedOnchangeCount,
-      localEditorValueId,
+      // accumulatedOnchangeCount,
+      localNoteId,
       localEditorValue,
     } = this.state;
     const { edit, editingNote, isEditing } = this.props;
     console.log(`onChange !!!!!!! ${value}`);
-    console.log("before: " + accumulatedOnchangeCount);
     console.log(editingNote.noteId);
 
     if (isEditing !== true && isEditing !== false) {
       this.setState({
-        accumulatedOnchangeCount: 1,
+        // accumulatedOnchangeCount: 1,
         localEditorValue: value,
-        localEditorValueId: editingNote.noteId,
+        localNoteId: editingNote.noteId,
       });
     } else if (isEditing === true) {
       this.setState({
-        accumulatedOnchangeCount: accumulatedOnchangeCount + 1,
+        // accumulatedOnchangeCount: accumulatedOnchangeCount + 1,
         localEditorValue: value,
-        localEditorValueId: editingNote.noteId,
+        localNoteId: editingNote.noteId,
       });
     } else if (isEditing === false) {
       this.setState({
-        accumulatedOnchangeCount: 1,
+        // accumulatedOnchangeCount: 1,
         localEditorValue: value,
-        localEditorValueId: editingNote.noteId,
+        localNoteId: editingNote.noteId,
       });
-      if (localEditorValueId) {
-        edit(localEditorValueId, localEditorValue, isEditing);
-      }
+      // 前一次動作為切換note時，將之前的編輯結果edit出去
+      // if (localNoteId) {
+      //   edit(localNoteId, localEditorValue, isEditing);
+      // }
     }
 
-    console.log("after: " + accumulatedOnchangeCount); // 加一後，下一次才會生效
+    // console.log("after: " + accumulatedOnchangeCount); // 加一後，下一次才會生效
 
     if (editingNote.noteId) {
-      if (accumulatedOnchangeCount === 1) {
-        this.setState({
-          localEditorValue: value,
-        });
-        edit(editingNote.noteId, value, isEditing);
-      } else if (
-        accumulatedOnchangeCount !== 0 &&
-        accumulatedOnchangeCount % 5 === 0
-      ) {
-        edit(editingNote.noteId, value, isEditing);
-      }
+      // if (
+      //   accumulatedOnchangeCount === 1 ||
+      //   (accumulatedOnchangeCount !== 0 && accumulatedOnchangeCount % 5 === 0)
+      // ) {
+      edit(editingNote.noteId, value, isEditing);
+      // }
     }
   };
 
   render() {
     const { editingNote, isEditing } = this.props;
-    const { localEditorValue } = this.state;
+    const { localEditorValue, localNoteId } = this.state;
     const dateObj = editingNote.lastModifiedTime
       ? editingNote.lastModifiedTime.toDate()
       : null;
@@ -83,9 +78,16 @@ class Editor extends Component {
           <p className="last-modified">Last Modified At: {lastModifiedDay}</p>
           <p>current editing: {editingNote.noteId}</p>
         </div>
+        {console.log("isEditing: " + isEditing)}
+        {console.log(`localNoteId: ${localNoteId}`)}
+        {console.log(`editingNote.noteId: ${editingNote.noteId}`)}
         <div>
           <ReactQuill
-            value={isEditing ? localEditorValue : editingNote.noteContent}
+            value={
+              localNoteId === editingNote.noteId
+                ? localEditorValue
+                : editingNote.noteContent
+            }
             onChange={this.onchangeHandler}
           />
         </div>
