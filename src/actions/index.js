@@ -69,10 +69,13 @@ export const edit = (noteId, value, isEditing) => async (dispatch) => {
       const content = doc.data().content;
       var sameContent = value === content ? true : false;
       if (!sameContent) {
+        console.log("not same");
         ref.update({
           content: value,
           lastModifiedTime: new Date(),
         });
+      } else {
+        console.log("same");
       }
     });
   } else {
