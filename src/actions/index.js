@@ -9,14 +9,15 @@ export const addNote = (noteId, newNote) => async (dispatch) => {
   ref.set(newNote);
   console.log("add note !!!!");
 };
-// export const completeNote = (completeNote) => async (dispatch) => {
-//   var db = firebase.firestore();
-//   var ref = db.collection("notes").doc(completeNote);
+export const deleteNote = (noteId) => async (dispatch) => {
+  console.log("delete note action");
+  var db = firebase.firestore();
+  var ref = db.collection("notes").doc(noteId);
 
-//   ref.delete().then(() => {
-//     console.log("delete data successful");
-//   });
-// };
+  ref.delete().then(() => {
+    console.log("delete data successful");
+  });
+};
 export const fetchNotes = () => async (dispatch, getState) => {
   // 若一開始用傳參數的方式將state裡的isEditing傳給fetchNotes， 他會一直是一開始的空物件
   var db = firebase.firestore();

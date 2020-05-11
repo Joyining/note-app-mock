@@ -4,8 +4,11 @@
   .editor-top,
   .editor-bottom {
     // background-color: $--evernote-green;
+    display: flex;
+    justify-content: space-between;
     height: 52px;
     box-sizing: border-box;
+    padding: 8px;
     .last-modified {
       color: $--silver-chalice;
       font-size: 13px;

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { edit } from "../actions";
 import ReactQuill from "react-quill";
+import EditorMenu from "./EditorMenu";
 import "react-quill/dist/quill.snow.css";
 import "../scss/components/editor.scss";
 
@@ -75,9 +76,13 @@ class Editor extends Component {
     return (
       <div className="editor-wrap">
         <div className="editor-top">
-          <p className="last-modified">Last Modified At: {lastModifiedDay}</p>
-          <p>current editing: {editingNote.noteId}</p>
+          <div className="last-modified">
+            <p>Last Modified At: {lastModifiedDay}</p>
+            <p>current editing: {editingNote.noteId}</p>
+          </div>
+          <EditorMenu />
         </div>
+
         {console.log("isEditing: " + isEditing)}
         {console.log(`localNoteId: ${localNoteId}`)}
         {console.log(`editingNote.noteId: ${editingNote.noteId}`)}
