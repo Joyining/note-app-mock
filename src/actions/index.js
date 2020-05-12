@@ -38,6 +38,7 @@ export const fetchNotes = () => async (dispatch, getState) => {
         lastModifiedTime: firstNoteData.lastModifiedTime
           ? firstNoteData.lastModifiedTime
           : "",
+        createdTime: firstNoteData.createdTime ? firstNoteData.createdTime : "",
       },
       isEditing: typeof state.isEditing !== "boolean" ? false : true,
     });
@@ -56,6 +57,7 @@ export const updateEditingNote = (noteId) => async (dispatch) => {
       content: data.content ? data.content : "",
       title: data.title ? data.title : "",
       lastModifiedTime: data.lastModifiedTime ? data.lastModifiedTime : "",
+      createdTime: data.createdTime ? data.createdTime : "",
       isEditing: false,
     });
   });
