@@ -1,5 +1,5 @@
+@import "../base/_base.scss";
 .editor-menu-wrap {
-  @import "../base/_base.scss";
   position: relative;
   .icon {
     width: $--editor-menu-icon-width;
@@ -19,14 +19,74 @@
     right: 0;
     top: 34px;
     width: 150px;
-    background-color: white;
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
-    border-radius: 3px;
+    @extend %box-style;
     &.show {
       display: block;
     }
     .menu-item {
       padding: 6px 20px;
+      color: $--title-gray;
+      font: {
+        weight: 500px;
+        size: 14px;
+      }
+    }
+  }
+}
+.light-box {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: $--light-box-bg;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  &.show {
+    display: flex;
+  }
+  .light-box-message-wrap {
+    @extend %box-style;
+    padding: 20px;
+    position: relative;
+    z-index: 2;
+    width: 500px;
+    box-sizing: border-box;
+    .heading-wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .cancel-icon {
+        fill: $--silver-chalice;
+      }
+    }
+    .message {
+      font: {
+        size: 14px;
+        weight: 300;
+        color: $--note-item-font-gray;
+      }
+      padding: 16px 0;
+      .note-title {
+        font-weight: bold;
+      }
+    }
+    .btn-wrap {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      .btn {
+        @extend %btn-style;
+        margin-left: 10px;
+        &.general-btn {
+          @extend %general-btn-style;
+        }
+        &.warning-btn {
+          @extend %warning-btn-style;
+        }
+      }
     }
   }
 }
