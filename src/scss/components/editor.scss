@@ -19,7 +19,6 @@
       height: calc(
         100vh - (2 * 52px) - (42px)
       ); // 100vh - top - bottom - toolbar height
-      border: 1px solid red;
       overflow-y: scroll;
       padding: 10px;
     }
