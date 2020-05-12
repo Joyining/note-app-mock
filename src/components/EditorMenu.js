@@ -55,10 +55,18 @@ class EditorMenu extends Component {
     const { addNote, updateEditingNote, editingNote } = this.props;
     const noteId = uuidv4();
     this.menuOnClickHandler();
+    let newTitle = "";
+    if (editingNote.content) {
+      const insertPoint = editingNote.content.indexOf(">");
+      newTitle = `${editingNote.content.slice(
+        0,
+        insertPoint + 1
+      )}Copy of ${editingNote.content.slice(insertPoint + 1)}`;
+    }
     addNote(noteId, {
       createdTime: new Date(),
       lastModifiedTime: new Date(),
-      content: `<span>Copy of </span>${editingNote.content}`,
+      content: newTitle,
     });
     updateEditingNote(noteId);
   };
