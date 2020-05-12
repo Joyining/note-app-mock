@@ -3,10 +3,14 @@ import { firebase } from "@firebase/app";
 import "@firebase/auth";
 import { FETCH_NOTES, UPDATE_EDITING_NOTE } from "./types";
 
-export const addNote = (noteId, newNote) => async (dispatch) => {
+export const addNote = (noteId, content = "") => async (dispatch) => {
   var db = firebase.firestore();
   var ref = db.collection("notes").doc(noteId);
-  ref.set(newNote);
+  ref.set({
+    createdTime: new Date(),
+    lastModifiedTime: new Date(),
+    content: content,
+  });
   console.log("add note !!!!");
 };
 export const deleteNote = (noteId) => async (dispatch) => {
