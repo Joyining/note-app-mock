@@ -11,6 +11,9 @@
     border: 1px solid $--mercury;
     font-size: 14px;
     color: $--note-item-font-gray;
+    &.active {
+      background-color: $--concrete;
+    }
     .note-item-inner {
       width: 100%;
       height: 100%;

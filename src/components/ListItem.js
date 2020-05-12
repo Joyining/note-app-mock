@@ -11,11 +11,13 @@ class ListItem extends Component {
   };
 
   render() {
-    const { noteId, note } = this.props;
+    const { noteId, note, editingNote } = this.props;
     return (
       <div
         id={noteId}
-        className="note-item-outer"
+        className={`note-item-outer ${
+          editingNote.id === noteId ? "active" : ""
+        }`}
         onClick={() => this.edit(noteId)}
       >
         <div
@@ -29,6 +31,11 @@ class ListItem extends Component {
   }
 }
 
-export default connect(null, { updateEditingNote })(ListItem);
+const mapStateToProps = (state) => {
+  const editingNote = state.editingNote;
+  return { editingNote };
+};
+
+export default connect(mapStateToProps, { updateEditingNote })(ListItem);
 
 // This file will render each individual Note item. When clicking each Note item, it will update the current editing Note. This is achieved with the help of the updateEditingNote action that we had created in the actions section of this post. The actions are connected to the component with the help of the connect method of react-redux library.

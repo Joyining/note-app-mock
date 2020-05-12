@@ -1,6 +1,7 @@
 @import "../base/_base.scss";
 .editor-menu-wrap {
   position: relative;
+  height: 100%;
   .icon {
     width: $--editor-menu-icon-width;
     height: 100%;
