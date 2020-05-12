@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { addNote, updateEditingNote } from "../actions";
 import { v4 as uuidv4 } from "uuid";
 import DeleteNoteLightBox from "./DeleteNoteLightBox";
+import NoteDetailLightBox from "./NoteDetailLightBox";
 import "../scss/components/editorMenu.scss";
 
 class EditorMenu extends Component {
@@ -20,7 +21,8 @@ class EditorMenu extends Component {
     switch (currentLightBox) {
       case "deleteNote":
         return <DeleteNoteLightBox toggleLightBox={this.toggleLightBox} />;
-
+      case "viewNoteDetail":
+        return <NoteDetailLightBox toggleLightBox={this.toggleLightBox} />;
       default:
         break;
     }
@@ -71,11 +73,20 @@ class EditorMenu extends Component {
     updateEditingNote(noteId);
   };
 
+  viewNoteDetailOnClickHandler = (e) => {
+    this.menuOnClickHandler();
+    this.toggleLightBox(e);
+    this.setState({
+      currentLightBox: "viewNoteDetail",
+    });
+  };
+
   render() {
     const { showMenu, showLightBox } = this.state;
     const menu = [
       { name: "Delete Note", onClick: this.deleteNoteOnClickHandler },
       { name: "Copy Note", onClick: this.copyNoteOnClickHandler },
+      { name: "View Note Detail", onClick: this.viewNoteDetailOnClickHandler },
     ];
     return (
       <div>

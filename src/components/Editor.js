@@ -78,7 +78,7 @@ class Editor extends Component {
         <div className="editor-top">
           <div className="last-modified">
             <p>Last Modified At: {lastModifiedDay}</p>
-            <p>current editing: {editingNote.title}</p>
+            {/* <p>current editing: {editingNote.title}</p> */}
             <p>current editing: {editingNote.id}</p>
           </div>
           <EditorMenu />
