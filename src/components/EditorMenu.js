@@ -20,7 +20,7 @@ class EditorMenu extends Component {
 
   deleteNoteOnClickHandler = () => {
     const { editingNote, deleteNote } = this.props;
-    deleteNote(editingNote.noteId);
+    deleteNote(editingNote.id);
     this.menuOnClickHandler();
   };
 
@@ -58,8 +58,8 @@ const mapStateToProps = (state) => {
   console.log(state);
   const editingNote = state.editingNote;
   const isEditing = state.isEditing;
-  // console.log(editingNote.noteId);
-  // console.log(editingNote.noteContent);
+  // console.log(editingNote.id);
+  // console.log(editingNote.content);
   return { editingNote, isEditing };
 };
 

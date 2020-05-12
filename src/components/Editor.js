@@ -24,25 +24,25 @@ class Editor extends Component {
     } = this.state;
     const { edit, editingNote, isEditing } = this.props;
     console.log(`onChange !!!!!!! ${value}`);
-    console.log(editingNote.noteId);
+    console.log(editingNote.id);
 
     if (isEditing !== true && isEditing !== false) {
       this.setState({
         // accumulatedOnchangeCount: 1,
         localEditorValue: value,
-        localNoteId: editingNote.noteId,
+        localNoteId: editingNote.id,
       });
     } else if (isEditing === true) {
       this.setState({
         // accumulatedOnchangeCount: accumulatedOnchangeCount + 1,
         localEditorValue: value,
-        localNoteId: editingNote.noteId,
+        localNoteId: editingNote.id,
       });
     } else if (isEditing === false) {
       this.setState({
         // accumulatedOnchangeCount: 1,
         localEditorValue: value,
-        localNoteId: editingNote.noteId,
+        localNoteId: editingNote.id,
       });
       // 前一次動作為切換note時，將之前的編輯結果edit出去
       // if (localNoteId) {
@@ -52,12 +52,12 @@ class Editor extends Component {
 
     // console.log("after: " + accumulatedOnchangeCount); // 加一後，下一次才會生效
 
-    if (editingNote.noteId) {
+    if (editingNote.id) {
       // if (
       //   accumulatedOnchangeCount === 1 ||
       //   (accumulatedOnchangeCount !== 0 && accumulatedOnchangeCount % 5 === 0)
       // ) {
-      edit(editingNote.noteId, value, isEditing);
+      edit(editingNote.id, value, isEditing);
       // }
     }
   };
@@ -78,21 +78,21 @@ class Editor extends Component {
         <div className="editor-top">
           <div className="last-modified">
             <p>Last Modified At: {lastModifiedDay}</p>
-            <p>current editing: {editingNote.noteTitle}</p>
-            <p>current editing: {editingNote.noteId}</p>
+            <p>current editing: {editingNote.title}</p>
+            <p>current editing: {editingNote.id}</p>
           </div>
           <EditorMenu />
         </div>
 
         {console.log("isEditing: " + isEditing)}
         {console.log(`localNoteId: ${localNoteId}`)}
-        {console.log(`editingNote.noteId: ${editingNote.noteId}`)}
+        {console.log(`editingNote.id: ${editingNote.id}`)}
         <div>
           <ReactQuill
             value={
-              localNoteId === editingNote.noteId
+              localNoteId === editingNote.id
                 ? localEditorValue
-                : editingNote.noteContent
+                : editingNote.content
             }
             onChange={this.onchangeHandler}
           />
@@ -107,8 +107,8 @@ const mapStateToProps = (state) => {
   console.log(state);
   const editingNote = state.editingNote;
   const isEditing = state.isEditing;
-  // console.log(editingNote.noteId);
-  // console.log(editingNote.noteContent);
+  // console.log(editingNote.id);
+  // console.log(editingNote.content);
   return { editingNote, isEditing };
 };
 

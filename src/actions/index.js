@@ -32,9 +32,9 @@ export const fetchNotes = () => async (dispatch, getState) => {
       type: FETCH_NOTES,
       allNotes: querySnapshot.docs,
       firstNote: {
-        noteId: querySnapshot.docs[0].id,
-        noteContent: firstNoteData.content ? firstNoteData.content : "",
-        noteTitle: firstNoteData.title ? firstNoteData.title : "",
+        id: querySnapshot.docs[0].id,
+        content: firstNoteData.content ? firstNoteData.content : "",
+        title: firstNoteData.title ? firstNoteData.title : "",
         lastModifiedTime: firstNoteData.lastModifiedTime
           ? firstNoteData.lastModifiedTime
           : "",
@@ -52,9 +52,9 @@ export const updateEditingNote = (noteId) => async (dispatch) => {
     const data = doc.data();
     dispatch({
       type: UPDATE_EDITING_NOTE,
-      noteId: noteId,
-      noteContent: data.content ? data.content : "",
-      noteTitle: data.title ? data.title : "",
+      id: noteId,
+      content: data.content ? data.content : "",
+      title: data.title ? data.title : "",
       lastModifiedTime: data.lastModifiedTime ? data.lastModifiedTime : "",
       isEditing: false,
     });
@@ -87,7 +87,7 @@ export const edit = (noteId, value, isEditing) => async (dispatch) => {
     ref.get().then((doc) => {
       const content = doc.data().content;
       var sameContent = value === content ? true : false;
-      title = doc.data().title; // 先初始化
+      title = doc.data().title ? doc.data().title : ""; // 先初始化
 
       if (!sameContent) {
         console.log("not same");
