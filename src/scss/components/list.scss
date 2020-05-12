@@ -1,11 +1,16 @@
+$--note-item-outer-height: 120px;
+$--note-item-inner-height: 63px;
+$--note-item-outer-paddingY: 16px;
+$--note-item-outer-paddingX: 26px;
+
 .list-wrap {
   @import "../base/_base.scss";
   flex: 0 0 293px;
   height: 100%;
   overflow-y: scroll;
   .note-item-outer {
-    height: 120px;
-    padding: 16px 26px;
+    height: $--note-item-outer-height;
+    padding: $--note-item-outer-paddingY $--note-item-outer-paddingX;
     box-sizing: border-box;
     background-color: $--alabaster;
     border: 1px solid $--mercury;
@@ -16,7 +21,7 @@
     }
     .note-item-inner {
       width: 100%;
-      height: 100%;
+      height: $--note-item-inner-height;
       overflow: hidden;
       :first-child {
         color: $--title-gray;
@@ -28,6 +33,14 @@
         font-size: 14px;
         font-weight: normal;
       }
+    }
+    .last-modified {
+      font-size: 12px;
+      color: $--silver-chalice;
+      height: $--note-item-outer-height - $--note-item-inner-height -
+        ($--note-item-outer-paddingY * 2);
+      line-height: $--note-item-outer-height - $--note-item-inner-height -
+        ($--note-item-outer-paddingY * 2);
     }
   }
 }
