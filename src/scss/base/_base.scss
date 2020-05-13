@@ -25,6 +25,13 @@ $--editor-menu-icon-width: 24px;
 }
 .main-wrap {
   flex-grow: 1;
+  .empty-note-message {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 %box-style {

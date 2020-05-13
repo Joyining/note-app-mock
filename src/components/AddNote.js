@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addNote, updateEditingNote } from "../actions";
+import * as actions from "../actions";
 import { v4 as uuidv4 } from "uuid";
-import "../scss/components/side.scss";
+import "../scss/components/addNote.scss";
 
 class AddNote extends Component {
   clickAddNote = () => {
-    const { addNote, updateEditingNote } = this.props;
+    const { addNote, updateEditingNote, switchView } = this.props;
     const noteId = uuidv4();
     addNote(noteId);
     updateEditingNote(noteId);
+    switchView("noteAndEditor");
   };
 
   render() {
@@ -21,4 +22,4 @@ class AddNote extends Component {
   }
 }
 
-export default connect(null, { addNote, updateEditingNote })(AddNote);
+export default connect(null, actions)(AddNote);
