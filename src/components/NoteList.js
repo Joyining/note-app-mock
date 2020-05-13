@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import _ from "lodash";
 import * as actions from "../actions";
-import ListItem from "./ListItem";
+import NoteListItem from "./NoteListItem";
 import "../scss/components/noteList.scss";
 
 class NoteList extends Component {
   renderNote() {
     const { allNotes } = this.props;
     const notes = _.map(allNotes, (note) => {
-      return <ListItem key={note.id} noteId={note.id} note={note.data()} />;
+      return <NoteListItem key={note.id} noteId={note.id} note={note.data()} />;
     });
     if (!_.isEmpty(notes)) {
       return notes;

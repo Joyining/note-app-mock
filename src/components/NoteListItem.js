@@ -4,7 +4,7 @@ import { updateEditingNote } from "../actions";
 import DOMPurify from "dompurify";
 import "../scss/components/noteList.scss";
 
-class ListItem extends Component {
+class NoteListItem extends Component {
   edit = (noteId) => {
     const { updateEditingNote } = this.props;
     updateEditingNote(noteId);
@@ -68,6 +68,6 @@ const mapStateToProps = (state) => {
   return { editingNote };
 };
 
-export default connect(mapStateToProps, { updateEditingNote })(ListItem);
+export default connect(mapStateToProps, { updateEditingNote })(NoteListItem);
 
 // This file will render each individual Note item. When clicking each Note item, it will update the current editing Note. This is achieved with the help of the updateEditingNote action that we had created in the actions section of this post. The actions are connected to the component with the help of the connect method of react-redux library.
