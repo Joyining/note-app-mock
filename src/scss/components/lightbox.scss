@@ -68,6 +68,9 @@
         &.warning-btn {
           @extend %warning-btn-style;
         }
+        &.highlight-btn {
+          @extend %highlight-btn-style;
+        }
       }
     }
   }

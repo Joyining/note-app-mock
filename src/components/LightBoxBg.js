@@ -4,13 +4,18 @@ import "../scss/components/lightbox.scss";
 
 class LightBoxBg extends Component {
   render() {
-    const { showLightBox, toggleLightBox, renderLightBoxMessage } = this.props;
+    const {
+      showLightBox,
+      toggleLightBox,
+      renderLightBoxMessage,
+      renderParameters,
+    } = this.props;
     return (
       <div
         className={showLightBox ? "light-box show" : "light-box"}
         onClick={toggleLightBox}
       >
-        {renderLightBoxMessage()}
+        {renderLightBoxMessage(renderParameters)}
       </div>
     );
   }
