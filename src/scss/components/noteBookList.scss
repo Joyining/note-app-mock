@@ -1,5 +1,6 @@
 .notebook-list-wrap {
   display: none;
+  width: 100%;
   @import "../base/_base.scss";
   &.show {
     display: block;
