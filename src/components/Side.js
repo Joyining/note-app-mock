@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import AddNote from "./AddNote.js";
-import "../scss/components/menu.scss";
+import "../scss/components/side.scss";
 
 class Side extends Component {
   render() {
     return (
-      <div className="menu-wrap">
+      <div className="side-wrap">
         <AddNote></AddNote>
       </div>
     );
