@@ -1,9 +1,10 @@
 .side-wrap {
   @import "../base/_base.scss";
   flex: 0 0 241px;
-  // border: 1px solid green;
   background-color: $--cod-gray;
   color: $--white;
+  padding: 24px;
+  box-sizing: border-box;
   .add-btn {
     background-color: $--evernote-green;
   }

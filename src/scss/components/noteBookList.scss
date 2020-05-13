@@ -1,0 +1,7 @@
+.notebook-list-wrap {
+  display: none;
+  @import "../base/_base.scss";
+  &.show {
+    display: block;
+  }
+}
