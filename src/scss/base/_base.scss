@@ -18,7 +18,8 @@ $--editor-menu-icon-width: 24px;
   border: none;
 }
 
-.app-wrap {
+.app-wrap,
+.main-wrap {
   display: flex;
   height: 100vh;
 }

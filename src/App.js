@@ -1,16 +1,14 @@
 import React, { Component } from "react";
-import Menu from "./components/Menu";
-import List from "./components/List";
-import Editor from "./components/Editor";
+import Side from "./components/Side";
+import Main from "./components/Main";
 import "./scss/base/_base.scss";
 
 class App extends Component {
   render() {
     return (
       <div className="app-wrap">
-        <Menu />
-        <List />
-        <Editor />
+        <Side />
+        <Main />
       </div>
     );
   }
