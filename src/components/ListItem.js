@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { updateEditingNote } from "../actions";
 import DOMPurify from "dompurify";
-import "../scss/components/list.scss";
+import "../scss/components/noteList.scss";
 
 class ListItem extends Component {
   edit = (noteId) => {

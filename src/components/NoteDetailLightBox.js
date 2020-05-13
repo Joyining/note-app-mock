@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import LightBoxHeading from "./LightBoxHeading";
-import "../scss/components/list.scss";
 
 class NoteDetailLightBox extends Component {
   render() {

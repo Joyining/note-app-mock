@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { deleteNote } from "../actions";
 import LightBoxHeading from "./LightBoxHeading";
-import "../scss/components/list.scss";
 
 class DeleteNoteLightBox extends Component {
   confirmDeleteNote = (e) => {

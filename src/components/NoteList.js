@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import _ from "lodash";
 import * as actions from "../actions";
 import ListItem from "./ListItem";
-import "../scss/components/list.scss";
+import "../scss/components/noteList.scss";
 
 class NoteList extends Component {
   renderNote() {
@@ -26,7 +26,7 @@ class NoteList extends Component {
   }
   render() {
     return (
-      <div className="list-wrap">
+      <div className="note-list-wrap">
         <div>{this.renderNote()}</div>
       </div>
     );
