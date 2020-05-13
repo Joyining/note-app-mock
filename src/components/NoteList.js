@@ -5,7 +5,7 @@ import * as actions from "../actions";
 import ListItem from "./ListItem";
 import "../scss/components/list.scss";
 
-class List extends Component {
+class NoteList extends Component {
   renderNote() {
     const { allNotes } = this.props;
     const notes = _.map(allNotes, (note) => {
@@ -38,4 +38,4 @@ const mapStateToProps = (state) => {
   return { allNotes };
 };
 
-export default connect(mapStateToProps, actions)(List);
+export default connect(mapStateToProps, actions)(NoteList);
