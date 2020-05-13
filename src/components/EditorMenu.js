@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addNote, updateEditingNote } from "../actions";
 import { v4 as uuidv4 } from "uuid";
+import LightBoxBg from "./LightBoxBg";
 import DeleteNoteLightBox from "./DeleteNoteLightBox";
 import NoteDetailLightBox from "./NoteDetailLightBox";
 import "../scss/components/editorMenu.scss";
@@ -110,12 +111,11 @@ class EditorMenu extends Component {
             })}
           </ul>
         </div>
-        <div
-          className={showLightBox ? "light-box show" : "light-box"}
-          onClick={this.toggleLightBox}
-        >
-          {this.renderLightBoxMessage()}
-        </div>
+        <LightBoxBg
+          showLightBox={showLightBox}
+          toggleLightBox={this.toggleLightBox}
+          renderLightBoxMessage={this.renderLightBoxMessage}
+        ></LightBoxBg>
       </div>
     );
   }
