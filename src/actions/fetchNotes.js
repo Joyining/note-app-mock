@@ -12,11 +12,10 @@ export const fetchNotes = () => async (dispatch, getState) => {
     // 要在onSnapshot時拿到最新的isEditing
     const state = getState();
     console.log(state);
-    const firstNoteData = querySnapshot.docs[0].data();
-    dispatch({
-      type: FETCH_NOTES,
-      allNotes: querySnapshot.docs,
-      firstNote: {
+    let firstNote;
+    if (querySnapshot.docs[0]) {
+      const firstNoteData = querySnapshot.docs[0].data();
+      firstNote = {
         id: querySnapshot.docs[0].id,
         content: firstNoteData.content ? firstNoteData.content : "",
         title: firstNoteData.title ? firstNoteData.title : "",
@@ -24,7 +23,14 @@ export const fetchNotes = () => async (dispatch, getState) => {
           ? firstNoteData.lastModifiedTime
           : "",
         createdTime: firstNoteData.createdTime ? firstNoteData.createdTime : "",
-      },
+      };
+    } else {
+      firstNote = {};
+    }
+    dispatch({
+      type: FETCH_NOTES,
+      allNotes: querySnapshot.docs,
+      firstNote: firstNote,
       isEditing: typeof state.isEditing !== "boolean" ? false : true,
     });
   });
