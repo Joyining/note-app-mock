@@ -41,6 +41,14 @@ $--editor-menu-icon-width: 24px;
   border-radius: 5px;
   border: 1px solid $--silver-chalice;
 }
+.small-warning-message {
+  font-size: 8px;
+  color: $--tomato;
+  visibility: hidden;
+  &.show {
+    visibility: visible;
+  }
+}
 
 %box-style {
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);

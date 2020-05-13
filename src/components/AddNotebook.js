@@ -12,6 +12,7 @@ class AddNotebook extends Component {
     this.state = {
       showLightBox: false,
       notebookName: "",
+      showWarning: false,
     };
   }
   // 重複了
@@ -29,6 +30,7 @@ class AddNotebook extends Component {
     this.setState({
       showLightBox: showLightBox ? false : true,
       notebookName: "",
+      showWarning: false,
     });
   };
   getNotebookName = (e) => {
@@ -40,10 +42,16 @@ class AddNotebook extends Component {
     const { addNotebook } = this.props;
     const { notebookName } = this.state;
     const id = uuidv4();
-    addNotebook(id, notebookName);
-    this.toggleLightBox(e);
+    if (notebookName) {
+      addNotebook(id, notebookName);
+      this.toggleLightBox(e);
+    } else {
+      this.setState({
+        showWarning: true,
+      });
+    }
   };
-  renderLightBoxMessage = (notebookName) => {
+  renderLightBoxMessage = (notebookName, showWarning) => {
     // const {notebookName} = this.state;
     return (
       <div className="light-box-message-wrap">
@@ -52,7 +60,6 @@ class AddNotebook extends Component {
           toggleLightBox={this.toggleLightBox}
         />
         <p className="message">Name:</p>
-        {/* required */}
         <input
           type="text"
           id="notebookName"
@@ -62,6 +69,9 @@ class AddNotebook extends Component {
           value={notebookName}
           onChange={this.getNotebookName}
         ></input>
+        <p className={`small-warning-message ${showWarning ? "show" : ""}`}>
+          Notebook name is required!
+        </p>
         <div className="btn-wrap">
           <button className="general-btn btn" onClick={this.toggleLightBox}>
             Cancel
@@ -78,7 +88,8 @@ class AddNotebook extends Component {
   };
 
   render() {
-    const { showLightBox, notebookName } = this.state;
+    const { showLightBox, notebookName, showWarning } = this.state;
+    const parameters = [notebookName, showWarning];
     return (
       <div className="add-notebook-wrap">
         <div className="add-notebook-btn" onClick={this.clickAddNotebook}>
@@ -88,7 +99,7 @@ class AddNotebook extends Component {
           showLightBox={showLightBox}
           toggleLightBox={this.toggleLightBox}
           renderLightBoxMessage={this.renderLightBoxMessage}
-          renderParameters={notebookName}
+          renderParameters={parameters}
         ></LightBoxBg>
       </div>
     );
