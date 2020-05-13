@@ -4,3 +4,4 @@ export * from "./fetchNotes";
 export * from "./updateEditingNote";
 export * from "./edit";
 export * from "./switchView";
+export * from "./addNotebook";
