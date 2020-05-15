@@ -1,10 +1,12 @@
 import { combineReducers } from "redux";
 import allNotes from "./allNotes";
+import allNotebooks from "./allNotebooks";
 import editingNote from "./editingNote";
 import isEditing from "./isEditing";
 import currentView from "./currentView";
 export default combineReducers({
   allNotes,
+  allNotebooks,
   editingNote,
   isEditing,
   currentView,
