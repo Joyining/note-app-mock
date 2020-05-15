@@ -16,7 +16,7 @@ class NoteList extends Component {
     }
     return (
       <div>
-        <h4>You have no more things Note!</h4>
+        <h4>You Don't have any Note yet!</h4>
       </div>
     );
   }
