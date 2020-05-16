@@ -4,10 +4,20 @@ import "@firebase/auth";
 
 export const addNotebook = (id, name = "") => async (dispatch) => {
   var db = firebase.firestore();
-  var ref = db.collection("notebooks").doc(id);
-  ref.set({
-    createdTime: new Date(),
-    // lastModifiedTime: new Date(),
-    name: name,
-  });
+  var defaultNotebook = false;
+  db.collection("notebooks")
+    .get()
+    .then((snap) => {
+      if (snap.size === 0) {
+        defaultNotebook = true;
+      }
+    })
+    .then((res) => {
+      var ref = db.collection("notebooks").doc(id);
+      ref.set({
+        createdTime: new Date(),
+        name: name,
+        defaultNotebook: defaultNotebook,
+      });
+    });
 };

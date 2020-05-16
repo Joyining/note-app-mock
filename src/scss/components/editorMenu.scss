@@ -14,25 +14,4 @@
       fill: $--silver-chalice;
     }
   }
-  .menu-list {
-    display: none;
-    position: absolute;
-    z-index: 1;
-    right: 0;
-    top: 34px;
-    width: 150px;
-    @extend %box-style;
-    &.show {
-      display: block;
-    }
-    .menu-item {
-      padding: 6px 20px;
-      color: $--title-gray;
-      cursor: pointer;
-      font: {
-        weight: 500px;
-        size: 14px;
-      }
-    }
-  }
 }
