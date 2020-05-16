@@ -35,7 +35,7 @@ class NoteBookList extends Component {
 
   render() {
     return (
-      <div>
+      <div class="notebook-list-wrap">
         <p>this is notebook list</p>
         <AddNotebook></AddNotebook>
         <div>{this.renderNotebook()}</div>

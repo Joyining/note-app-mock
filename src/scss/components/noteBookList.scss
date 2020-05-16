@@ -1,8 +1,16 @@
 .notebook-list-wrap {
-  display: none;
-  width: 100%;
   @import "../base/_base.scss";
   &.show {
     display: block;
+  }
+  .notebook-item-inner {
+    display: flex;
+  }
+  .actions {
+    position: relative;
+    .icon {
+      width: 20px;
+      height: 20px;
+    }
   }
 }

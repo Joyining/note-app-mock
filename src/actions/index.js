@@ -6,3 +6,4 @@ export * from "./edit";
 export * from "./switchView";
 export * from "./addNotebook";
 export * from "./fetchNotebooks";
+export * from "./editNotebook";
