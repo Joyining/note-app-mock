@@ -11,7 +11,6 @@ export const fetchNotes = () => async (dispatch, getState) => {
   ref.orderBy("lastModifiedTime", "desc").onSnapshot((querySnapshot) => {
     // 要在onSnapshot時拿到最新的isEditing
     const state = getState();
-    console.log(state);
     let firstNote;
     if (querySnapshot.docs[0]) {
       const firstNoteData = querySnapshot.docs[0].data();

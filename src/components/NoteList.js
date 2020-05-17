@@ -22,7 +22,7 @@ class NoteList extends Component {
   }
   componentDidMount() {
     const { fetchNotes } = this.props;
-    fetchNotes();
+    // fetchNotes();
   }
   render() {
     return (
