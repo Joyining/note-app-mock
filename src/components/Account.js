@@ -19,19 +19,24 @@ class Account extends Component {
   };
 
   logOutOnClickHandler = () => {
-    const { logOut } = this.props;
+    const { logOut, cookies } = this.props;
+    cookies.remove("isLogedIn");
+    cookies.remove("currentUser");
     logOut();
   };
 
   render() {
     const { showMenu } = this.state;
-    const { currentUser, isLogedIn } = this.props;
-    console.log(isLogedIn);
+    const { currentUser, isLogedIn, cookies } = this.props;
     const menu = [{ name: "Log Out", onClick: this.logOutOnClickHandler }];
     return (
       <div>
         <div className="account-menu-wrap" onClick={this.menuOnClickHandler}>
-          <p>{currentUser.toString()}</p>
+          <p>
+            {cookies.get("currentUser")
+              ? cookies.get("currentUser")
+              : currentUser.toString()}
+          </p>
           <ul
             className={showMenu ? "shared-menu-list show" : "shared-menu-list"}
           >
@@ -53,10 +58,11 @@ class Account extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   const currentUser = state.currentUser;
   const isLogedIn = state.isLogedIn;
-  return { currentUser, isLogedIn };
+  const cookies = ownProps.cookies;
+  return { currentUser, isLogedIn, cookies };
 };
 
 export default connect(mapStateToProps, actions)(Account);

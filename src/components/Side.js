@@ -6,9 +6,10 @@ import "../scss/components/side.scss";
 
 class Side extends Component {
   render() {
+    const { cookies } = this.props;
     return (
       <div className="side-wrap">
-        <Account></Account>
+        <Account cookies={cookies}></Account>
         <AddNote></AddNote>
         <SideMenu></SideMenu>
       </div>
