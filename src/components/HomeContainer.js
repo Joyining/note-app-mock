@@ -11,14 +11,14 @@ class HomeContainer extends Component {
     const { isLogedIn, cookies } = this.props;
     if (cookies.get("isLogedIn") === "true" || isLogedIn === true) {
       return (
-        <div className="app-wrap">
+        <div className="home-container-wrap">
           <Side cookies={this.props.cookies} />
           <Main />
         </div>
       );
     } else {
       return (
-        <div className="app-wrap">
+        <div className="home-container-wrap">
           <Registration />
         </div>
       );
