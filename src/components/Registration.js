@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import _ from "lodash";
 import * as actions from "../actions";
 import "../scss/components/registration.scss";
 
-class LogIn extends Component {
+class Registration extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -42,9 +43,15 @@ class LogIn extends Component {
 
   render() {
     const { showSignUp } = this.state;
+    const { registrationErrorMessage } = this.props;
     return (
-      <div className="login-outer-wrap">
+      <div className="registration-wrap">
         <div className={`login-wrap ${showSignUp ? "" : "show"}`}>
+          <p className="error-message">
+            {!_.isEmpty(registrationErrorMessage)
+              ? registrationErrorMessage.toString()
+              : ""}
+          </p>
           <input
             type="text"
             id="logInAccount"
@@ -64,11 +71,21 @@ class LogIn extends Component {
           <button className="highlight-btn btn" onClick={this.validateLogIn}>
             Log In
           </button>
-          <p>No Account?</p>
-          <p onClick={this.switchLogInSignUp}>Create Account</p>
+          <p className="switch-login-signup-message">Don't Have an Account?</p>
+          <p
+            className="switch-login-signup-message highlight"
+            onClick={this.switchLogInSignUp}
+          >
+            Create Account
+          </p>
         </div>
 
         <div className={`signup-wrap ${showSignUp ? "show" : ""}`}>
+          <p className="error-message">
+            {!_.isEmpty(registrationErrorMessage)
+              ? registrationErrorMessage.toString()
+              : ""}
+          </p>
           <input
             type="text"
             id="signUpAccount"
@@ -88,12 +105,22 @@ class LogIn extends Component {
           <button className="highlight-btn btn" onClick={this.continueSignUp}>
             Continue
           </button>
-          <p>Already Have Account?</p>
-          <p onClick={this.switchLogInSignUp}>Login</p>
+          <p className="switch-login-signup-message">Already Have Account?</p>
+          <p
+            className="switch-login-signup-message highlight"
+            onClick={this.switchLogInSignUp}
+          >
+            Login
+          </p>
         </div>
       </div>
     );
   }
 }
 
-export default connect(null, actions)(LogIn);
+const mapStateToProps = (state) => {
+  const registrationErrorMessage = state.registrationErrorMessage;
+  return { registrationErrorMessage };
+};
+
+export default connect(mapStateToProps, actions)(Registration);
