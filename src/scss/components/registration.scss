@@ -1,0 +1,8 @@
+@import "../base/_base.scss";
+.login-wrap,
+.signup-wrap {
+  display: none;
+  &.show {
+    display: block;
+  }
+}

@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as actions from "./actions";
-import Side from "./components/Side";
-import Main from "./components/Main";
-import Registration from "./components/Registration";
-import "./scss/base/_base.scss";
+import * as actions from "../actions";
+import Side from "./Side";
+import Main from "./Main";
+import Registration from "./Registration";
+import "../scss/base/_base.scss";
 
-class App extends Component {
+class AppContainer extends Component {
   render() {
     const { isLogedIn } = this.props;
     if (isLogedIn === true) {
@@ -31,4 +31,4 @@ const mapStateToProps = (state) => {
   return { isLogedIn };
 };
 
-export default connect(mapStateToProps, actions)(App);
+export default connect(mapStateToProps, actions)(AppContainer);
