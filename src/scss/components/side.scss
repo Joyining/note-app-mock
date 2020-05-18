@@ -5,4 +5,21 @@
   color: $--white;
   padding: 24px;
   box-sizing: border-box;
+  .account-menu-wrap {
+    position: relative;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .current-user {
+      font-size: 13px;
+      width: 133px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      color: $--silver-chalice;
+    }
+    .expand-icon {
+      stroke: $--silver-chalice;
+    }
+  }
 }
