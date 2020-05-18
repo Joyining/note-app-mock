@@ -1,7 +1,7 @@
 import "../firebase";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
-import { LOG_IN } from "./types";
+import { REGISTER } from "./types";
 
 export const logIn = (email, password) => async (dispatch) => {
   firebase
@@ -9,15 +9,21 @@ export const logIn = (email, password) => async (dispatch) => {
     .signInWithEmailAndPassword(email, password)
     .then((res) => {
       dispatch({
-        type: LOG_IN,
+        type: REGISTER,
         isLogedIn: true,
         currentUser: email,
+        errorMessage: null,
       });
     })
     .catch((error) => {
       var errorCode = error.code;
       var errorMessage = error.message;
-      console.log(errorMessage);
+      dispatch({
+        type: REGISTER,
+        isLogedIn: false,
+        currentUser: null,
+        errorMessage: errorMessage,
+      });
     });
 };
 
@@ -27,15 +33,21 @@ export const signUp = (email, password) => async (dispatch) => {
     .createUserWithEmailAndPassword(email, password)
     .then((res) => {
       dispatch({
-        type: LOG_IN,
+        type: REGISTER,
         isLogedIn: true,
         currentUser: email,
+        errorMessage: null,
       });
     })
     .catch(function (error) {
       var errorCode = error.code;
       var errorMessage = error.message;
-      console.log(errorMessage);
+      dispatch({
+        type: REGISTER,
+        isLogedIn: false,
+        currentUser: null,
+        errorMessage: errorMessage,
+      });
     });
 };
 
@@ -45,9 +57,10 @@ export const logOut = () => async (dispatch) => {
     .signOut()
     .then((res) => {
       dispatch({
-        type: LOG_IN,
+        type: REGISTER,
         isLogedIn: false,
         currentUser: null,
+        errorMessage: null,
       });
     })
     .catch((error) => {
