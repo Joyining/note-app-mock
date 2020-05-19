@@ -29,8 +29,11 @@ class NoteBookList extends Component {
   }
 
   componentDidMount() {
-    const { fetchNotebooks } = this.props;
-    fetchNotebooks();
+    const { fetchNotebooks, cookies, currentUser } = this.props;
+    const getCurrentUser = cookies.get("currentUser")
+      ? cookies.get("currentUser")
+      : currentUser.toString();
+    fetchNotebooks(getCurrentUser);
   }
 
   render() {
@@ -46,7 +49,8 @@ class NoteBookList extends Component {
 }
 const mapStateToProps = (state) => {
   const allNotebooks = state.allNotebooks;
-  return { allNotebooks };
+  const currentUser = state.currentUser;
+  return { allNotebooks, currentUser };
 };
 
 export default connect(mapStateToProps, actions)(NoteBookList);
