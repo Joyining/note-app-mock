@@ -8,9 +8,17 @@ export const fetchNotebooks = (owner) => async (dispatch, getState) => {
   var ref = db.collection("notebooks");
 
   ref.where("owner", "==", owner).onSnapshot((querySnapshot) => {
+    let defaultNotebookId = null;
+    for (var notebook of querySnapshot.docs) {
+      if (notebook.data().defaultNotebook === true) {
+        defaultNotebookId = notebook.id;
+        break;
+      }
+    }
     dispatch({
       type: FETCH_NOTEBOOKS,
       allNotebooks: querySnapshot.docs,
+      defaultNotebook: defaultNotebookId,
     });
   });
 };
