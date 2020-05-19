@@ -109,10 +109,9 @@ class AddNotebook extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   const currentUser = state.currentUser;
-  const cookies = ownProps.cookies;
-  return { currentUser, cookies };
+  return { currentUser };
 };
 
 export default connect(mapStateToProps, actions)(AddNotebook);

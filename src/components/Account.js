@@ -66,11 +66,10 @@ class Account extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   const currentUser = state.currentUser;
   const isLogedIn = state.isLogedIn;
-  const cookies = ownProps.cookies;
-  return { currentUser, isLogedIn, cookies };
+  return { currentUser, isLogedIn };
 };
 
 export default connect(mapStateToProps, actions)(Account);
