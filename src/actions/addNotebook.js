@@ -11,6 +11,8 @@ export const addNotebook = (id, owner, name = "") => async (dispatch) => {
     .then((snap) => {
       if (snap.size === 0) {
         defaultNotebook = true;
+        // 因為第一本notebook在signUp時已建立
+        // 所以這邊可以不需判斷snap.size了
       }
     })
     .then((res) => {
