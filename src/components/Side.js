@@ -11,7 +11,7 @@ class Side extends Component {
       <div className="side-wrap">
         <Account cookies={cookies}></Account>
         <AddNote cookies={cookies}></AddNote>
-        <SideMenu></SideMenu>
+        <SideMenu cookies={cookies}></SideMenu>
       </div>
     );
   }
