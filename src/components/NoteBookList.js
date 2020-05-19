@@ -8,13 +8,14 @@ import "../scss/components/notebookList.scss";
 
 class NoteBookList extends Component {
   renderNotebook() {
-    const { allNotebooks } = this.props;
+    const { allNotebooks, cookies } = this.props;
     const ntoebooks = _.map(allNotebooks, (notebook) => {
       return (
         <NotebookListItem
           key={notebook.id}
           notebookId={notebook.id}
           notebook={notebook.data()}
+          cookies={cookies}
         />
       );
     });

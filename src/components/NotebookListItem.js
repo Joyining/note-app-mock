@@ -17,8 +17,16 @@ class NotebookListItem extends Component {
     });
   };
   setAsDefaultOnClickHandler = () => {
-    const { notebookId, setAsDefaultNotebook } = this.props;
-    setAsDefaultNotebook(notebookId);
+    const {
+      notebookId,
+      cookies,
+      currentUser,
+      setAsDefaultNotebook,
+    } = this.props;
+    const getCurrentUser = cookies.get("currentUser")
+      ? cookies.get("currentUser")
+      : currentUser.toString();
+    setAsDefaultNotebook(notebookId, getCurrentUser);
   };
 
   render() {
@@ -69,4 +77,9 @@ class NotebookListItem extends Component {
   }
 }
 
-export default connect(null, actions)(NotebookListItem);
+const mapStateToProps = (state) => {
+  const currentUser = state.currentUser;
+  return { currentUser };
+};
+
+export default connect(mapStateToProps, actions)(NotebookListItem);
