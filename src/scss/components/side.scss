@@ -22,4 +22,36 @@
       stroke: $--silver-chalice;
     }
   }
+  .side-menu-wrap {
+    .menu-list {
+      .menu-item {
+        color: $--mercury;
+        font-size: 14px;
+        height: 32px;
+        line-height: 32px;
+        cursor: pointer;
+      }
+    }
+  }
+  .notebook-item-inner {
+    display: flex;
+    align-items: center;
+    padding-left: 16px;
+    box-sizing: border-box;
+    height: 32px;
+    cursor: pointer;
+    .notebook-icon {
+      fill: $--mercury;
+      margin-right: 5px;
+    }
+    .notebook-name {
+      color: $--mercury;
+      font-size: 14px;
+    }
+
+    .is-default-notebook,
+    .actions {
+      display: none;
+    }
+  }
 }

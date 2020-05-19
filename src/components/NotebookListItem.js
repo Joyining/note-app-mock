@@ -10,6 +10,12 @@ class NotebookListItem extends Component {
       showMenu: false,
     };
   }
+  notebookItemOnClickHandler = (e) => {
+    const { switchView } = this.props;
+    if (e.target === e.currentTarget) {
+      switchView("noteAndEditor");
+    }
+  };
   actionOnClickHandler = () => {
     const { showMenu } = this.state;
     this.setState({
@@ -39,10 +45,30 @@ class NotebookListItem extends Component {
       },
     ];
     return (
-      <div id={notebookId} className="notebook-item-outer">
+      <li
+        id={notebookId}
+        className="notebook-item-outer"
+        onClick={this.notebookItemOnClickHandler}
+      >
         <div className="notebook-item-inner">
-          <span>{notebook.name}</span>
-          <span>{notebook.defaultNotebook.toString()}</span>
+          <svg
+            className="notebook-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="14"
+            viewBox="0 0 14 14"
+          >
+            <path
+              fillRule="evenodd"
+              d="M3 2v10h7a1 1 0 001-1V3a1 1 0 00-1-1H3zM2 1h8a2 2 0 012 2v8a2 2 0 01-2 2H2V1zm2 1v10h1V2H4zm2 3v1h4V5H6z"
+            ></path>
+          </svg>
+          <span className="notebook-name">{notebook.name}</span>
+          <span className="is-default-notebook">
+            {notebook.defaultNotebook.toString() === "true"
+              ? "Default Notebook"
+              : ""}
+          </span>
           <div className="actions">
             <div className="icon" onClick={this.actionOnClickHandler}>
               <svg
@@ -72,7 +98,7 @@ class NotebookListItem extends Component {
             </ul>
           </div>
         </div>
-      </div>
+      </li>
     );
   }
 }

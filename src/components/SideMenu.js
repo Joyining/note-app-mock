@@ -2,17 +2,27 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import _ from "lodash";
 import * as actions from "../actions";
+import NotebookListItem from "./NotebookListItem";
 
 class SideMenu extends Component {
-  menuItemOnClickHandler = (view) => {
+  menuItemOnClickHandler = (view, e) => {
     const { switchView } = this.props;
-    switchView(view);
+    if (e.target === e.currentTarget) {
+      switchView(view);
+    }
   };
 
   renderNotebook() {
-    const { allNotebooks } = this.props;
+    const { allNotebooks, cookies } = this.props;
     const ntoebooks = _.map(allNotebooks, (notebook) => {
-      return <p>{notebook.data().name}</p>;
+      return (
+        <NotebookListItem
+          key={notebook.id}
+          notebookId={notebook.id}
+          notebook={notebook.data()}
+          cookies={cookies}
+        />
+      );
     });
     if (!_.isEmpty(ntoebooks)) {
       return ntoebooks;
@@ -29,8 +39,8 @@ class SideMenu extends Component {
 
   render() {
     const menu = [
-      { name: "All Notes", view: "noteAndEditor" },
-      { name: "Notebooks", view: "notebookList" },
+      { name: "All Notes", view: "noteAndEditor", child: null },
+      { name: "Notebooks", view: "notebookList", child: this.renderNotebook() },
     ];
     return (
       <div>
@@ -41,16 +51,16 @@ class SideMenu extends Component {
                 <li
                   key={item.name}
                   className="menu-item"
-                  onClick={() => {
-                    this.menuItemOnClickHandler(item.view);
+                  onClick={(e) => {
+                    this.menuItemOnClickHandler(item.view, e);
                   }}
                 >
                   {item.name}
+                  <ul>{item.child}</ul>
                 </li>
               );
             })}
           </ul>
-          <div>{this.renderNotebook()}</div>
         </div>
       </div>
     );
