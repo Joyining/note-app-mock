@@ -33,7 +33,7 @@ class Main extends Component {
         case "notebookList":
           return (
             <div className="main-wrap">
-              <NoteBookList />
+              <NoteBookList cookies={cookies} />
             </div>
           );
         case "noteAndEditor":

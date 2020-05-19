@@ -39,11 +39,14 @@ class AddNotebook extends Component {
     });
   };
   confirmAddNotebook = (e) => {
-    const { addNotebook } = this.props;
+    const { addNotebook, cookies, currentUser } = this.props;
     const { notebookName } = this.state;
     const id = uuidv4();
+    const getCurrentUser = cookies.get("currentUser")
+      ? cookies.get("currentUser")
+      : currentUser.toString();
     if (notebookName) {
-      addNotebook(id, notebookName);
+      addNotebook(id, getCurrentUser, notebookName);
       this.toggleLightBox(e);
     } else {
       this.setState({
@@ -106,4 +109,10 @@ class AddNotebook extends Component {
   }
 }
 
-export default connect(null, actions)(AddNotebook);
+const mapStateToProps = (state, ownProps) => {
+  const currentUser = state.currentUser;
+  const cookies = ownProps.cookies;
+  return { currentUser, cookies };
+};
+
+export default connect(mapStateToProps, actions)(AddNotebook);

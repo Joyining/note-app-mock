@@ -2,7 +2,8 @@ import "../firebase";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
 
-export const addNotebook = (id, name = "") => async (dispatch) => {
+export const addNotebook = (id, owner, name = "") => async (dispatch) => {
+  console.log("add Notebook");
   var db = firebase.firestore();
   var defaultNotebook = false;
   db.collection("notebooks")
@@ -17,6 +18,7 @@ export const addNotebook = (id, name = "") => async (dispatch) => {
       ref.set({
         createdTime: new Date(),
         name: name,
+        owner: owner,
         defaultNotebook: defaultNotebook,
       });
     });

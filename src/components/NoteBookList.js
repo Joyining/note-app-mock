@@ -34,10 +34,11 @@ class NoteBookList extends Component {
   }
 
   render() {
+    const { cookies } = this.props;
     return (
       <div className="notebook-list-wrap">
         <p>this is notebook list</p>
-        <AddNotebook></AddNotebook>
+        <AddNotebook cookies={cookies}></AddNotebook>
         <div>{this.renderNotebook()}</div>
       </div>
     );
