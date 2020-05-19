@@ -49,8 +49,11 @@ class Main extends Component {
   };
 
   componentDidMount() {
-    const { fetchNotes } = this.props;
-    fetchNotes();
+    const { fetchNotes, currentUser, cookies } = this.props;
+    const getCurrentUser = cookies.get("currentUser")
+      ? cookies.get("currentUser")
+      : currentUser.toString();
+    fetchNotes(getCurrentUser);
   }
 
   render() {
@@ -61,7 +64,8 @@ class Main extends Component {
 const mapStateToProps = (state) => {
   const currentView = state.currentView;
   const allNotes = state.allNotes;
-  return { currentView, allNotes };
+  const currentUser = state.currentUser;
+  return { currentView, allNotes, currentUser };
 };
 
 export default connect(mapStateToProps, actions)(Main);
