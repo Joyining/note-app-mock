@@ -63,7 +63,7 @@ class Editor extends Component {
   };
 
   render() {
-    const { editingNote, isEditing } = this.props;
+    const { editingNote, isEditing, cookies } = this.props;
     const { localEditorValue, localNoteId } = this.state;
     const dateObj = editingNote.lastModifiedTime
       ? editingNote.lastModifiedTime.toDate()
@@ -81,7 +81,7 @@ class Editor extends Component {
             {/* <p>current editing: {editingNote.title}</p> */}
             <p>current editing: {editingNote.id}</p>
           </div>
-          <EditorMenu />
+          <EditorMenu cookies={cookies} />
         </div>
 
         {console.log("isEditing: " + isEditing)}

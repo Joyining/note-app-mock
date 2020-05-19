@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addNote, updateEditingNote } from "../actions";
+import * as actions from "../actions";
 import { v4 as uuidv4 } from "uuid";
 import LightBoxBg from "./LightBoxBg";
 import DeleteNoteLightBox from "./DeleteNoteLightBox";
@@ -55,7 +55,13 @@ class EditorMenu extends Component {
   };
 
   copyNoteOnClickHandler = () => {
-    const { addNote, updateEditingNote, editingNote } = this.props;
+    const {
+      addNote,
+      currentUser,
+      updateEditingNote,
+      editingNote,
+      cookies,
+    } = this.props;
     const noteId = uuidv4();
     this.menuOnClickHandler();
     let newContent = "";
@@ -66,7 +72,10 @@ class EditorMenu extends Component {
         insertPoint + 1
       )}Copy of ${editingNote.content.slice(insertPoint + 1)}`;
     }
-    addNote(noteId, newContent);
+    const getCurrentUser = cookies.get("currentUser")
+      ? cookies.get("currentUser")
+      : currentUser.toString();
+    addNote(noteId, getCurrentUser, newContent);
     updateEditingNote(noteId);
   };
 
@@ -124,12 +133,10 @@ class EditorMenu extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   const editingNote = state.editingNote;
   const isEditing = state.isEditing;
-  return { editingNote, isEditing };
+  const currentUser = state.currentUser;
+  return { editingNote, isEditing, currentUser };
 };
 
-export default connect(mapStateToProps, { addNote, updateEditingNote })(
-  EditorMenu
-);
+export default connect(mapStateToProps, actions)(EditorMenu);

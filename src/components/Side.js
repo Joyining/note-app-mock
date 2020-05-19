@@ -10,7 +10,7 @@ class Side extends Component {
     return (
       <div className="side-wrap">
         <Account cookies={cookies}></Account>
-        <AddNote></AddNote>
+        <AddNote cookies={cookies}></AddNote>
         <SideMenu></SideMenu>
       </div>
     );

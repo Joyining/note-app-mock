@@ -17,14 +17,14 @@ class Main extends Component {
   };
 
   renderView = () => {
-    const { currentView, allNotes } = this.props;
+    const { currentView, allNotes, cookies } = this.props;
     if (this.isEmptyNotes(allNotes)) {
       return (
         <div className="main-wrap">
           <div className="empty-note-message">
             <p>You don't have any note yet.</p>
             <p>Create your first note now.</p>
-            <AddNote></AddNote>
+            <AddNote cookies={cookies}></AddNote>
           </div>
         </div>
       );
@@ -41,7 +41,7 @@ class Main extends Component {
           return (
             <div className="main-wrap">
               <NoteList />
-              <Editor />
+              <Editor cookies={cookies} />
             </div>
           );
       }

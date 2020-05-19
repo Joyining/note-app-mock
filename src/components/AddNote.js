@@ -6,9 +6,18 @@ import "../scss/components/addNote.scss";
 
 class AddNote extends Component {
   clickAddNote = () => {
-    const { addNote, updateEditingNote, switchView } = this.props;
+    const {
+      addNote,
+      currentUser,
+      updateEditingNote,
+      switchView,
+      cookies,
+    } = this.props;
     const noteId = uuidv4();
-    addNote(noteId);
+    const getCurrentUser = cookies.get("currentUser")
+      ? cookies.get("currentUser")
+      : currentUser.toString();
+    addNote(noteId, getCurrentUser);
     updateEditingNote(noteId);
     switchView("noteAndEditor");
   };
@@ -22,4 +31,10 @@ class AddNote extends Component {
   }
 }
 
-export default connect(null, actions)(AddNote);
+const mapStateToProps = (state, ownProps) => {
+  const currentUser = state.currentUser;
+  const cookies = ownProps.cookies;
+  return { currentUser, cookies };
+};
+
+export default connect(mapStateToProps, actions)(AddNote);

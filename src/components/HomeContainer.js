@@ -12,8 +12,8 @@ class HomeContainer extends Component {
     if (cookies.get("isLogedIn") === "true" || isLogedIn === true) {
       return (
         <div className="home-container-wrap">
-          <Side cookies={this.props.cookies} />
-          <Main />
+          <Side cookies={cookies} />
+          <Main cookies={cookies} />
         </div>
       );
     } else {
