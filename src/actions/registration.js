@@ -2,6 +2,8 @@ import "../firebase";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
 import { REGISTER } from "./types";
+import { v4 as uuidv4 } from "uuid";
+// import * as actions from "../actions";
 
 export const logIn = (email, password) => async (dispatch) => {
   firebase
@@ -37,6 +39,20 @@ export const signUp = (email, password) => async (dispatch) => {
         isLogedIn: true,
         currentUser: email,
         errorMessage: null,
+      });
+    })
+    // .then((res) => {
+    //   actions.addNotebook(uuidv4(), email, "My Notebook");
+    //   // why cannot???
+    // })
+    .then((res) => {
+      var db = firebase.firestore();
+      var ref = db.collection("notebooks").doc(uuidv4());
+      ref.set({
+        createdTime: new Date(),
+        name: "My Notebook",
+        owner: email,
+        defaultNotebook: true,
       });
     })
     .catch(function (error) {
