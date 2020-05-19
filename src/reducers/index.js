@@ -7,6 +7,7 @@ import currentView from "./currentView";
 import isLogedIn from "./isLogedIn";
 import currentUser from "./currentUser";
 import registrationErrorMessage from "./registrationErrorMessage";
+import defaultNotebook from "./defaultNotebook";
 export default combineReducers({
   allNotes,
   allNotebooks,
@@ -16,5 +17,6 @@ export default combineReducers({
   isLogedIn,
   currentUser,
   registrationErrorMessage,
+  defaultNotebook,
 });
 // The redux library contains a function named combineReducers that cantake multiple reducers and combine them into one reducer.

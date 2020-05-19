@@ -1,6 +1,7 @@
 import "../firebase";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
+import { SET_AS_DEFAULT_NOTEBOOK } from "./types";
 
 export const setAsDefaultNotebook = (notebookId, owner) => async (dispatch) => {
   var db = firebase.firestore();
@@ -18,6 +19,12 @@ export const setAsDefaultNotebook = (notebookId, owner) => async (dispatch) => {
     .then((res) => {
       collection.doc(notebookId).update({
         defaultNotebook: true,
+      });
+    })
+    .then((res) => {
+      dispatch({
+        type: SET_AS_DEFAULT_NOTEBOOK,
+        defaultNotebook: notebookId,
       });
     });
 };
