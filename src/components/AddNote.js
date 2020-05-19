@@ -12,12 +12,13 @@ class AddNote extends Component {
       updateEditingNote,
       switchView,
       cookies,
+      defaultNotebook,
     } = this.props;
     const noteId = uuidv4();
     const getCurrentUser = cookies.get("currentUser")
       ? cookies.get("currentUser")
       : currentUser.toString();
-    addNote(noteId, getCurrentUser);
+    addNote(noteId, getCurrentUser, defaultNotebook);
     updateEditingNote(noteId);
     switchView("noteAndEditor");
   };
@@ -33,7 +34,8 @@ class AddNote extends Component {
 
 const mapStateToProps = (state) => {
   const currentUser = state.currentUser;
-  return { currentUser };
+  const defaultNotebook = state.defaultNotebook;
+  return { currentUser, defaultNotebook };
 };
 
 export default connect(mapStateToProps, actions)(AddNote);
