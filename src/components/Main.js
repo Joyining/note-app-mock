@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import _ from "lodash";
 import NoteList from "./NoteList";
 import Editor from "./Editor";
 import NoteBookList from "./NoteBookList";
@@ -8,17 +9,18 @@ import * as actions from "../actions";
 import "../scss/base/_base.scss";
 
 class Main extends Component {
-  isEmptyNotes = (obj) => {
-    const hasOwnProperty = Object.prototype.hasOwnProperty;
-    for (let key in obj) {
-      if (hasOwnProperty.call(obj, key)) return false;
-    }
-    return true;
-  };
+  // isEmptyNotes = (obj) => {
+  //   const hasOwnProperty = Object.prototype.hasOwnProperty;
+  //   for (let key in obj) {
+  //     if (hasOwnProperty.call(obj, key)) return false;
+  //   }
+  //   return true;
+  // };
 
   renderView = () => {
     const { currentView, allNotes, cookies } = this.props;
-    if (this.isEmptyNotes(allNotes)) {
+    // is loadash slower??
+    if (_.isEmpty(allNotes)) {
       return (
         <div className="main-wrap">
           <div className="empty-note-message">
