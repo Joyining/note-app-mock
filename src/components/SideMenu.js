@@ -5,10 +5,16 @@ import * as actions from "../actions";
 import NotebookListItem from "./NotebookListItem";
 
 class SideMenu extends Component {
-  menuItemOnClickHandler = (view, e) => {
-    const { switchView } = this.props;
+  menuItemOnClickHandler = (view, needFetchNotes, fetchNotesFilter, e) => {
+    const { switchView, fetchNotes, cookies, currentUser } = this.props;
     if (e.target === e.currentTarget) {
       switchView(view);
+    }
+    if (needFetchNotes) {
+      const getCurrentUser = cookies.get("currentUser")
+        ? cookies.get("currentUser")
+        : currentUser.toString();
+      fetchNotes(getCurrentUser, fetchNotesFilter);
     }
   };
 
@@ -39,8 +45,20 @@ class SideMenu extends Component {
 
   render() {
     const menu = [
-      { name: "All Notes", view: "noteAndEditor", child: null },
-      { name: "Notebooks", view: "notebookList", child: this.renderNotebook() },
+      {
+        name: "All Notes",
+        view: "noteAndEditor",
+        child: null,
+        needFetchNotes: true,
+        fetchNotesFilter: "",
+      },
+      {
+        name: "Notebooks",
+        view: "notebookList",
+        child: this.renderNotebook(),
+        needFetchNotes: false,
+        fetchNotesFilter: null,
+      },
     ];
     return (
       <div>
@@ -52,7 +70,12 @@ class SideMenu extends Component {
                   key={item.name}
                   className="menu-item"
                   onClick={(e) => {
-                    this.menuItemOnClickHandler(item.view, e);
+                    this.menuItemOnClickHandler(
+                      item.view,
+                      item.needFetchNotes,
+                      item.fetchNotesFilter,
+                      e
+                    );
                   }}
                 >
                   {item.name}

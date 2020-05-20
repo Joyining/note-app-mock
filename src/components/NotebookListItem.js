@@ -11,10 +11,13 @@ class NotebookListItem extends Component {
     };
   }
   notebookItemOnClickHandler = (e) => {
-    const { switchView } = this.props;
-    if (e.target === e.currentTarget) {
-      switchView("noteAndEditor");
-    }
+    const { cookies, currentUser, switchView, fetchNotes } = this.props;
+    const getCurrentUser = cookies.get("currentUser")
+      ? cookies.get("currentUser")
+      : currentUser.toString();
+    const notebookId = e.target.closest("li").id;
+    switchView("noteAndEditor");
+    fetchNotes(getCurrentUser, notebookId);
   };
   actionOnClickHandler = () => {
     const { showMenu } = this.state;
@@ -45,11 +48,7 @@ class NotebookListItem extends Component {
       },
     ];
     return (
-      <li
-        id={notebookId}
-        className="notebook-item-outer"
-        onClick={this.notebookItemOnClickHandler}
-      >
+      <li id={notebookId} className="notebook-item-outer">
         <div className="notebook-item-inner">
           <svg
             className="notebook-icon"
@@ -63,7 +62,12 @@ class NotebookListItem extends Component {
               d="M3 2v10h7a1 1 0 001-1V3a1 1 0 00-1-1H3zM2 1h8a2 2 0 012 2v8a2 2 0 01-2 2H2V1zm2 1v10h1V2H4zm2 3v1h4V5H6z"
             ></path>
           </svg>
-          <span className="notebook-name">{notebook.name}</span>
+          <span
+            className="notebook-name"
+            onClick={this.notebookItemOnClickHandler}
+          >
+            {notebook.name}
+          </span>
           <span className="is-default-notebook">
             {notebook.defaultNotebook.toString() === "true"
               ? "Default Notebook"
