@@ -15,7 +15,7 @@ export const fetchNotes = (owner, notebookId = "") => async (
     console.log("notebookId not empty");
     finalRef = ref
       .where("owner", "==", owner)
-      .where("notebook", "==", notebookId)
+      .where("notebookId", "==", notebookId)
       .orderBy("lastModifiedTime", "desc");
   } else {
     console.log("notebookId empty");
@@ -34,6 +34,10 @@ export const fetchNotes = (owner, notebookId = "") => async (
         id: querySnapshot.docs[0].id,
         content: firstNoteData.content ? firstNoteData.content : "",
         title: firstNoteData.title ? firstNoteData.title : "",
+        notebookId: firstNoteData.notebookId ? firstNoteData.notebookId : "",
+        notebookName: firstNoteData.notebookName
+          ? firstNoteData.notebookName
+          : "",
         lastModifiedTime: firstNoteData.lastModifiedTime
           ? firstNoteData.lastModifiedTime
           : "",

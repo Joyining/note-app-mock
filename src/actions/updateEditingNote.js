@@ -14,6 +14,8 @@ export const updateEditingNote = (noteId) => async (dispatch) => {
       id: noteId,
       content: data.content ? data.content : "",
       title: data.title ? data.title : "",
+      notebookId: data.notebookId ? data.notebookId : "",
+      notebookName: data.notebookName ? data.notebookName : "",
       lastModifiedTime: data.lastModifiedTime ? data.lastModifiedTime : "",
       createdTime: data.createdTime ? data.createdTime : "",
       isEditing: false,

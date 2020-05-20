@@ -12,7 +12,8 @@ export const addNote = (noteId, owner, defaultNotebook, content = "") => async (
     lastModifiedTime: new Date(),
     content: content,
     owner: owner,
-    notebook: defaultNotebook,
+    notebookId: defaultNotebook.id,
+    notebookName: defaultNotebook.name,
   });
   console.log("add note !!!!");
 };
