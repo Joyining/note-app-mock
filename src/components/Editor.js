@@ -77,9 +77,8 @@ class Editor extends Component {
       <div className="editor-wrap">
         <div className="editor-top">
           <div className="last-modified">
+            <p>{editingNote.notebookName}</p>
             <p>Last Modified At: {lastModifiedDay}</p>
-            {/* <p>current editing: {editingNote.title}</p> */}
-            <p>current editing: {editingNote.id}</p>
           </div>
           <EditorMenu cookies={cookies} />
         </div>
@@ -97,7 +96,10 @@ class Editor extends Component {
             onChange={this.onchangeHandler}
           />
         </div>
-        <p className="editor-bottom">tag area</p>
+        <div className="editor-bottom">
+          <p>tag area</p>
+          <p>current editing: {editingNote.id}</p>
+        </div>
       </div>
     );
   }
@@ -107,8 +109,6 @@ const mapStateToProps = (state) => {
   console.log(state);
   const editingNote = state.editingNote;
   const isEditing = state.isEditing;
-  // console.log(editingNote.id);
-  // console.log(editingNote.content);
   return { editingNote, isEditing };
 };
 
