@@ -20,11 +20,17 @@ export const setAsDefaultNotebook = (notebookId, owner) => async (dispatch) => {
       collection.doc(notebookId).update({
         defaultNotebook: true,
       });
-    })
-    .then((res) => {
+    });
+  collection
+    .doc(notebookId)
+    .get()
+    .then((thisNotebook) => {
       dispatch({
         type: SET_AS_DEFAULT_NOTEBOOK,
-        defaultNotebook: notebookId,
+        defaultNotebook: {
+          id: notebookId,
+          name: thisNotebook.data().name,
+        },
       });
     });
 };

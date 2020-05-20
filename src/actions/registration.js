@@ -15,7 +15,6 @@ export const logIn = (email, password) => async (dispatch) => {
         isLogedIn: true,
         currentUser: email,
         errorMessage: null,
-        defaultNotebook: null,
       });
     })
     .catch((error) => {
@@ -26,7 +25,6 @@ export const logIn = (email, password) => async (dispatch) => {
         isLogedIn: false,
         currentUser: null,
         errorMessage: errorMessage,
-        defaultNotebook: null,
       });
     });
 };
@@ -56,7 +54,10 @@ export const signUp = (email, password) => async (dispatch) => {
         isLogedIn: true,
         currentUser: email,
         errorMessage: null,
-        defaultNotebook: id,
+        defaultNotebook: {
+          id: id,
+          name: "My Notebook",
+        },
       });
     })
     .catch(function (error) {

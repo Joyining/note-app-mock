@@ -9,16 +9,21 @@ export const fetchNotebooks = (owner) => async (dispatch, getState) => {
 
   ref.where("owner", "==", owner).onSnapshot((querySnapshot) => {
     let defaultNotebookId = null;
+    let defaultNotebookName = null;
     for (var notebook of querySnapshot.docs) {
       if (notebook.data().defaultNotebook === true) {
         defaultNotebookId = notebook.id;
+        defaultNotebookName = notebook.data().name;
         break;
       }
     }
     dispatch({
       type: FETCH_NOTEBOOKS,
       allNotebooks: querySnapshot.docs,
-      defaultNotebook: defaultNotebookId,
+      defaultNotebook: {
+        id: defaultNotebookId,
+        name: defaultNotebookName,
+      },
     });
   });
 };
