@@ -8,12 +8,39 @@ $--note-item-outer-paddingX: 26px;
   flex: 0 0 293px;
   height: 100%;
   overflow-y: scroll;
+  background-color: $--alabaster;
+  border-right: 1px solid $--mercury;
+  .notebook-item-inner {
+    padding: 16px 26px;
+    box-sizing: border-box;
+    height: 102px;
+    border-bottom: 1px solid $--mercury;
+    .notebook-name {
+      color: $--title-gray;
+      font-size: 20px;
+    }
+    .actions {
+      position: relative;
+      &.allNotes {
+        display: none;
+      }
+      .icon {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    .notebook-icon,
+    .is-default-notebook {
+      display: none;
+    }
+  }
   .note-item-outer {
     height: $--note-item-outer-height;
     padding: $--note-item-outer-paddingY $--note-item-outer-paddingX;
     box-sizing: border-box;
-    background-color: $--alabaster;
-    border: 1px solid $--mercury;
+    // background-color: $--alabaster;
+    border-bottom: 1px solid $--mercury;
     font-size: 14px;
     color: $--note-item-font-gray;
     &.active {

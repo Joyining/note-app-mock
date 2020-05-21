@@ -43,13 +43,13 @@ class Main extends Component {
           if (allNotes.length === 0) {
             return (
               <div className="main-wrap">
-                <NoteList />
+                <NoteList cookies={cookies} />
               </div>
             );
           } else {
             return (
               <div className="main-wrap">
-                <NoteList />
+                <NoteList cookies={cookies} />
                 <Editor cookies={cookies} />
               </div>
             );

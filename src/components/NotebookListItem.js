@@ -10,7 +10,7 @@ class NotebookListItem extends Component {
       showMenu: false,
     };
   }
-  notebookItemOnClickHandler = (e) => {
+  notebookNameOnClickHandler = (e) => {
     const { cookies, currentUser, switchView, filterNotes } = this.props;
     const getCurrentUser = cookies.get("currentUser")
       ? cookies.get("currentUser")
@@ -64,7 +64,7 @@ class NotebookListItem extends Component {
           </svg>
           <span
             className="notebook-name"
-            onClick={this.notebookItemOnClickHandler}
+            onClick={this.notebookNameOnClickHandler}
           >
             {notebook.name}
           </span>
@@ -73,7 +73,7 @@ class NotebookListItem extends Component {
               ? "Default Notebook"
               : ""}
           </span>
-          <div className="actions">
+          <div className={`actions ${notebookId}`}>
             <div className="icon" onClick={this.actionOnClickHandler}>
               <svg
                 viewBox="0 0 24 24"
