@@ -2,7 +2,7 @@ import "../firebase";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
 
-export const addNote = (noteId, owner, defaultNotebook, content = "") => async (
+export const addNote = (noteId, owner, notebook, content = "") => async (
   dispatch
 ) => {
   var db = firebase.firestore();
@@ -12,8 +12,8 @@ export const addNote = (noteId, owner, defaultNotebook, content = "") => async (
     lastModifiedTime: new Date(),
     content: content,
     owner: owner,
-    notebookId: defaultNotebook.id,
-    notebookName: defaultNotebook.name,
+    notebookId: notebook.id,
+    notebookName: notebook.name,
   });
   console.log("add note !!!!");
 };

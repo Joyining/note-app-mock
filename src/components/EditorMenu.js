@@ -63,6 +63,7 @@ class EditorMenu extends Component {
       editingNote,
       cookies,
       defaultNotebook,
+      selectedNotebook,
     } = this.props;
     const noteId = uuidv4();
     this.menuOnClickHandler();
@@ -77,7 +78,8 @@ class EditorMenu extends Component {
     const getCurrentUser = cookies.get("currentUser")
       ? cookies.get("currentUser")
       : currentUser.toString();
-    addNote(noteId, getCurrentUser, defaultNotebook, newContent);
+    const notebook = selectedNotebook.id ? selectedNotebook : defaultNotebook;
+    addNote(noteId, getCurrentUser, notebook, newContent);
     updateEditingNote(noteId);
   };
 
@@ -139,7 +141,14 @@ const mapStateToProps = (state) => {
   const isEditing = state.isEditing;
   const currentUser = state.currentUser;
   const defaultNotebook = state.defaultNotebook;
-  return { editingNote, isEditing, currentUser, defaultNotebook };
+  const selectedNotebook = state.selectedNotebook;
+  return {
+    editingNote,
+    isEditing,
+    currentUser,
+    defaultNotebook,
+    selectedNotebook,
+  };
 };
 
 export default connect(mapStateToProps, actions)(EditorMenu);
