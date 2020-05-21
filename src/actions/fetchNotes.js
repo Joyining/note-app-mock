@@ -6,8 +6,8 @@ import _ from "lodash";
 
 export const fetchNotes = (owner) => async (dispatch, getState) => {
   // 若一開始用傳參數的方式將state裡的isEditing傳給fetchNotes， 他會一直是一開始的空物件
-  var db = firebase.firestore();
-  var ref = db
+  const db = firebase.firestore();
+  const ref = db
     .collection("notes")
     .where("owner", "==", owner)
     .orderBy("lastModifiedTime", "desc");
@@ -22,10 +22,9 @@ export const fetchNotes = (owner) => async (dispatch, getState) => {
     const isEditing =
       typeof isEditingInState !== "boolean" || isDeletingNote ? false : true;
     let firstNote;
-    if (!_.isEmpty(selectedNotebook)) {
-      console.log(selectedNotebook);
+    if (selectedNotebook && selectedNotebook.id) {
       ref
-        .where("notebookId", "==", selectedNotebook)
+        .where("notebookId", "==", selectedNotebook.id)
         .get()
         .then((filteredQuerySnapshot) => {
           if (filteredQuerySnapshot.docs[0]) {

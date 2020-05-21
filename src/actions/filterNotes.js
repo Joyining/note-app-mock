@@ -4,21 +4,31 @@ import "@firebase/auth";
 import { FILTER_NOTES } from "./types";
 
 export const filterNotes = (owner, notebookId = "") => async (dispatch) => {
-  var db = firebase.firestore();
-  var ref = db.collection("notes");
-  var selectedRef = null;
+  const db = firebase.firestore();
+  const notesCollection = db.collection("notes");
+  const notebooksCollection = db.collection("notebooks");
+  let selectedNotesCollection = null;
+  let selectedNotebookName = "";
   if (notebookId) {
-    selectedRef = ref
+    selectedNotesCollection = notesCollection
       .where("owner", "==", owner)
       .where("notebookId", "==", notebookId)
       .orderBy("lastModifiedTime", "desc");
+    notebooksCollection.get().then((snap) => {
+      for (let notebook of snap.docs) {
+        if (notebook.id === notebookId) {
+          selectedNotebookName = notebook.data().name;
+          break;
+        }
+      }
+    });
   } else {
-    selectedRef = ref
+    selectedNotesCollection = notesCollection
       .where("owner", "==", owner)
       .orderBy("lastModifiedTime", "desc");
   }
 
-  selectedRef.get().then((querySnapshot) => {
+  selectedNotesCollection.get().then((querySnapshot) => {
     let firstNote;
     if (querySnapshot.docs[0]) {
       const firstNoteData = querySnapshot.docs[0].data();
@@ -43,7 +53,10 @@ export const filterNotes = (owner, notebookId = "") => async (dispatch) => {
       allNotes: querySnapshot.docs,
       firstNote: firstNote,
       isEditing: false,
-      selectedNotebook: notebookId,
+      selectedNotebook: {
+        id: notebookId,
+        name: selectedNotebookName,
+      },
     });
   });
 };
