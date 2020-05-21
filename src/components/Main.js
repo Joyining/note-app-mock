@@ -18,9 +18,9 @@ class Main extends Component {
   // };
 
   renderView = () => {
-    const { currentView, allNotes, cookies } = this.props;
+    const { currentView, allNotes, cookies, selectedNotebook } = this.props;
     // is loadash slower??
-    if (_.isEmpty(allNotes)) {
+    if (_.isEmpty(allNotes) && !selectedNotebook.id) {
       return (
         <div className="main-wrap">
           <div className="empty-note-message">
@@ -40,12 +40,20 @@ class Main extends Component {
           );
         case "noteAndEditor":
         default:
-          return (
-            <div className="main-wrap">
-              <NoteList />
-              <Editor cookies={cookies} />
-            </div>
-          );
+          if (allNotes.length === 0) {
+            return (
+              <div className="main-wrap">
+                <NoteList />
+              </div>
+            );
+          } else {
+            return (
+              <div className="main-wrap">
+                <NoteList />
+                <Editor cookies={cookies} />
+              </div>
+            );
+          }
       }
     }
   };
@@ -67,7 +75,8 @@ const mapStateToProps = (state) => {
   const currentView = state.currentView;
   const allNotes = state.allNotes;
   const currentUser = state.currentUser;
-  return { currentView, allNotes, currentUser };
+  const selectedNotebook = state.selectedNotebook;
+  return { currentView, allNotes, currentUser, selectedNotebook };
 };
 
 export default connect(mapStateToProps, actions)(Main);
