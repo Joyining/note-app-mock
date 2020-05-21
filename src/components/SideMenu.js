@@ -56,8 +56,8 @@ class SideMenu extends Component {
         name: "Notebooks",
         view: "notebookList",
         child: this.renderNotebook(),
-        needFilterNotes: false,
-        filter: null,
+        needFilterNotes: true,
+        filter: "",
       },
     ];
     return (
