@@ -9,6 +9,7 @@ import currentUser from "./currentUser";
 import registrationErrorMessage from "./registrationErrorMessage";
 import defaultNotebook from "./defaultNotebook";
 import selectedNotebook from "./selectedNotebook";
+import isDeletingNote from "./isDeletingNote";
 export default combineReducers({
   allNotes,
   allNotebooks,
@@ -20,5 +21,6 @@ export default combineReducers({
   registrationErrorMessage,
   defaultNotebook,
   selectedNotebook,
+  isDeletingNote,
 });
 // The redux library contains a function named combineReducers that cantake multiple reducers and combine them into one reducer.

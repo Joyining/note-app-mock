@@ -16,6 +16,11 @@ export const fetchNotes = (owner) => async (dispatch, getState) => {
     // 要在onSnapshot時拿到最新的isEditing, selectedNotebook
     const state = getState();
     const selectedNotebook = state.selectedNotebook;
+    const isDeletingNote = state.isDeletingNote;
+    console.log(isDeletingNote);
+    const isEditingInState = state.isEditing;
+    const isEditing =
+      typeof isEditingInState !== "boolean" || isDeletingNote ? false : true;
     let firstNote;
     if (!_.isEmpty(selectedNotebook)) {
       console.log(selectedNotebook);
@@ -49,7 +54,8 @@ export const fetchNotes = (owner) => async (dispatch, getState) => {
             type: FETCH_NOTES,
             allNotes: filteredQuerySnapshot.docs,
             firstNote: firstNote,
-            isEditing: typeof state.isEditing !== "boolean" ? false : true,
+            isEditing: isEditing,
+            isDeletingNote: false,
           });
         });
     } else {
@@ -77,7 +83,8 @@ export const fetchNotes = (owner) => async (dispatch, getState) => {
         type: FETCH_NOTES,
         allNotes: querySnapshot.docs,
         firstNote: firstNote,
-        isEditing: typeof state.isEditing !== "boolean" ? false : true,
+        isEditing: isEditing,
+        isDeletingNote: false,
       });
     }
   });
