@@ -5,16 +5,16 @@ import * as actions from "../actions";
 import NotebookListItem from "./NotebookListItem";
 
 class SideMenu extends Component {
-  menuItemOnClickHandler = (view, needFetchNotes, fetchNotesFilter, e) => {
-    const { switchView, fetchNotes, cookies, currentUser } = this.props;
+  menuItemOnClickHandler = (view, needFilterNotes, filter, e) => {
+    const { switchView, filterNotes, cookies, currentUser } = this.props;
     if (e.target === e.currentTarget) {
       switchView(view);
     }
-    if (needFetchNotes) {
+    if (needFilterNotes) {
       const getCurrentUser = cookies.get("currentUser")
         ? cookies.get("currentUser")
         : currentUser.toString();
-      fetchNotes(getCurrentUser, fetchNotesFilter);
+      filterNotes(getCurrentUser, filter);
     }
   };
 
@@ -49,15 +49,15 @@ class SideMenu extends Component {
         name: "All Notes",
         view: "noteAndEditor",
         child: null,
-        needFetchNotes: true,
-        fetchNotesFilter: "",
+        needFilterNotes: true,
+        filter: "",
       },
       {
         name: "Notebooks",
         view: "notebookList",
         child: this.renderNotebook(),
-        needFetchNotes: false,
-        fetchNotesFilter: null,
+        needFilterNotes: false,
+        filter: null,
       },
     ];
     return (
@@ -72,8 +72,8 @@ class SideMenu extends Component {
                   onClick={(e) => {
                     this.menuItemOnClickHandler(
                       item.view,
-                      item.needFetchNotes,
-                      item.fetchNotesFilter,
+                      item.needFilterNotes,
+                      item.filter,
                       e
                     );
                   }}

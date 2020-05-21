@@ -1,8 +1,10 @@
-import { FETCH_NOTES } from "../actions/types";
+import { FETCH_NOTES, FILTER_NOTES } from "../actions/types";
 export default (state = {}, action) => {
   // The reducer is actually a function that has two arguments — the initial state and action
   switch (action.type) {
     case FETCH_NOTES:
+      return action.allNotes;
+    case FILTER_NOTES:
       return action.allNotes;
     default:
       return state;

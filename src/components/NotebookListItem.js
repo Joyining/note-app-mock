@@ -11,13 +11,13 @@ class NotebookListItem extends Component {
     };
   }
   notebookItemOnClickHandler = (e) => {
-    const { cookies, currentUser, switchView, fetchNotes } = this.props;
+    const { cookies, currentUser, switchView, filterNotes } = this.props;
     const getCurrentUser = cookies.get("currentUser")
       ? cookies.get("currentUser")
       : currentUser.toString();
     const notebookId = e.target.closest("li").id;
     switchView("noteAndEditor");
-    fetchNotes(getCurrentUser, notebookId);
+    filterNotes(getCurrentUser, notebookId);
   };
   actionOnClickHandler = () => {
     const { showMenu } = this.state;
