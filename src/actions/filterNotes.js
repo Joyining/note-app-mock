@@ -9,6 +9,7 @@ export const filterNotes = (owner, notebookId = "") => async (dispatch) => {
   const notebooksCollection = db.collection("notebooks");
   let selectedNotesCollection = null;
   let selectedNotebookName = "";
+  let selectedNotebookNotes = null;
   if (notebookId) {
     selectedNotesCollection = notesCollection
       .where("owner", "==", owner)
@@ -18,6 +19,7 @@ export const filterNotes = (owner, notebookId = "") => async (dispatch) => {
       for (let notebook of snap.docs) {
         if (notebook.id === notebookId) {
           selectedNotebookName = notebook.data().name;
+          selectedNotebookNotes = notebook.data().notes;
           break;
         }
       }
@@ -56,6 +58,7 @@ export const filterNotes = (owner, notebookId = "") => async (dispatch) => {
       selectedNotebook: {
         id: notebookId,
         name: selectedNotebookName,
+        notes: selectedNotebookNotes,
       },
     });
   });
