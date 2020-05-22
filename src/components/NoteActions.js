@@ -29,8 +29,11 @@ class NoteActions extends Component {
     }
   };
 
-  menuOnClickHandler = () => {
+  menuOnClickHandler = (e) => {
     const { showMenu } = this.state;
+    const { updateEditingNote } = this.props;
+    const noteId = e.target.closest(".note-info-action-wrap").id;
+    updateEditingNote(noteId);
     this.setState({
       showMenu: showMenu ? false : true,
     });
@@ -47,14 +50,14 @@ class NoteActions extends Component {
   };
 
   deleteNoteOnClickHandler = (e) => {
-    this.menuOnClickHandler();
+    this.menuOnClickHandler(e);
     this.toggleLightBox(e);
     this.setState({
       currentLightBox: "deleteNote",
     });
   };
 
-  copyNoteOnClickHandler = () => {
+  copyNoteOnClickHandler = (e) => {
     console.log("click copy notebook");
     const {
       addNote,
@@ -66,7 +69,7 @@ class NoteActions extends Component {
       selectedNotebook,
     } = this.props;
     const noteId = uuidv4();
-    this.menuOnClickHandler();
+    this.menuOnClickHandler(e);
     let newContent = "";
     if (editingNote.content) {
       const insertPoint = editingNote.content.indexOf(">");
@@ -84,7 +87,7 @@ class NoteActions extends Component {
   };
 
   viewNoteDetailOnClickHandler = (e) => {
-    this.menuOnClickHandler();
+    this.menuOnClickHandler(e);
     this.toggleLightBox(e);
     this.setState({
       currentLightBox: "viewNoteDetail",
