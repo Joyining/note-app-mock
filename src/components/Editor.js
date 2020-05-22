@@ -66,20 +66,12 @@ class Editor extends Component {
   render() {
     const { editingNote, isEditing, cookies } = this.props;
     const { localEditorValue, localNoteId } = this.state;
-    const dateObj = editingNote.lastModifiedTime
-      ? editingNote.lastModifiedTime.toDate()
-      : null;
-    const lastModifiedDay = dateObj
-      ? `${dateObj.getFullYear()}/${
-          dateObj.getMonth() + 1
-        }/${dateObj.getDate()}  ${dateObj.getHours()}:${dateObj.getMinutes()}:${dateObj.getSeconds()}`
-      : "";
     return (
       <div className="editor-wrap">
-        <div className="editor-top">
+        <div className="editor-top note-info-action-wrap" id={editingNote.id}>
           <NoteInfo
             notebookName={editingNote.notebookName}
-            lastModifiedDay={lastModifiedDay}
+            lastModifiedTime={editingNote.lastModifiedTime}
           />
           <NoteActions cookies={cookies} />
         </div>
@@ -107,7 +99,6 @@ class Editor extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   const editingNote = state.editingNote;
   const isEditing = state.isEditing;
   return { editingNote, isEditing };
