@@ -6,7 +6,7 @@ import AddNotebook from "./AddNotebook";
 import NotebookListItem from "./NotebookListItem";
 import "../scss/components/notebookList.scss";
 
-class NoteBookList extends Component {
+class NotebookList extends Component {
   renderNotebook() {
     const { allNotebooks, cookies } = this.props;
     const ntoebooks = _.map(allNotebooks, (notebook) => {
@@ -74,4 +74,4 @@ const mapStateToProps = (state) => {
   return { allNotebooks, currentUser };
 };
 
-export default connect(mapStateToProps, actions)(NoteBookList);
+export default connect(mapStateToProps, actions)(NotebookList);

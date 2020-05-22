@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import _ from "lodash";
 import NoteList from "./NoteList";
 import Editor from "./Editor";
-import NoteBookList from "./NoteBookList";
+import NotebookList from "./NotebookList";
 import AddNote from "./AddNote";
 import * as actions from "../actions";
 import "../scss/base/_base.scss";
@@ -35,7 +35,7 @@ class Main extends Component {
         case "notebookList":
           return (
             <div className="main-wrap">
-              <NoteBookList cookies={cookies} />
+              <NotebookList cookies={cookies} />
             </div>
           );
         case "noteAndEditor":
