@@ -18,13 +18,19 @@ $--note-item-outer-paddingX: 26px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    .notebook-name {
-      color: $--title-gray;
-      font-size: 20px;
-      height: 28px;
-      overflow: hidden;
-      text-overflow: ellipsis;
+    .notebook-name-and-icon {
+      .notebook-name {
+        color: $--title-gray;
+        font-size: 20px;
+        height: 28px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .note-count {
+        display: none;
+      }
     }
+
     .notebook-detail-and-actions {
       display: flex;
       justify-content: space-between;

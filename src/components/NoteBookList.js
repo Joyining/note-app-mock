@@ -40,10 +40,29 @@ class NoteBookList extends Component {
   render() {
     const { cookies } = this.props;
     return (
-      <div className="notebook-list-wrap">
-        <p>this is notebook list</p>
-        <AddNotebook cookies={cookies}></AddNotebook>
-        <div>{this.renderNotebook()}</div>
+      <div className="notebook-list-outer-wrap">
+        <div className="main-title-wrap">
+          <h3>Notebooks</h3>
+        </div>
+        <div className="secondary-title-wrap">
+          <p className="secondary-title">My Notebook List</p>
+          <AddNotebook cookies={cookies}></AddNotebook>
+        </div>
+
+        <div className="notebook-list-inner-wrap">
+          <ul className="table-heading">
+            <li className="notebook-name-and-icon">
+              <p className="title">Title</p>
+            </li>
+            <li className="notebook-detail-and-actions">
+              <p className="is-default-notebook detail-item">
+                Default Notebook
+              </p>
+              <p className="detail-item">Action</p>
+            </li>
+          </ul>
+          {this.renderNotebook()}
+        </div>
       </div>
     );
   }

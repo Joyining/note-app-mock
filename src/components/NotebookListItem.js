@@ -50,35 +50,39 @@ class NotebookListItem extends Component {
     return (
       <li id={notebookId} className="notebook-item-outer">
         <div className="notebook-item-inner">
-          <svg
-            className="notebook-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            width="14"
-            height="14"
-            viewBox="0 0 14 14"
-          >
-            <path
-              fillRule="evenodd"
-              d="M3 2v10h7a1 1 0 001-1V3a1 1 0 00-1-1H3zM2 1h8a2 2 0 012 2v8a2 2 0 01-2 2H2V1zm2 1v10h1V2H4zm2 3v1h4V5H6z"
-            ></path>
-          </svg>
-          <p
-            className="notebook-name"
-            onClick={this.notebookNameOnClickHandler}
-          >
-            {notebook.name}
-          </p>
+          <div className="notebook-name-and-icon">
+            <svg
+              className="notebook-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 14 14"
+            >
+              <path
+                fillRule="evenodd"
+                d="M3 2v10h7a1 1 0 001-1V3a1 1 0 00-1-1H3zM2 1h8a2 2 0 012 2v8a2 2 0 01-2 2H2V1zm2 1v10h1V2H4zm2 3v1h4V5H6z"
+              ></path>
+            </svg>
+            <p
+              className="notebook-name"
+              onClick={this.notebookNameOnClickHandler}
+            >
+              {notebook.name}
+            </p>
+            <div className="note-count">
+              <span>{`(${notebook.notes.length})`}</span>
+            </div>
+          </div>
+
           <div className="notebook-detail-and-actions">
             <div className="note-count">
               <span>{notebook.notes.length}</span>
               <span>{` note${notebook.notes.length > 1 ? "s" : ""}`}</span>
             </div>
-            <p className="is-default-notebook">
-              {notebook.defaultNotebook.toString() === "true"
-                ? "Default Notebook"
-                : ""}
+            <p className="is-default-notebook detail-item">
+              {notebook.defaultNotebook.toString() === "true" ? "Default" : ""}
             </p>
-            <div className={`actions ${notebookId}`}>
+            <div className={`actions detail-item ${notebookId}`}>
               <div className="icon" onClick={this.actionOnClickHandler}>
                 <svg
                   viewBox="0 0 24 24"
