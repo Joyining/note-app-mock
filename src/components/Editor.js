@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { edit } from "../actions";
 import ReactQuill from "react-quill";
+import NoteInfo from "./NoteInfo";
 import NoteActions from "./NoteActions";
 import "react-quill/dist/quill.snow.css";
 import "../scss/components/editor.scss";
@@ -76,10 +77,10 @@ class Editor extends Component {
     return (
       <div className="editor-wrap">
         <div className="editor-top">
-          <div className="note-info">
-            <p>{editingNote.notebookName}</p>
-            <p>Last Modified At: {lastModifiedDay}</p>
-          </div>
+          <NoteInfo
+            notebookName={editingNote.notebookName}
+            lastModifiedDay={lastModifiedDay}
+          />
           <NoteActions cookies={cookies} />
         </div>
 
