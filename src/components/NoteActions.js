@@ -7,7 +7,7 @@ import DeleteNoteLightBox from "./DeleteNoteLightBox";
 import NoteDetailLightBox from "./NoteDetailLightBox";
 import "../scss/components/editorMenu.scss";
 
-class EditorMenu extends Component {
+class NoteActions extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -100,7 +100,7 @@ class EditorMenu extends Component {
     ];
     return (
       <div>
-        <div className="editor-menu-wrap">
+        <div className="note-actions-wrap">
           <div className="icon" onClick={this.menuOnClickHandler}>
             <svg
               viewBox="0 0 24 24"
@@ -151,4 +151,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, actions)(EditorMenu);
+export default connect(mapStateToProps, actions)(NoteActions);

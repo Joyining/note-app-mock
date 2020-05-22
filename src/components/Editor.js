@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { edit } from "../actions";
 import ReactQuill from "react-quill";
-import EditorMenu from "./EditorMenu";
+import NoteActions from "./NoteActions";
 import "react-quill/dist/quill.snow.css";
 import "../scss/components/editor.scss";
 
@@ -80,7 +80,7 @@ class Editor extends Component {
             <p>{editingNote.notebookName}</p>
             <p>Last Modified At: {lastModifiedDay}</p>
           </div>
-          <EditorMenu cookies={cookies} />
+          <NoteActions cookies={cookies} />
         </div>
 
         {console.log("isEditing: " + isEditing)}
