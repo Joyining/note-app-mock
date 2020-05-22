@@ -34,26 +34,30 @@
     }
   }
   .notebook-item-inner {
-    display: flex;
-    align-items: center;
     padding-left: 16px;
     box-sizing: border-box;
     height: 32px;
     cursor: pointer;
-    .notebook-icon {
-      fill: $--mercury;
-      margin-right: 5px;
-      flex-shrink: 0;
-    }
-    .notebook-name {
-      color: $--mercury;
-      font-size: 14px;
+    .notebook-name-and-icon {
+      display: flex;
+      align-items: center;
       height: 100%;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      .notebook-icon {
+        fill: $--mercury;
+        margin-right: 5px;
+        flex-shrink: 0;
+      }
+      .notebook-name {
+        color: $--mercury;
+        font-size: 14px;
+        height: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
 
-    .notebook-detail-and-actions {
+    .notebook-detail-and-actions,
+    .note-count {
       display: none;
     }
   }
