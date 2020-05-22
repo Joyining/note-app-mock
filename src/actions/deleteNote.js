@@ -23,7 +23,7 @@ export const deleteNote = (noteId) => async (dispatch) => {
     .then((res) => {
       notebookRef.get().then((snapshot) => {
         notes = snapshot.data().notes;
-        notes.splice(notes.indexOf(notebookId), 1);
+        notes.splice(notes.indexOf(noteId), 1);
         notebookRef.update({
           notes: notes,
         });
