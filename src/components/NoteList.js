@@ -22,10 +22,11 @@ class NoteList extends Component {
     // fetchNotes();
   }
   render() {
-    const { selectedNotebook, defaultNotebook, cookies } = this.props;
+    const { selectedNotebook, defaultNotebook, cookies, allNotes } = this.props;
     const currentNotebook = {
       id: selectedNotebook.id ? selectedNotebook.id : "allNotes",
       name: selectedNotebook.name ? selectedNotebook.name : "All Notes",
+      notes: allNotes,
       defaultNotebook:
         defaultNotebook.id === selectedNotebook.id ? true : false,
     };

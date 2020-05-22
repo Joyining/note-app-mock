@@ -68,6 +68,10 @@ class NotebookListItem extends Component {
           >
             {notebook.name}
           </span>
+          <div className="note-count">
+            <span>{notebook.notes.length}</span>
+            <span>{` note${notebook.notes.length > 1 ? "s" : ""}`}</span>
+          </div>
           <span className="is-default-notebook">
             {notebook.defaultNotebook.toString() === "true"
               ? "Default Notebook"
