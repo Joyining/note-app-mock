@@ -76,7 +76,7 @@ class Editor extends Component {
     return (
       <div className="editor-wrap">
         <div className="editor-top">
-          <div className="last-modified">
+          <div className="note-info">
             <p>{editingNote.notebookName}</p>
             <p>Last Modified At: {lastModifiedDay}</p>
           </div>

@@ -3,15 +3,19 @@
   flex-grow: 1;
   .editor-top,
   .editor-bottom {
-    // background-color: $--evernote-green;
     display: flex;
     justify-content: space-between;
     height: 52px;
     box-sizing: border-box;
     padding: 8px;
-    .last-modified {
+    .note-info {
       color: $--silver-chalice;
       font-size: 13px;
+      p {
+        height: 18px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
   }
   .quill {

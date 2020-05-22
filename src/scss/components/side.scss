@@ -43,15 +43,17 @@
     .notebook-icon {
       fill: $--mercury;
       margin-right: 5px;
+      flex-shrink: 0;
     }
     .notebook-name {
       color: $--mercury;
       font-size: 14px;
+      height: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .is-default-notebook,
-    .note-count,
-    .actions {
+    .notebook-detail-and-actions {
       display: none;
     }
   }

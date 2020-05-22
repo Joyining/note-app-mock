@@ -15,22 +15,36 @@ $--note-item-outer-paddingX: 26px;
     box-sizing: border-box;
     height: 102px;
     border-bottom: 1px solid $--mercury;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     .notebook-name {
       color: $--title-gray;
       font-size: 20px;
+      height: 28px;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-    .note-count {
-      font-size: 13px;
-      color: $--silver-chalice;
-    }
-    .actions {
-      position: relative;
-      &.allNotes {
-        display: none;
+    .notebook-detail-and-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .note-count {
+        font-size: 13px;
+        color: $--silver-chalice;
       }
-      .icon {
-        width: 20px;
-        height: 20px;
+      .actions {
+        position: relative;
+        &.allNotes {
+          display: none;
+        }
+        .icon {
+          width: 20px;
+          height: 20px;
+          svg {
+            fill: $--silver-chalice;
+          }
+        }
       }
     }
 
@@ -43,7 +57,6 @@ $--note-item-outer-paddingX: 26px;
     height: $--note-item-outer-height;
     padding: $--note-item-outer-paddingY $--note-item-outer-paddingX;
     box-sizing: border-box;
-    // background-color: $--alabaster;
     border-bottom: 1px solid $--mercury;
     font-size: 14px;
     color: $--note-item-font-gray;

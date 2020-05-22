@@ -62,48 +62,50 @@ class NotebookListItem extends Component {
               d="M3 2v10h7a1 1 0 001-1V3a1 1 0 00-1-1H3zM2 1h8a2 2 0 012 2v8a2 2 0 01-2 2H2V1zm2 1v10h1V2H4zm2 3v1h4V5H6z"
             ></path>
           </svg>
-          <span
+          <p
             className="notebook-name"
             onClick={this.notebookNameOnClickHandler}
           >
             {notebook.name}
-          </span>
-          <div className="note-count">
-            <span>{notebook.notes.length}</span>
-            <span>{` note${notebook.notes.length > 1 ? "s" : ""}`}</span>
-          </div>
-          <span className="is-default-notebook">
-            {notebook.defaultNotebook.toString() === "true"
-              ? "Default Notebook"
-              : ""}
-          </span>
-          <div className={`actions ${notebookId}`}>
-            <div className="icon" onClick={this.actionOnClickHandler}>
-              <svg
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-                id="qa-NOTEBOOK_ACTIONS"
-              >
-                <path d="M16 12c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2zm-2 0c0-1.1-.9-2-2-2s-2 .9-2 2 .9 2 2 2 2-.9 2-2zm-6 0c0-1.1-.9-2-2-2s-2 .9-2 2 .9 2 2 2 2-.9 2-2z"></path>
-              </svg>
+          </p>
+          <div className="notebook-detail-and-actions">
+            <div className="note-count">
+              <span>{notebook.notes.length}</span>
+              <span>{` note${notebook.notes.length > 1 ? "s" : ""}`}</span>
             </div>
-            <ul
-              className={
-                showMenu ? "shared-menu-list show" : "shared-menu-list"
-              }
-            >
-              {menu.map((item) => {
-                return (
-                  <li
-                    key={item.name}
-                    className="menu-item"
-                    onClick={item.onClick}
-                  >
-                    {item.name}
-                  </li>
-                );
-              })}
-            </ul>
+            <p className="is-default-notebook">
+              {notebook.defaultNotebook.toString() === "true"
+                ? "Default Notebook"
+                : ""}
+            </p>
+            <div className={`actions ${notebookId}`}>
+              <div className="icon" onClick={this.actionOnClickHandler}>
+                <svg
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  id="qa-NOTEBOOK_ACTIONS"
+                >
+                  <path d="M16 12c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2zm-2 0c0-1.1-.9-2-2-2s-2 .9-2 2 .9 2 2 2 2-.9 2-2zm-6 0c0-1.1-.9-2-2-2s-2 .9-2 2 .9 2 2 2 2-.9 2-2z"></path>
+                </svg>
+              </div>
+              <ul
+                className={
+                  showMenu ? "shared-menu-list show" : "shared-menu-list"
+                }
+              >
+                {menu.map((item) => {
+                  return (
+                    <li
+                      key={item.name}
+                      className="menu-item"
+                      onClick={item.onClick}
+                    >
+                      {item.name}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
           </div>
         </div>
       </li>
