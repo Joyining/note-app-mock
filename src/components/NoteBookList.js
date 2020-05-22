@@ -55,6 +55,7 @@ class NoteBookList extends Component {
               <p className="title">Title</p>
             </li>
             <li className="notebook-detail-and-actions">
+              <p className="last-modified detail-item">Last Modified</p>
               <p className="is-default-notebook detail-item">
                 Default Notebook
               </p>
