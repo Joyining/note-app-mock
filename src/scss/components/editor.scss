@@ -16,6 +16,10 @@
         overflow: hidden;
         text-overflow: ellipsis;
       }
+      .note-title,
+      .last-modified-date {
+        display: none;
+      }
     }
   }
   .quill {

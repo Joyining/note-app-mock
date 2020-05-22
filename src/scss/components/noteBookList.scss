@@ -77,8 +77,10 @@
       padding: 0.5rem;
       box-sizing: border-box;
       flex-basis: 30%;
+      .expand-icon,
       .notebook-icon {
         margin-right: 5px;
+        flex-shrink: 0;
       }
       .notebook-name {
         color: $--title-gray;
@@ -112,6 +114,29 @@
           svg {
             fill: $--boulder;
           }
+        }
+      }
+    }
+  }
+  .note-list {
+    .note {
+      display: flex;
+      .note-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+        box-sizing: border-box;
+        p {
+          padding: 0.5rem;
+        }
+        .note-name-and-icon {
+          flex-basis: 30%;
+          padding-left: 52px;
+        }
+        .notebook-name,
+        .last-modified-time {
+          display: none;
         }
       }
     }

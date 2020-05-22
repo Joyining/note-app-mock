@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
+import NoteInfo from "./NoteInfo";
+import NoteActions from "./NoteActions";
+import "../firebase";
+import { firebase } from "@firebase/app";
+import "@firebase/auth";
 import "../scss/components/notebookList.scss";
 
 class NotebookListItem extends Component {
@@ -8,6 +13,8 @@ class NotebookListItem extends Component {
     super(props);
     this.state = {
       showMenu: false,
+      expandNotebook: false,
+      notes: [],
     };
   }
   notebookNameOnClickHandler = (e) => {
@@ -38,9 +45,42 @@ class NotebookListItem extends Component {
     setAsDefaultNotebook(notebookId, getCurrentUser);
   };
 
-  render() {
+  expandNotebook = () => {
+    const { expandNotebook } = this.state;
     const { notebookId, notebook } = this.props;
-    const { showMenu } = this.state;
+    const notesIdArray = notebook.notes;
+    const db = firebase.firestore();
+    let notes = [];
+    notesIdArray.map((id) => {
+      const noteRef = db.collection("notes").doc(id);
+      noteRef.get().then((snapShot) => {
+        const data = snapShot.data();
+        const noteObj = {
+          id: id,
+          title: data.title,
+          lastModifiedTime: data.lastModifiedTime,
+          owner: data.owner,
+        };
+        notes.push(noteObj);
+        this.setState({
+          notes: notes,
+        });
+      });
+    });
+
+    this.setState({
+      expandNotebook: expandNotebook ? false : true,
+    });
+  };
+
+  componentDidUpdate() {
+    console.log("NotebookListItem componentDidUpdate");
+  }
+
+  render() {
+    console.log("render!");
+    const { notebookId, notebook, cookies } = this.props;
+    const { showMenu, notes } = this.state;
     const menu = [
       {
         name: "Set as Default Notebook",
@@ -51,6 +91,20 @@ class NotebookListItem extends Component {
       <li id={notebookId} className="notebook-item-outer">
         <div className="notebook-item-inner">
           <div className="notebook-name-and-icon">
+            <svg
+              width="6"
+              height="9"
+              viewBox="2 240 6 9"
+              xmlns="http://www.w3.org/2000/svg"
+              className="expand-icon"
+              onClick={this.expandNotebook}
+            >
+              <path
+                fill="#9B9B9B"
+                fillRule="evenodd"
+                d="M2 240l6 4.5-6 4.5z"
+              ></path>
+            </svg>
             <svg
               className="notebook-icon"
               xmlns="http://www.w3.org/2000/svg"
@@ -112,6 +166,23 @@ class NotebookListItem extends Component {
             </div>
           </div>
         </div>
+        <ul className="note-list">
+          {notes.map((note) => {
+            return (
+              <li
+                className="note note-info-action-wrap"
+                key={note.id}
+                id={note.id}
+              >
+                <NoteInfo
+                  title={note.title}
+                  lastModifiedTime={note.lastModifiedTime}
+                />
+                <NoteActions cookies={cookies} />
+              </li>
+            );
+          })}
+        </ul>
       </li>
     );
   }

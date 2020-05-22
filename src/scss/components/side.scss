@@ -42,6 +42,9 @@
       display: flex;
       align-items: center;
       height: 100%;
+      .expand-icon {
+        display: none;
+      }
       .notebook-icon {
         fill: $--mercury;
         margin-right: 5px;
@@ -57,7 +60,8 @@
     }
 
     .notebook-detail-and-actions,
-    .note-count {
+    .note-count,
+    .note-list {
       display: none;
     }
   }
