@@ -5,9 +5,11 @@ import "@firebase/auth";
 export const addNote = (noteId, owner, notebook, content = "") => async (
   dispatch
 ) => {
-  var db = firebase.firestore();
-  var ref = db.collection("notes").doc(noteId);
-  ref.set({
+  const db = firebase.firestore();
+  const noteRef = db.collection("notes").doc(noteId);
+  const notebookRef = db.collection("notebooks").doc(notebook.id);
+  let notes = null;
+  noteRef.set({
     createdTime: new Date(),
     lastModifiedTime: new Date(),
     content: content,
@@ -15,5 +17,11 @@ export const addNote = (noteId, owner, notebook, content = "") => async (
     notebookId: notebook.id,
     notebookName: notebook.name,
   });
-  console.log("add note !!!!");
+  notebookRef.get().then((snapshot) => {
+    notes = snapshot.data().notes;
+    notes.push(noteId);
+    notebookRef.update({
+      notes: notes,
+    });
+  });
 };

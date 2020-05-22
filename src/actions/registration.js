@@ -46,6 +46,7 @@ export const signUp = (email, password) => async (dispatch) => {
         name: "My Notebook",
         owner: email,
         defaultNotebook: true,
+        notes: [],
       });
     })
     .then((res) => {

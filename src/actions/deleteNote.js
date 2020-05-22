@@ -4,15 +4,34 @@ import "@firebase/auth";
 import { DELETE_NOTE } from "./types";
 
 export const deleteNote = (noteId) => async (dispatch) => {
-  var db = firebase.firestore();
-  var ref = db.collection("notes").doc(noteId);
-
+  const db = firebase.firestore();
+  const noteRef = db.collection("notes").doc(noteId);
+  let notebookId = "";
+  let notebookRef = null;
+  let notes = null;
   dispatch({
     type: DELETE_NOTE,
     isDeletingNote: true,
   });
 
-  ref.delete().then(() => {
-    console.log("delete data success");
-  });
+  noteRef
+    .get()
+    .then((snapshot) => {
+      notebookId = snapshot.data().notebookId;
+      notebookRef = db.collection("notebooks").doc(notebookId);
+    })
+    .then((res) => {
+      notebookRef.get().then((snapshot) => {
+        notes = snapshot.data().notes;
+        notes.splice(notes.indexOf(notebookId), 1);
+        notebookRef.update({
+          notes: notes,
+        });
+      });
+    })
+    .then((res) => {
+      noteRef.delete().then(() => {
+        console.log("delete data success");
+      });
+    });
 };

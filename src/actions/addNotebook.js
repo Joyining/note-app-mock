@@ -22,6 +22,7 @@ export const addNotebook = (id, owner, name = "") => async (dispatch) => {
         name: name,
         owner: owner,
         defaultNotebook: defaultNotebook,
+        notes: [],
       });
     });
 };
