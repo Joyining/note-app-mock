@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import LightBoxBg from "./LightBoxBg";
 import DeleteNoteLightBox from "./DeleteNoteLightBox";
 import NoteDetailLightBox from "./NoteDetailLightBox";
-import "../scss/components/editorMenu.scss";
+import "../scss/components/noteActions.scss";
 
 class NoteActions extends Component {
   constructor(props) {
