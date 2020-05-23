@@ -60,7 +60,7 @@ class Notebook extends Component {
           lastModifiedTime: data.lastModifiedTime,
           owner: data.owner,
         };
-        notes.push(noteObj);
+        notes.push(noteObj); // should sort by lastModifiedTime
         this.setState({
           notes: notes,
         });
@@ -75,6 +75,17 @@ class Notebook extends Component {
   componentDidUpdate() {
     console.log("Notebook componentDidUpdate");
   }
+
+  getDisplayedTime = (originTime) => {
+    if (originTime) {
+      const dateObj = originTime.toDate();
+      return dateObj
+        ? `${dateObj.getFullYear()}/${
+            dateObj.getMonth() + 1
+          }/${dateObj.getDate()}  ${dateObj.getHours()}:${dateObj.getMinutes()}:${dateObj.getSeconds()}`
+        : "";
+    }
+  };
 
   render() {
     console.log("render!");
@@ -122,9 +133,7 @@ class Notebook extends Component {
             >
               {notebook.name}
             </p>
-            <div className="note-count">
-              <span>{`(${notebook.notes.length})`}</span>
-            </div>
+            <span className="note-count">{`(${notebook.notes.length})`}</span>
           </div>
 
           <div className="notebook-detail-and-actions">
@@ -132,6 +141,7 @@ class Notebook extends Component {
               <span>{notebook.notes.length}</span>
               <span>{` note${notebook.notes.length > 1 ? "s" : ""}`}</span>
             </div>
+            <p>{this.getDisplayedTime(notebook.lastModifiedTime)}</p>
             <p className="is-default-notebook detail-item">
               {notebook.defaultNotebook.toString() === "true" ? "Default" : ""}
             </p>

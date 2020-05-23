@@ -4,7 +4,8 @@ import "@firebase/auth";
 
 export const editNote = (noteId, value, isEditing) => async (dispatch) => {
   const db = firebase.firestore();
-  const ref = db.collection("notes").doc(noteId);
+  const noteRef = db.collection("notes").doc(noteId);
+  const now = new Date();
   let title = "";
   if (value) {
     let result = 0;
@@ -21,31 +22,40 @@ export const editNote = (noteId, value, isEditing) => async (dispatch) => {
     let temp = value.substring(firstIndex);
     title = value.substring(firstIndex, temp.indexOf("<") + firstIndex);
   }
-  if (isEditing === false) {
-    // 如果前一次的Quill onChange是user click ListItem
-    // 則檢查value是否跟database裡的資料一樣
-    console.log("need to check sameContent");
-    ref.get().then((doc) => {
-      const content = doc.data().content;
-      const sameContent = value === content ? true : false;
-      title = doc.data().title ? doc.data().title : ""; // 先初始化
 
+  noteRef.get().then((doc) => {
+    const data = doc.data();
+    const content = data.content;
+    const notebookId = data.notebookId;
+    const notebookRef = db.collection("notebooks").doc(notebookId);
+    if (isEditing === false) {
+      // 如果前一次的Quill onChange是user click Note
+      // 則檢查value是否跟database裡的資料一樣
+      console.log("need to check sameContent");
+      const sameContent = value === content ? true : false;
+      title = data.title ? data.title : ""; // 先初始化
       if (!sameContent) {
         console.log("not same");
-        ref.update({
+        noteRef.update({
           content: value,
-          lastModifiedTime: new Date(),
+          lastModifiedTime: now,
           title: title,
+        });
+        notebookRef.update({
+          lastModifiedTime: now,
         });
       } else {
         console.log("same");
       }
-    });
-  } else {
-    ref.update({
-      content: value,
-      lastModifiedTime: new Date(),
-      title: title,
-    });
-  }
+    } else {
+      noteRef.update({
+        content: value,
+        lastModifiedTime: now,
+        title: title,
+      });
+      notebookRef.update({
+        lastModifiedTime: now,
+      });
+    }
+  });
 };

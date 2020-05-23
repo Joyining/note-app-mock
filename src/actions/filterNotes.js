@@ -10,6 +10,7 @@ export const filterNotes = (owner, notebookId = "") => async (dispatch) => {
   let selectedNotesCollection = null;
   let selectedNotebookName = "";
   let selectedNotebookNotes = null;
+  let selectedNotebookLastModifiedTime = null;
   if (notebookId) {
     selectedNotesCollection = notesCollection
       .where("owner", "==", owner)
@@ -20,6 +21,7 @@ export const filterNotes = (owner, notebookId = "") => async (dispatch) => {
         if (notebook.id === notebookId) {
           selectedNotebookName = notebook.data().name;
           selectedNotebookNotes = notebook.data().notes;
+          selectedNotebookLastModifiedTime = notebook.data().lastModifiedTime;
           break;
         }
       }
@@ -59,6 +61,7 @@ export const filterNotes = (owner, notebookId = "") => async (dispatch) => {
         id: notebookId,
         name: selectedNotebookName,
         notes: selectedNotebookNotes,
+        lastModifiedTime: selectedNotebookLastModifiedTime,
       },
     });
   });

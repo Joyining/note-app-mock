@@ -3,9 +3,9 @@ import { firebase } from "@firebase/app";
 import "@firebase/auth";
 
 export const addNotebook = (id, owner, name = "") => async (dispatch) => {
-  console.log("add Notebook");
-  var db = firebase.firestore();
-  var defaultNotebook = false;
+  const db = firebase.firestore();
+  const defaultNotebook = false;
+  const now = new Date();
   db.collection("notebooks")
     .get()
     .then((snap) => {
@@ -16,9 +16,10 @@ export const addNotebook = (id, owner, name = "") => async (dispatch) => {
       }
     })
     .then((res) => {
-      var ref = db.collection("notebooks").doc(id);
+      const ref = db.collection("notebooks").doc(id);
       ref.set({
-        createdTime: new Date(),
+        createdTime: now,
+        lastModifiedTime: now, // or null?
         name: name,
         owner: owner,
         defaultNotebook: defaultNotebook,

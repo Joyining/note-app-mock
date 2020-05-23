@@ -8,10 +8,11 @@ export const addNote = (noteId, owner, notebook, content = "") => async (
   const db = firebase.firestore();
   const noteRef = db.collection("notes").doc(noteId);
   const notebookRef = db.collection("notebooks").doc(notebook.id);
+  const now = new Date();
   let notes = null;
   noteRef.set({
-    createdTime: new Date(),
-    lastModifiedTime: new Date(),
+    createdTime: now,
+    lastModifiedTime: now,
     content: content,
     owner: owner,
     notebookId: notebook.id,
@@ -22,6 +23,7 @@ export const addNote = (noteId, owner, notebook, content = "") => async (
     notes.push(noteId);
     notebookRef.update({
       notes: notes,
+      lastModifiedTime: now,
     });
   });
 };

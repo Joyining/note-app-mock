@@ -37,6 +37,9 @@ class NoteList extends Component {
       notes: allNotes,
       defaultNotebook:
         defaultNotebook.id === selectedNotebook.id ? true : false,
+      lastModifiedTime: selectedNotebook.lastModifiedTime
+        ? selectedNotebook.lastModifiedTime
+        : null,
     };
     return (
       <div className="note-list-wrap">
