@@ -8,7 +8,7 @@ import { firebase } from "@firebase/app";
 import "@firebase/auth";
 import "../scss/components/notebookList.scss";
 
-class NotebookListItem extends Component {
+class Notebook extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -74,7 +74,7 @@ class NotebookListItem extends Component {
   };
 
   componentDidUpdate() {
-    console.log("NotebookListItem componentDidUpdate");
+    console.log("Notebook componentDidUpdate");
   }
 
   render() {
@@ -88,8 +88,8 @@ class NotebookListItem extends Component {
       },
     ];
     return (
-      <li id={notebookId} className="notebook-item-outer">
-        <div className="notebook-item-inner">
+      <li id={notebookId} className="notebook-outer-wrap">
+        <div className="notebook-inner-wrap">
           <div className="notebook-name-and-icon">
             <svg
               width="6"
@@ -193,4 +193,4 @@ const mapStateToProps = (state) => {
   return { currentUser };
 };
 
-export default connect(mapStateToProps, actions)(NotebookListItem);
+export default connect(mapStateToProps, actions)(Notebook);

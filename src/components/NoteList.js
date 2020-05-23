@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import _ from "lodash";
 import * as actions from "../actions";
 import NoteListItem from "./NoteListItem";
-import NotebookListItem from "./NotebookListItem";
+import Notebook from "./Notebook";
 import "../scss/components/noteList.scss";
 
 class NoteList extends Component {
@@ -32,8 +32,8 @@ class NoteList extends Component {
     };
     return (
       <div className="note-list-wrap">
-        <NotebookListItem
-          notebookId={`${currentNotebook.id}`} // id會跟SideMenu裡的NotebookListItem重複？
+        <Notebook
+          notebookId={`${currentNotebook.id}`} // id會跟SideMenu裡的Notebook重複？
           notebook={currentNotebook}
           cookies={cookies}
         />

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import _ from "lodash";
 import * as actions from "../actions";
-import NotebookListItem from "./NotebookListItem";
+import Notebook from "./Notebook";
 
 class SideMenu extends Component {
   menuItemOnClickHandler = (view, needFilterNotes, filter, e) => {
@@ -22,7 +22,7 @@ class SideMenu extends Component {
     const { allNotebooks, cookies } = this.props;
     const ntoebooks = _.map(allNotebooks, (notebook) => {
       return (
-        <NotebookListItem
+        <Notebook
           key={notebook.id}
           notebookId={notebook.id}
           notebook={notebook.data()}

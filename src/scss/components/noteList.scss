@@ -10,7 +10,7 @@ $--note-item-outer-paddingX: 26px;
   overflow-y: scroll;
   background-color: $--alabaster;
   border-right: 1px solid $--mercury;
-  .notebook-item-inner {
+  .notebook-inner-wrap {
     padding: 16px 26px;
     box-sizing: border-box;
     height: 102px;
@@ -53,6 +53,9 @@ $--note-item-outer-paddingX: 26px;
           }
         }
       }
+    }
+    .note-list {
+      display: none;
     }
 
     .notebook-icon,

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import _ from "lodash";
 import * as actions from "../actions";
 import AddNotebook from "./AddNotebook";
-import NotebookListItem from "./NotebookListItem";
+import Notebook from "./Notebook";
 import "../scss/components/notebookList.scss";
 
 class NotebookList extends Component {
@@ -11,7 +11,7 @@ class NotebookList extends Component {
     const { allNotebooks, cookies } = this.props;
     const ntoebooks = _.map(allNotebooks, (notebook) => {
       return (
-        <NotebookListItem
+        <Notebook
           key={notebook.id}
           notebookId={notebook.id}
           notebook={notebook.data()}
