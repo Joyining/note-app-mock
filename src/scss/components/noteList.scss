@@ -1,5 +1,5 @@
 $--note-outer-wrap-height: 120px;
-$--note-inner-wrap-height: 63px;
+$--partial-content-height: 63px;
 $--note-outer-wrap-paddingY: 16px;
 $--note-outer-wrap-paddingX: 26px;
 
@@ -73,9 +73,16 @@ $--note-outer-wrap-paddingX: 26px;
     &.active {
       background-color: $--concrete;
     }
-    .note-inner-wrap {
+    .last-modified-time,
+    .last-modified-date,
+    .notebook-name,
+    .note-info {
+      display: none;
+    }
+
+    .partial-content {
       width: 100%;
-      height: $--note-inner-wrap-height;
+      height: $--partial-content-height;
       overflow: hidden;
       :first-child {
         color: $--title-gray;
@@ -88,16 +95,13 @@ $--note-outer-wrap-paddingX: 26px;
         font-weight: normal;
       }
     }
-    .last-modified {
+    .last-modified-ago {
       font-size: 12px;
       color: $--silver-chalice;
-      height: $--note-outer-wrap-height - $--note-inner-wrap-height -
+      height: $--note-outer-wrap-height - $--partial-content-height -
         ($--note-outer-wrap-paddingY * 2);
-      line-height: $--note-outer-wrap-height - $--note-inner-wrap-height -
+      line-height: $--note-outer-wrap-height - $--partial-content-height -
         ($--note-outer-wrap-paddingY * 2);
-    }
-    .note-info {
-      display: none;
     }
   }
 }

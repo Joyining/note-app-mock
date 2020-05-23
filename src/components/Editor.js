@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import * as actions from "../actions";
 import ReactQuill from "react-quill";
 import Note from "./Note";
-import NoteActions from "./NoteActions";
 import "react-quill/dist/quill.snow.css";
 import "../scss/components/editor.scss";
 
@@ -73,8 +72,8 @@ class Editor extends Component {
             noteId={editingNote.id}
             notebookName={editingNote.notebookName}
             lastModifiedTime={editingNote.lastModifiedTime}
+            cookies={cookies}
           />
-          <NoteActions cookies={cookies} />
         </div>
 
         {console.log("isEditing: " + isEditing)}

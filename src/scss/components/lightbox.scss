@@ -24,6 +24,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      color: $--note-item-font-gray;
       .cancel-icon {
         fill: $--silver-chalice;
       }
@@ -32,8 +33,8 @@
       font: {
         size: 14px;
         weight: 300;
-        color: $--note-item-font-gray;
       }
+      color: $--note-item-font-gray;
       padding: 16px 0;
       .note-title {
         font-weight: bold;

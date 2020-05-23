@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 import Note from "./Note";
-import NoteActions from "./NoteActions";
 import "../firebase";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
@@ -178,8 +177,8 @@ class Notebook extends Component {
                   noteId={note.id}
                   title={note.title}
                   lastModifiedTime={note.lastModifiedTime}
+                  cookies={cookies}
                 />
-                <NoteActions cookies={cookies} />
               </li>
             );
           })}

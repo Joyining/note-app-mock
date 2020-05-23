@@ -8,7 +8,7 @@ import "../scss/components/noteList.scss";
 
 class NoteList extends Component {
   renderNote() {
-    const { allNotes } = this.props;
+    const { allNotes, cookies } = this.props;
     const notes = _.map(allNotes, (note) => {
       return (
         <Note
@@ -16,6 +16,7 @@ class NoteList extends Component {
           noteId={note.id}
           content={note.data().content}
           lastModifiedTime={note.data().lastModifiedTime}
+          cookies={cookies}
         />
       );
     });

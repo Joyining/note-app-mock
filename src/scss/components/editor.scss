@@ -8,21 +8,27 @@
     height: 52px;
     box-sizing: border-box;
     padding: 8px;
-    .note-inner-wrap,
-    .last-modified {
-      display: none;
-    }
-    .note-info {
+    .note-outer-wrap {
+      width: 100%;
       color: $--silver-chalice;
       font-size: 13px;
+      display: flex;
+      justify-content: space-between;
       p {
         height: 18px;
         overflow: hidden;
         text-overflow: ellipsis;
       }
-      .note-title,
-      .last-modified-date {
+      .partial-content,
+      .last-modified-ago,
+      .note-name-and-icon,
+      .note-detail {
         display: none;
+      }
+      .icon {
+        .horizontal {
+          display: none;
+        }
       }
     }
   }
