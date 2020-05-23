@@ -2,9 +2,9 @@ import "../firebase";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
 
-export const edit = (noteId, value, isEditing) => async (dispatch) => {
-  var db = firebase.firestore();
-  var ref = db.collection("notes").doc(noteId);
+export const editNote = (noteId, value, isEditing) => async (dispatch) => {
+  const db = firebase.firestore();
+  const ref = db.collection("notes").doc(noteId);
   let title = "";
   if (value) {
     let result = 0;
@@ -27,7 +27,7 @@ export const edit = (noteId, value, isEditing) => async (dispatch) => {
     console.log("need to check sameContent");
     ref.get().then((doc) => {
       const content = doc.data().content;
-      var sameContent = value === content ? true : false;
+      const sameContent = value === content ? true : false;
       title = doc.data().title ? doc.data().title : ""; // 先初始化
 
       if (!sameContent) {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { edit } from "../actions";
+import * as actions from "../actions";
 import ReactQuill from "react-quill";
 import NoteInfo from "./NoteInfo";
 import NoteActions from "./NoteActions";
@@ -23,7 +23,7 @@ class Editor extends Component {
       localNoteId,
       localEditorValue,
     } = this.state;
-    const { edit, editingNote, isEditing } = this.props;
+    const { editNote, editingNote, isEditing } = this.props;
     console.log(`onChange !!!!!!! ${value}`);
     console.log(editingNote.id);
 
@@ -47,7 +47,7 @@ class Editor extends Component {
       });
       // 前一次動作為切換note時，將之前的編輯結果edit出去
       // if (localNoteId) {
-      //   edit(localNoteId, localEditorValue, isEditing);
+      //   editNote( localNoteId, localEditorValue, isEditing);
       // }
     }
 
@@ -58,7 +58,7 @@ class Editor extends Component {
       //   accumulatedOnchangeCount === 1 ||
       //   (accumulatedOnchangeCount !== 0 && accumulatedOnchangeCount % 5 === 0)
       // ) {
-      edit(editingNote.id, value, isEditing);
+      editNote(editingNote.id, value, isEditing);
       // }
     }
   };
@@ -104,4 +104,4 @@ const mapStateToProps = (state) => {
   return { editingNote, isEditing };
 };
 
-export default connect(mapStateToProps, { edit })(Editor);
+export default connect(mapStateToProps, actions)(Editor);
