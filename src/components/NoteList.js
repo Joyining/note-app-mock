@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import _ from "lodash";
 import * as actions from "../actions";
-import NoteListItem from "./NoteListItem";
+import Note from "./Note";
 import Notebook from "./Notebook";
 import "../scss/components/noteList.scss";
 
@@ -11,7 +11,7 @@ class NoteList extends Component {
     const { allNotes } = this.props;
     const notes = _.map(allNotes, (note) => {
       return (
-        <NoteListItem
+        <Note
           key={note.id}
           noteId={note.id}
           content={note.data().content}

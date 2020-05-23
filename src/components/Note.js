@@ -4,7 +4,7 @@ import * as actions from "../actions";
 import DOMPurify from "dompurify";
 import "../scss/components/noteList.scss";
 
-class NoteListItem extends Component {
+class Note extends Component {
   edit = (noteId) => {
     const { updateEditingNote } = this.props;
     updateEditingNote(noteId);
@@ -72,13 +72,13 @@ class NoteListItem extends Component {
     return (
       <div
         id={noteId}
-        className={`note-item-outer ${
+        className={`note-outer-wrap ${
           editingNote.id === noteId ? "active" : ""
         }`}
         onClick={() => this.edit(noteId)}
       >
         <div
-          className="note-item-inner"
+          className="note-inner-wrap"
           dangerouslySetInnerHTML={{
             __html: DOMPurify.sanitize(content),
           }}
@@ -111,6 +111,6 @@ const mapStateToProps = (state) => {
   return { editingNote };
 };
 
-export default connect(mapStateToProps, actions)(NoteListItem);
+export default connect(mapStateToProps, actions)(Note);
 
 // This file will render each individual Note item. When clicking each Note item, it will update the current editing Note. This is achieved with the help of the updateEditingNote action that we had created in the actions section of this post. The actions are connected to the component with the help of the connect method of react-redux library.

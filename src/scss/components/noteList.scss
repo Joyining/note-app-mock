@@ -1,7 +1,7 @@
-$--note-item-outer-height: 120px;
-$--note-item-inner-height: 63px;
-$--note-item-outer-paddingY: 16px;
-$--note-item-outer-paddingX: 26px;
+$--note-outer-wrap-height: 120px;
+$--note-inner-wrap-height: 63px;
+$--note-outer-wrap-paddingY: 16px;
+$--note-outer-wrap-paddingX: 26px;
 
 .note-list-wrap {
   @import "../base/_base.scss";
@@ -63,9 +63,9 @@ $--note-item-outer-paddingX: 26px;
       display: none;
     }
   }
-  .note-item-outer {
-    height: $--note-item-outer-height;
-    padding: $--note-item-outer-paddingY $--note-item-outer-paddingX;
+  .note-outer-wrap {
+    height: $--note-outer-wrap-height;
+    padding: $--note-outer-wrap-paddingY $--note-outer-wrap-paddingX;
     box-sizing: border-box;
     border-bottom: 1px solid $--mercury;
     font-size: 14px;
@@ -73,9 +73,9 @@ $--note-item-outer-paddingX: 26px;
     &.active {
       background-color: $--concrete;
     }
-    .note-item-inner {
+    .note-inner-wrap {
       width: 100%;
-      height: $--note-item-inner-height;
+      height: $--note-inner-wrap-height;
       overflow: hidden;
       :first-child {
         color: $--title-gray;
@@ -91,10 +91,10 @@ $--note-item-outer-paddingX: 26px;
     .last-modified {
       font-size: 12px;
       color: $--silver-chalice;
-      height: $--note-item-outer-height - $--note-item-inner-height -
-        ($--note-item-outer-paddingY * 2);
-      line-height: $--note-item-outer-height - $--note-item-inner-height -
-        ($--note-item-outer-paddingY * 2);
+      height: $--note-outer-wrap-height - $--note-inner-wrap-height -
+        ($--note-outer-wrap-paddingY * 2);
+      line-height: $--note-outer-wrap-height - $--note-inner-wrap-height -
+        ($--note-outer-wrap-paddingY * 2);
     }
     .note-info {
       display: none;
