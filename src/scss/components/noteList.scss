@@ -96,5 +96,8 @@ $--note-item-outer-paddingX: 26px;
       line-height: $--note-item-outer-height - $--note-item-inner-height -
         ($--note-item-outer-paddingY * 2);
     }
+    .note-info {
+      display: none;
+    }
   }
 }

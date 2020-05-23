@@ -10,7 +10,14 @@ class NoteList extends Component {
   renderNote() {
     const { allNotes } = this.props;
     const notes = _.map(allNotes, (note) => {
-      return <NoteListItem key={note.id} noteId={note.id} note={note.data()} />;
+      return (
+        <NoteListItem
+          key={note.id}
+          noteId={note.id}
+          content={note.data().content}
+          lastModifiedTime={note.data().lastModifiedTime}
+        />
+      );
     });
     if (!_.isEmpty(notes)) {
       return notes;

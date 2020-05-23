@@ -121,6 +121,10 @@
   .note-list {
     .note {
       display: flex;
+      .note-item-inner,
+      .last-modified {
+        display: none;
+      }
       .note-info {
         display: flex;
         justify-content: space-between;

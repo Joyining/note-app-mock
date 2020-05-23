@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 import ReactQuill from "react-quill";
-import NoteInfo from "./NoteInfo";
+import NoteListItem from "./NoteListItem";
 import NoteActions from "./NoteActions";
 import "react-quill/dist/quill.snow.css";
 import "../scss/components/editor.scss";
@@ -69,7 +69,8 @@ class Editor extends Component {
     return (
       <div className="editor-wrap">
         <div className="editor-top note-info-action-wrap" id={editingNote.id}>
-          <NoteInfo
+          <NoteListItem
+            noteId={editingNote.id}
             notebookName={editingNote.notebookName}
             lastModifiedTime={editingNote.lastModifiedTime}
           />

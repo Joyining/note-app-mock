@@ -8,6 +8,10 @@
     height: 52px;
     box-sizing: border-box;
     padding: 8px;
+    .note-item-inner,
+    .last-modified {
+      display: none;
+    }
     .note-info {
       color: $--silver-chalice;
       font-size: 13px;

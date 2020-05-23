@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
-import NoteInfo from "./NoteInfo";
+import NoteListItem from "./NoteListItem";
 import NoteActions from "./NoteActions";
 import "../firebase";
 import { firebase } from "@firebase/app";
@@ -174,7 +174,8 @@ class Notebook extends Component {
                 key={note.id}
                 id={note.id}
               >
-                <NoteInfo
+                <NoteListItem
+                  noteId={note.id}
                   title={note.title}
                   lastModifiedTime={note.lastModifiedTime}
                 />

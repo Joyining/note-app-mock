@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { updateEditingNote } from "../actions";
+import * as actions from "../actions";
 import DOMPurify from "dompurify";
 import "../scss/components/noteList.scss";
 
@@ -39,8 +39,36 @@ class NoteListItem extends Component {
     return result;
   };
 
+  getDisplayedDate = (originTime) => {
+    if (originTime) {
+      const dateObj = originTime.toDate();
+      return dateObj
+        ? `${dateObj.getFullYear()}/${
+            dateObj.getMonth() + 1
+          }/${dateObj.getDate()}`
+        : "";
+    }
+  };
+  getDisplayedTime = (originTime) => {
+    if (originTime) {
+      const dateObj = originTime.toDate();
+      return dateObj
+        ? `${dateObj.getFullYear()}/${
+            dateObj.getMonth() + 1
+          }/${dateObj.getDate()}  ${dateObj.getHours()}:${dateObj.getMinutes()}:${dateObj.getSeconds()}`
+        : "";
+    }
+  };
+
   render() {
-    const { noteId, note, editingNote } = this.props;
+    const {
+      noteId,
+      content,
+      notebookName,
+      title,
+      lastModifiedTime,
+      editingNote,
+    } = this.props;
     return (
       <div
         id={noteId}
@@ -52,12 +80,27 @@ class NoteListItem extends Component {
         <div
           className="note-item-inner"
           dangerouslySetInnerHTML={{
-            __html: DOMPurify.sanitize(note.content),
+            __html: DOMPurify.sanitize(content),
           }}
         ></div>
         <p className="last-modified">
-          {this.calculateDisplayedLastModifiedTime(note.lastModifiedTime)}
+          {this.calculateDisplayedLastModifiedTime(lastModifiedTime)}
         </p>
+        <div className="note-info">
+          <p className="note-name-and-icon">
+            <span className="notebook-name">{notebookName}</span>
+            <span className="note-title">{title}</span>
+          </p>
+
+          <p className="note-detail-and-action">
+            <span className="last-modified-time">
+              Last Modified At: {this.getDisplayedTime(lastModifiedTime)}
+            </span>
+            <span className="last-modified-date">
+              {this.getDisplayedDate(lastModifiedTime)}
+            </span>
+          </p>
+        </div>
       </div>
     );
   }
@@ -68,6 +111,6 @@ const mapStateToProps = (state) => {
   return { editingNote };
 };
 
-export default connect(mapStateToProps, { updateEditingNote })(NoteListItem);
+export default connect(mapStateToProps, actions)(NoteListItem);
 
 // This file will render each individual Note item. When clicking each Note item, it will update the current editing Note. This is achieved with the help of the updateEditingNote action that we had created in the actions section of this post. The actions are connected to the component with the help of the connect method of react-redux library.
