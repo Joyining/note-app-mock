@@ -4,26 +4,29 @@ import "@firebase/auth";
 import { FETCH_NOTEBOOKS } from "./types";
 
 export const fetchNotebooks = (owner) => async (dispatch, getState) => {
-  var db = firebase.firestore();
-  var ref = db.collection("notebooks");
+  const db = firebase.firestore();
+  const ref = db.collection("notebooks");
 
-  ref.where("owner", "==", owner).onSnapshot((querySnapshot) => {
-    let defaultNotebookId = null;
-    let defaultNotebookName = null;
-    for (var notebook of querySnapshot.docs) {
-      if (notebook.data().defaultNotebook === true) {
-        defaultNotebookId = notebook.id;
-        defaultNotebookName = notebook.data().name;
-        break;
+  ref
+    .where("owner", "==", owner)
+    .orderBy("lastModifiedTime", "desc")
+    .onSnapshot((querySnapshot) => {
+      let defaultNotebookId = null;
+      let defaultNotebookName = null;
+      for (let notebook of querySnapshot.docs) {
+        if (notebook.data().defaultNotebook === true) {
+          defaultNotebookId = notebook.id;
+          defaultNotebookName = notebook.data().name;
+          break;
+        }
       }
-    }
-    dispatch({
-      type: FETCH_NOTEBOOKS,
-      allNotebooks: querySnapshot.docs,
-      defaultNotebook: {
-        id: defaultNotebookId,
-        name: defaultNotebookName,
-      },
+      dispatch({
+        type: FETCH_NOTEBOOKS,
+        allNotebooks: querySnapshot.docs,
+        defaultNotebook: {
+          id: defaultNotebookId,
+          name: defaultNotebookName,
+        },
+      });
     });
-  });
 };
