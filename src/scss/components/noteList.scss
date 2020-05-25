@@ -36,6 +36,9 @@ $--note-outer-wrap-paddingX: 26px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      .last-modified-time {
+        display: none;
+      }
       .note-count {
         font-size: 13px;
         color: $--silver-chalice;

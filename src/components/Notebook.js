@@ -106,7 +106,9 @@ class Notebook extends Component {
               <span>{notebook.notes.length}</span>
               <span>{` note${notebook.notes.length > 1 ? "s" : ""}`}</span>
             </div>
-            <p>{utils.getDisplayedTime(notebook.lastModifiedTime)}</p>
+            <p className="last-modified-time">
+              {utils.getDisplayedTime(notebook.lastModifiedTime)}
+            </p>
             {/* <p>{utils.getDisplayedDate(notebook.lastModifiedTime)}</p> */}
             <p className="is-default-notebook detail-item">
               {notebook.defaultNotebook.toString() === "true" ? "Default" : ""}
