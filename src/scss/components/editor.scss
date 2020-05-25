@@ -1,6 +1,7 @@
 .editor-wrap {
   @import "../base/_base.scss";
   flex-grow: 1;
+  overflow: hidden;
   .editor-top,
   .editor-bottom {
     display: flex;

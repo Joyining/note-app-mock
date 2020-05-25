@@ -20,13 +20,16 @@ $--note-actions-icon-width: 24px;
   border: none;
 }
 
+.home-container-wrap {
+  width: 100vw;
+}
 .home-container-wrap,
 .main-wrap {
   display: flex;
   height: 100vh;
 }
 .main-wrap {
-  flex-grow: 1;
+  width: calc(100vw - 241px); // flex-grow: 1;
   .empty-note-message {
     width: 100%;
     display: flex;
