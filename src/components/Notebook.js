@@ -3,6 +3,9 @@ import { connect } from "react-redux";
 import * as actions from "../actions";
 import * as utils from "../utils";
 import Note from "./Note";
+import { ReactComponent as ArrowRight } from "../images/arrowRight.svg";
+import { ReactComponent as NotebookIcon } from "../images/notebook.svg";
+import { ReactComponent as ActionIcon } from "../images/actionHorizontal.svg";
 import "../firebase";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
@@ -87,32 +90,8 @@ class Notebook extends Component {
       <li id={notebookId} className="notebook-outer-wrap">
         <div className="notebook-inner-wrap">
           <div className="notebook-name-and-icon">
-            <svg
-              width="6"
-              height="9"
-              viewBox="2 240 6 9"
-              xmlns="http://www.w3.org/2000/svg"
-              className="expand-icon"
-              onClick={this.expandNotebook}
-            >
-              <path
-                fill="#9B9B9B"
-                fillRule="evenodd"
-                d="M2 240l6 4.5-6 4.5z"
-              ></path>
-            </svg>
-            <svg
-              className="notebook-icon"
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="14"
-              viewBox="0 0 14 14"
-            >
-              <path
-                fillRule="evenodd"
-                d="M3 2v10h7a1 1 0 001-1V3a1 1 0 00-1-1H3zM2 1h8a2 2 0 012 2v8a2 2 0 01-2 2H2V1zm2 1v10h1V2H4zm2 3v1h4V5H6z"
-              ></path>
-            </svg>
+            <ArrowRight className="expand-icon" onClick={this.expandNotebook} />
+            <NotebookIcon className="notebook-icon" />
             <p
               className="notebook-name"
               onClick={this.notebookNameOnClickHandler}
@@ -133,15 +112,10 @@ class Notebook extends Component {
               {notebook.defaultNotebook.toString() === "true" ? "Default" : ""}
             </p>
             <div className={`actions detail-item ${notebookId}`}>
-              <div className="icon" onClick={this.actionOnClickHandler}>
-                <svg
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                  id="qa-NOTEBOOK_ACTIONS"
-                >
-                  <path d="M16 12c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2zm-2 0c0-1.1-.9-2-2-2s-2 .9-2 2 .9 2 2 2 2-.9 2-2zm-6 0c0-1.1-.9-2-2-2s-2 .9-2 2 .9 2 2 2 2-.9 2-2z"></path>
-                </svg>
-              </div>
+              <ActionIcon
+                className="icon"
+                onClick={this.actionOnClickHandler}
+              />
               <ul
                 className={
                   showMenu ? "shared-menu-list show" : "shared-menu-list"

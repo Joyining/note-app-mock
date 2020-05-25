@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 import * as utils from "../utils";
+import { ReactComponent as ExpandIcon } from "../images/arrowDown.svg";
 
 class Account extends Component {
   constructor(props) {
@@ -35,15 +36,7 @@ class Account extends Component {
           <p className="current-user">
             {utils.getCurrentUser(cookies, currentUser)}
           </p>
-          <svg
-            className="expand-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            width="8"
-            height="8"
-            viewBox="0 0 8 8"
-          >
-            <path fill="none" d="M7 2L4 5 1 2"></path>
-          </svg>
+          <ExpandIcon className="expand-icon" />
           <ul
             className={showMenu ? "shared-menu-list show" : "shared-menu-list"}
           >

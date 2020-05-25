@@ -6,6 +6,8 @@ import { v4 as uuidv4 } from "uuid";
 import LightBoxBg from "./LightBoxBg";
 import DeleteNoteLightBox from "./DeleteNoteLightBox";
 import NoteDetailLightBox from "./NoteDetailLightBox";
+import { ReactComponent as ActionVertical } from "../images/actionVertical.svg";
+import { ReactComponent as ActionHorizontal } from "../images/actionHorizontal.svg";
 import "../scss/components/noteActions.scss";
 
 class NoteActions extends Component {
@@ -104,22 +106,8 @@ class NoteActions extends Component {
       <div>
         <div className="note-actions-wrap">
           <div className="icon" onClick={this.menuOnClickHandler}>
-            <svg
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-              id="qa-NOTE_ACTIONS"
-              className="vertical"
-            >
-              <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
-            </svg>
-            <svg
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-              id="qa-NOTEBOOK_ACTIONS"
-              className="horizontal"
-            >
-              <path d="M16 12c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2zm-2 0c0-1.1-.9-2-2-2s-2 .9-2 2 .9 2 2 2 2-.9 2-2zm-6 0c0-1.1-.9-2-2-2s-2 .9-2 2 .9 2 2 2 2-.9 2-2z"></path>
-            </svg>
+            <ActionVertical className="vertical" />
+            <ActionHorizontal className="horizontal" />
           </div>
           <ul
             className={showMenu ? "shared-menu-list show" : "shared-menu-list"}

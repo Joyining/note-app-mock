@@ -4,6 +4,7 @@ import * as actions from "../actions";
 import * as utils from "../utils";
 import DOMPurify from "dompurify";
 import NoteActions from "./NoteActions";
+import { ReactComponent as NoteIcon } from "../images/note.svg";
 import "../scss/components/noteList.scss";
 
 class Note extends Component {
@@ -55,18 +56,7 @@ class Note extends Component {
 
         <div className="note-info">
           <p className="note-name-and-icon">
-            <svg
-              className="note-icon"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-            >
-              <path
-                id="80a"
-                d="M8 5a1 1 0 00-1 1v11a1 1 0 001 1h8a1 1 0 001-1V6a1 1 0 00-1-1H8zm8 11h1v-1h-1a.997.997 0 00-1 1v2h1v-2zM8 4h8a2 2 0 012 2v11a2 2 0 01-2 2H8a2 2 0 01-2-2V6a2 2 0 012-2zm1.5 4a.5.5 0 000 1h5a.5.5 0 100-1h-5zm0 3a.5.5 0 100 1h5a.5.5 0 100-1h-5zm0 3a.5.5 0 100 1h3a.5.5 0 100-1h-3z"
-              ></path>
-            </svg>
+            <NoteIcon className="note-icon" />
             <span className="note-title">{title}</span>
           </p>
 
