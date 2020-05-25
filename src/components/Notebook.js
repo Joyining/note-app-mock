@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
+import * as utils from "../utils";
 import Note from "./Note";
 import "../firebase";
 import { firebase } from "@firebase/app";
@@ -76,17 +77,6 @@ class Notebook extends Component {
     console.log("Notebook componentDidUpdate");
   }
 
-  getDisplayedTime = (originTime) => {
-    if (originTime) {
-      const dateObj = originTime.toDate();
-      return dateObj
-        ? `${dateObj.getFullYear()}/${
-            dateObj.getMonth() + 1
-          }/${dateObj.getDate()}  ${dateObj.getHours()}:${dateObj.getMinutes()}:${dateObj.getSeconds()}`
-        : "";
-    }
-  };
-
   render() {
     console.log("render!");
     const { notebookId, notebook, cookies } = this.props;
@@ -141,7 +131,8 @@ class Notebook extends Component {
               <span>{notebook.notes.length}</span>
               <span>{` note${notebook.notes.length > 1 ? "s" : ""}`}</span>
             </div>
-            <p>{this.getDisplayedTime(notebook.lastModifiedTime)}</p>
+            <p>{utils.getDisplayedTime(notebook.lastModifiedTime)}</p>
+            {/* <p>{utils.getDisplayedDate(notebook.lastModifiedTime)}</p> */}
             <p className="is-default-notebook detail-item">
               {notebook.defaultNotebook.toString() === "true" ? "Default" : ""}
             </p>

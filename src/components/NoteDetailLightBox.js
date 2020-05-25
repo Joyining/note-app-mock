@@ -1,25 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import LightBoxHeading from "./LightBoxHeading";
+import * as utils from "../utils";
 
 class NoteDetailLightBox extends Component {
   render() {
     const { editingNote, toggleLightBox } = this.props;
-    const lastModifiedDateObj = editingNote.lastModifiedTime
-      ? editingNote.lastModifiedTime.toDate()
-      : null;
-    const createdDateObj = editingNote.createdTime
-      ? editingNote.createdTime.toDate()
-      : null;
-    const getDisplayTime = (dateObj) => {
-      return dateObj
-        ? `${dateObj.getFullYear()}/${
-            dateObj.getMonth() + 1
-          }/${dateObj.getDate()}  ${dateObj.getHours()}:${dateObj.getMinutes()}`
-        : "";
-    };
-    const lastModifiedTime = getDisplayTime(lastModifiedDateObj);
-    const createdTime = getDisplayTime(createdDateObj);
+    const lastModifiedTime = utils.getDisplayedDate(
+      editingNote.lastModifiedTime
+    );
+    const createdTime = utils.getDisplayedDate(editingNote.createdTime);
     const details = [
       { name: "Title", data: editingNote.title, maxHeight: true },
       { name: "Created Time", data: createdTime, maxHeight: false },

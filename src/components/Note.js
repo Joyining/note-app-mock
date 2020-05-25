@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
+import * as utils from "../utils";
 import DOMPurify from "dompurify";
 import NoteActions from "./NoteActions";
 import "../scss/components/noteList.scss";
@@ -9,56 +10,6 @@ class Note extends Component {
   edit = (noteId) => {
     const { updateEditingNote } = this.props;
     updateEditingNote(noteId);
-  };
-
-  calculateDisplayedLastModifiedTime = (lastModifiedTime) => {
-    let result = "";
-    const now = new Date();
-    const dateObj = lastModifiedTime.toDate();
-    const lastModifiedDay = `${dateObj.getFullYear()}/${
-      dateObj.getMonth() + 1
-    }/${dateObj.getDate()}`;
-    const diffInSecond = Math.floor(
-      now.getTime() / 1000 - dateObj.getTime() / 1000
-    );
-    switch (true) {
-      case diffInSecond < 60:
-        result = `Few seconds ago`;
-        break;
-      case diffInSecond >= 60 && diffInSecond < 60 * 60:
-        result = `${Math.floor(diffInSecond / 60)} minutes ago`;
-        break;
-      case diffInSecond >= 60 * 60 && diffInSecond < 60 * 60 * 24:
-        result = `${Math.floor(diffInSecond / (60 * 60))} hours ago`;
-        break;
-      case diffInSecond >= 60 * 60 * 24:
-        result = lastModifiedDay;
-        break;
-      default:
-        break;
-    }
-    return result;
-  };
-
-  getDisplayedDate = (originTime) => {
-    if (originTime) {
-      const dateObj = originTime.toDate();
-      return dateObj
-        ? `${dateObj.getFullYear()}/${
-            dateObj.getMonth() + 1
-          }/${dateObj.getDate()}`
-        : "";
-    }
-  };
-  getDisplayedTime = (originTime) => {
-    if (originTime) {
-      const dateObj = originTime.toDate();
-      return dateObj
-        ? `${dateObj.getFullYear()}/${
-            dateObj.getMonth() + 1
-          }/${dateObj.getDate()}  ${dateObj.getHours()}:${dateObj.getMinutes()}:${dateObj.getSeconds()}`
-        : "";
-    }
   };
 
   render() {
@@ -86,19 +37,19 @@ class Note extends Component {
           }}
         ></div>
         <p className="last-modified-ago">
-          {this.calculateDisplayedLastModifiedTime(lastModifiedTime)}
+          {utils.getDisplayedTimeAgo(lastModifiedTime)}
         </p>
 
         <div>
           {/* remove later */}
           <p className="last-modified-time">
             will be removed >>> Last Modified At:{" "}
-            {this.getDisplayedTime(lastModifiedTime)}
+            {utils.getDisplayedTime(lastModifiedTime)}
           </p>
           {/* remove later */}
           <p className="notebook-name">{notebookName}</p>
           <p className="last-modified-date">
-            Last Modified At: {this.getDisplayedDate(lastModifiedTime)}
+            Last Modified At: {utils.getDisplayedDate(lastModifiedTime)}
           </p>
         </div>
 
@@ -121,7 +72,7 @@ class Note extends Component {
 
           <p className="note-detail">
             <span className="last-modified-date">
-              {this.getDisplayedDate(lastModifiedTime)}
+              {utils.getDisplayedDate(lastModifiedTime)}
             </span>
           </p>
           <NoteActions cookies={cookies} />
