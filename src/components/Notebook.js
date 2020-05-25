@@ -19,9 +19,7 @@ class Notebook extends Component {
   }
   notebookNameOnClickHandler = (e) => {
     const { cookies, currentUser, switchView, filterNotes } = this.props;
-    const getCurrentUser = cookies.get("currentUser")
-      ? cookies.get("currentUser")
-      : currentUser.toString();
+    const getCurrentUser = utils.getCurrentUser(cookies, currentUser);
     const notebookId = e.target.closest("li").id;
     switchView("noteAndEditor");
     filterNotes(getCurrentUser, notebookId);
@@ -39,9 +37,7 @@ class Notebook extends Component {
       currentUser,
       setAsDefaultNotebook,
     } = this.props;
-    const getCurrentUser = cookies.get("currentUser")
-      ? cookies.get("currentUser")
-      : currentUser.toString();
+    const getCurrentUser = utils.getCurrentUser(cookies, currentUser);
     setAsDefaultNotebook(notebookId, getCurrentUser);
   };
 

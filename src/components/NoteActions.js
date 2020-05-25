@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
+import * as utils from "../utils";
 import { v4 as uuidv4 } from "uuid";
 import LightBoxBg from "./LightBoxBg";
 import DeleteNoteLightBox from "./DeleteNoteLightBox";
@@ -78,9 +79,7 @@ class NoteActions extends Component {
         insertPoint + 1
       )}Copy of ${editingNote.content.slice(insertPoint + 1)}`;
     }
-    const getCurrentUser = cookies.get("currentUser")
-      ? cookies.get("currentUser")
-      : currentUser.toString();
+    const getCurrentUser = utils.getCurrentUser(cookies, currentUser);
     const notebook = selectedNotebook.id ? selectedNotebook : defaultNotebook;
     addNote(noteId, getCurrentUser, notebook, newContent);
     updateEditingNote(noteId);

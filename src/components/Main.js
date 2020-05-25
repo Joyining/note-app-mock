@@ -6,6 +6,7 @@ import Editor from "./Editor";
 import NotebookList from "./NotebookList";
 import AddNote from "./AddNote";
 import * as actions from "../actions";
+import * as utils from "../utils";
 import "../scss/base/_base.scss";
 
 class Main extends Component {
@@ -60,9 +61,7 @@ class Main extends Component {
 
   componentDidMount() {
     const { fetchNotes, currentUser, cookies } = this.props;
-    const getCurrentUser = cookies.get("currentUser")
-      ? cookies.get("currentUser")
-      : currentUser.toString();
+    const getCurrentUser = utils.getCurrentUser(cookies, currentUser);
     fetchNotes(getCurrentUser);
   }
 

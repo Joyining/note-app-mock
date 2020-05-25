@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
+import * as utils from "../utils";
 
 class Account extends Component {
   constructor(props) {
@@ -32,9 +33,7 @@ class Account extends Component {
       <div>
         <div className="account-menu-wrap" onClick={this.menuOnClickHandler}>
           <p className="current-user">
-            {cookies.get("currentUser")
-              ? cookies.get("currentUser")
-              : currentUser.toString()}
+            {utils.getCurrentUser(cookies, currentUser)}
           </p>
           <svg
             className="expand-icon"

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
+import * as utils from "../utils";
 import { v4 as uuidv4 } from "uuid";
 import LightBoxBg from "./LightBoxBg";
 import LightBoxHeading from "./LightBoxHeading";
@@ -42,9 +43,7 @@ class AddNotebook extends Component {
     const { addNotebook, cookies, currentUser } = this.props;
     const { notebookName } = this.state;
     const id = uuidv4();
-    const getCurrentUser = cookies.get("currentUser")
-      ? cookies.get("currentUser")
-      : currentUser.toString();
+    const getCurrentUser = utils.getCurrentUser(cookies, currentUser);
     if (notebookName) {
       addNotebook(id, getCurrentUser, notebookName);
       this.toggleLightBox(e);

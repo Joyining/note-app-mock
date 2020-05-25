@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
+import * as utils from "../utils";
 import { v4 as uuidv4 } from "uuid";
 import "../scss/components/addNote.scss";
 
@@ -16,9 +17,7 @@ class AddNote extends Component {
       selectedNotebook,
     } = this.props;
     const noteId = uuidv4();
-    const getCurrentUser = cookies.get("currentUser")
-      ? cookies.get("currentUser")
-      : currentUser.toString();
+    const getCurrentUser = utils.getCurrentUser(cookies, currentUser);
     const notebook = selectedNotebook.id ? selectedNotebook : defaultNotebook;
     addNote(noteId, getCurrentUser, notebook);
     updateEditingNote(noteId);

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import _ from "lodash";
 import * as actions from "../actions";
+import * as utils from "../utils";
 import AddNotebook from "./AddNotebook";
 import Notebook from "./Notebook";
 import "../scss/components/notebookList.scss";
@@ -31,9 +32,7 @@ class NotebookList extends Component {
 
   componentDidMount() {
     const { fetchNotebooks, cookies, currentUser } = this.props;
-    const getCurrentUser = cookies.get("currentUser")
-      ? cookies.get("currentUser")
-      : currentUser.toString();
+    const getCurrentUser = utils.getCurrentUser(cookies, currentUser);
     fetchNotebooks(getCurrentUser);
   }
 

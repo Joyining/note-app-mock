@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import _ from "lodash";
 import * as actions from "../actions";
+import * as utils from "../utils";
 import Notebook from "./Notebook";
 
 class SideMenu extends Component {
@@ -11,9 +12,7 @@ class SideMenu extends Component {
       switchView(view);
     }
     if (needFilterNotes) {
-      const getCurrentUser = cookies.get("currentUser")
-        ? cookies.get("currentUser")
-        : currentUser.toString();
+      const getCurrentUser = utils.getCurrentUser(cookies, currentUser);
       filterNotes(getCurrentUser, filter);
     }
   };
@@ -37,9 +36,7 @@ class SideMenu extends Component {
 
   componentDidMount() {
     const { fetchNotebooks, cookies, currentUser } = this.props;
-    const getCurrentUser = cookies.get("currentUser")
-      ? cookies.get("currentUser")
-      : currentUser.toString();
+    const getCurrentUser = utils.getCurrentUser(cookies, currentUser);
     fetchNotebooks(getCurrentUser);
   }
 
