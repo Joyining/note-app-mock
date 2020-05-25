@@ -60,7 +60,10 @@ class Notebook extends Component {
           lastModifiedTime: data.lastModifiedTime,
           owner: data.owner,
         };
-        notes.push(noteObj); // should sort by lastModifiedTime
+        notes.push(noteObj);
+        notes.sort((noteA, noteB) => {
+          return noteB.lastModifiedTime - noteA.lastModifiedTime;
+        });
         this.setState({
           notes: notes,
         });
