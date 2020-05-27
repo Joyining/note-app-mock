@@ -1,27 +1,13 @@
 import "../firebase";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
+import * as utils from "../utils";
 
 export const editNote = (noteId, value, isEditing) => async (dispatch) => {
   const db = firebase.firestore();
   const noteRef = db.collection("notes").doc(noteId);
   const now = new Date();
-  let title = "";
-  if (value) {
-    let result = 0;
-    const findTitleStart = (val) => {
-      let startIndex = val.indexOf(">") + 1;
-      result = result + startIndex;
-      let subStr = val.substring(result);
-      if (subStr.indexOf("<") === 0) {
-        findTitleStart(subStr); // recursive
-      }
-      return result;
-    };
-    const firstIndex = findTitleStart(value);
-    let temp = value.substring(firstIndex);
-    title = value.substring(firstIndex, temp.indexOf("<") + firstIndex);
-  }
+  let title = utils.getNoteTitle(value);
 
   noteRef.get().then((doc) => {
     const data = doc.data();
