@@ -5,14 +5,16 @@ import { FETCH_NOTEBOOKS } from "./types";
 
 export const fetchNotebooks = (owner) => async (dispatch, getState) => {
   const db = firebase.firestore();
-  const ref = db.collection("notebooks");
+  const notebooksRef = db.collection("notebooks");
+  const notesRef = db.collection("notes");
 
-  ref
+  notebooksRef
     .where("owner", "==", owner)
     .orderBy("lastModifiedTime", "desc")
     .onSnapshot((querySnapshot) => {
       let defaultNotebookId = null;
       let defaultNotebookName = null;
+      let allNotebooks = [];
       for (let notebook of querySnapshot.docs) {
         if (notebook.data().defaultNotebook === true) {
           defaultNotebookId = notebook.id;
@@ -20,9 +22,26 @@ export const fetchNotebooks = (owner) => async (dispatch, getState) => {
           break;
         }
       }
+      for (let notebook of querySnapshot.docs) {
+        let aNotebook = {};
+        aNotebook.notebookInfo = notebook;
+        aNotebook.notes = [];
+        const noteIdsInThisNotebook = notebook.data().notes;
+        noteIdsInThisNotebook.map((id) => {
+          notesRef
+            .doc(id)
+            .get()
+            .then((snapshot) => {
+              let data = snapshot.data();
+              data.id = id;
+              aNotebook.notes.push(data);
+            });
+        });
+        allNotebooks.push(aNotebook);
+      }
       dispatch({
         type: FETCH_NOTEBOOKS,
-        allNotebooks: querySnapshot.docs,
+        allNotebooks: allNotebooks,
         defaultNotebook: {
           id: defaultNotebookId,
           name: defaultNotebookName,

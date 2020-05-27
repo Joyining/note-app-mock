@@ -117,6 +117,10 @@
     }
   }
   .note-list {
+    display: none;
+    &.show {
+      display: block;
+    }
     .note {
       display: flex;
       .note-outer-wrap {

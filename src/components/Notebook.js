@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 import * as utils from "../utils";
+import _ from "lodash";
 import Note from "./Note";
 import { ReactComponent as ArrowRight } from "../images/arrowRight.svg";
 import { ReactComponent as NotebookIcon } from "../images/notebook.svg";
@@ -17,7 +18,6 @@ class Notebook extends Component {
     this.state = {
       showMenu: false,
       expandNotebook: false,
-      notes: [],
     };
   }
   notebookNameOnClickHandler = (e) => {
@@ -46,33 +46,46 @@ class Notebook extends Component {
 
   expandNotebook = () => {
     const { expandNotebook } = this.state;
-    const { notebookId, notebook } = this.props;
-    const notesIdArray = notebook.notes;
-    const db = firebase.firestore();
-    let notes = [];
-    notesIdArray.map((id) => {
-      const noteRef = db.collection("notes").doc(id);
-      noteRef.get().then((snapShot) => {
-        const data = snapShot.data();
-        const noteObj = {
-          id: id,
-          title: data.title,
-          lastModifiedTime: data.lastModifiedTime,
-          owner: data.owner,
-        };
-        notes.push(noteObj);
-        notes.sort((noteA, noteB) => {
-          return noteB.lastModifiedTime - noteA.lastModifiedTime;
-        });
-        this.setState({
-          notes: notes,
-        });
-      });
-    });
-
     this.setState({
       expandNotebook: expandNotebook ? false : true,
     });
+  };
+
+  renderNotes = () => {
+    const { allNotebooks, notebookId, cookies } = this.props;
+    let thisNotebook = null;
+    let notesInThisNotebook = null;
+    if (allNotebooks) {
+      allNotebooks.map((notebook) => {
+        if (notebook.notebookInfo.id === notebookId) {
+          thisNotebook = notebook;
+        }
+      });
+      if (thisNotebook) {
+        notesInThisNotebook = thisNotebook.notes;
+      }
+      if (notesInThisNotebook) {
+        const result = notesInThisNotebook.map((note) => {
+          return (
+            <li
+              className="note note-info-action-wrap"
+              key={note.id}
+              id={note.id}
+            >
+              <Note
+                noteId={note.id}
+                title={note.title}
+                lastModifiedTime={note.lastModifiedTime}
+                cookies={cookies}
+              />
+            </li>
+          );
+        });
+        if (!_.isEmpty(result)) {
+          return result;
+        }
+      }
+    }
   };
 
   componentDidUpdate() {
@@ -82,7 +95,7 @@ class Notebook extends Component {
   render() {
     console.log("render!");
     const { notebookId, notebook, cookies } = this.props;
-    const { showMenu, notes } = this.state;
+    const { showMenu, expandNotebook } = this.state;
     const menu = [
       {
         name: "Set as Default Notebook",
@@ -141,23 +154,8 @@ class Notebook extends Component {
             </div>
           </div>
         </div>
-        <ul className="note-list">
-          {notes.map((note) => {
-            return (
-              <li
-                className="note note-info-action-wrap"
-                key={note.id}
-                id={note.id}
-              >
-                <Note
-                  noteId={note.id}
-                  title={note.title}
-                  lastModifiedTime={note.lastModifiedTime}
-                  cookies={cookies}
-                />
-              </li>
-            );
-          })}
+        <ul className={`note-list ${expandNotebook ? "show" : ""}`}>
+          {this.renderNotes()}
         </ul>
       </li>
     );
@@ -166,7 +164,8 @@ class Notebook extends Component {
 
 const mapStateToProps = (state) => {
   const currentUser = state.currentUser;
-  return { currentUser };
+  const allNotebooks = state.allNotebooks;
+  return { currentUser, allNotebooks };
 };
 
 export default connect(mapStateToProps, actions)(Notebook);

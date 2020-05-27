@@ -57,14 +57,13 @@ $--note-outer-wrap-paddingX: 26px;
         }
       }
     }
-    .note-list {
-      display: none;
-    }
-
     .notebook-icon,
     .is-default-notebook {
       display: none;
     }
+  }
+  .note-list {
+    display: none;
   }
   .note-outer-wrap {
     height: $--note-outer-wrap-height;

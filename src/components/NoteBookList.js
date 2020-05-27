@@ -13,9 +13,9 @@ class NotebookList extends Component {
     const ntoebooks = _.map(allNotebooks, (notebook) => {
       return (
         <Notebook
-          key={notebook.id}
-          notebookId={notebook.id}
-          notebook={notebook.data()}
+          key={notebook.notebookInfo.id}
+          notebookId={notebook.notebookInfo.id}
+          notebook={notebook.notebookInfo.data()}
           cookies={cookies}
         />
       );
