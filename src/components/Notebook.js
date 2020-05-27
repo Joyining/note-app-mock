@@ -7,9 +7,6 @@ import Note from "./Note";
 import { ReactComponent as ArrowRight } from "../images/arrowRight.svg";
 import { ReactComponent as NotebookIcon } from "../images/notebook.svg";
 import { ReactComponent as ActionIcon } from "../images/actionHorizontal.svg";
-import "../firebase";
-import { firebase } from "@firebase/app";
-import "@firebase/auth";
 import "../scss/components/notebookList.scss";
 
 class Notebook extends Component {
