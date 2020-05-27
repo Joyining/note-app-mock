@@ -65,6 +65,9 @@ class Notebook extends Component {
         notesInThisNotebook = thisNotebook.notes;
       }
       if (notesInThisNotebook) {
+        notesInThisNotebook.sort((noteA, noteB) => {
+          return noteB.lastModifiedTime - noteA.lastModifiedTime;
+        });
         const result = notesInThisNotebook.map((note) => {
           return (
             <li
