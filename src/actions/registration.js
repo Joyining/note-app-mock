@@ -31,6 +31,7 @@ export const logIn = (email, password) => async (dispatch) => {
 
 export const signUp = (email, password) => async (dispatch) => {
   const id = uuidv4();
+  const now = new Date();
   firebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
@@ -42,7 +43,8 @@ export const signUp = (email, password) => async (dispatch) => {
       var db = firebase.firestore();
       var ref = db.collection("notebooks").doc(id);
       ref.set({
-        createdTime: new Date(),
+        createdTime: now,
+        lastModifiedTime: now,
         name: "My Notebook",
         owner: email,
         defaultNotebook: true,
