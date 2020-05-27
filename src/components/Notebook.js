@@ -49,23 +49,21 @@ class Notebook extends Component {
   };
 
   renderNotes = () => {
-    const { allNotebooks, notebookId, cookies } = this.props;
-    let thisNotebook = null;
+    const { notebookId, cookies, thisNotebook } = this.props;
+    console.log("Notebook renderNotes");
+    console.log(notebookId);
     let notesInThisNotebook = null;
-    if (allNotebooks) {
-      allNotebooks.map((notebook) => {
-        if (notebook.notebookInfo.id === notebookId) {
-          thisNotebook = notebook;
-        }
-      });
-      if (thisNotebook) {
-        notesInThisNotebook = thisNotebook.notes;
-      }
+    if (thisNotebook) {
+      console.log(thisNotebook);
+      notesInThisNotebook = thisNotebook.notes;
+      console.log(notesInThisNotebook);
       if (notesInThisNotebook) {
         notesInThisNotebook.sort((noteA, noteB) => {
           return noteB.lastModifiedTime - noteA.lastModifiedTime;
         });
+        console.log(notesInThisNotebook);
         const result = notesInThisNotebook.map((note) => {
+          console.log(note.id);
           return (
             <li
               className="note note-info-action-wrap"
@@ -81,6 +79,7 @@ class Notebook extends Component {
             </li>
           );
         });
+        console.log(result);
         if (!_.isEmpty(result)) {
           return result;
         }
@@ -93,7 +92,6 @@ class Notebook extends Component {
   }
 
   render() {
-    console.log("render!");
     const { notebookId, notebook, cookies } = this.props;
     const { showMenu, expandNotebook } = this.state;
     const menu = [
@@ -162,10 +160,19 @@ class Notebook extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   const currentUser = state.currentUser;
   const allNotebooks = state.allNotebooks;
-  return { currentUser, allNotebooks };
+  const notebookId = ownProps.notebookId;
+  let thisNotebook = null;
+  // 可以只map allNotebooks裡面的這一個notebook嗎？
+  for (let notebook of allNotebooks) {
+    if (notebook.notebookInfo.id === notebookId) {
+      thisNotebook = notebook;
+      break;
+    }
+  }
+  return { currentUser, thisNotebook };
 };
 
 export default connect(mapStateToProps, actions)(Notebook);
