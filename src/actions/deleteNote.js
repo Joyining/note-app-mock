@@ -6,6 +6,7 @@ import { DELETE_NOTE } from "./types";
 export const deleteNote = (noteId) => async (dispatch) => {
   const db = firebase.firestore();
   const noteRef = db.collection("notes").doc(noteId);
+  const now = new Date();
   let notebookId = "";
   let notebookRef = null;
   let notes = null;
@@ -26,6 +27,7 @@ export const deleteNote = (noteId) => async (dispatch) => {
         notes.splice(notes.indexOf(noteId), 1);
         notebookRef.update({
           notes: notes,
+          lastModifiedTime: now,
         });
       });
     })
