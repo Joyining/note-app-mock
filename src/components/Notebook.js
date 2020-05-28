@@ -17,9 +17,10 @@ const Notebook = (props) => {
     filterNotes,
     notebookId,
     setAsDefaultNotebook,
-    thisNotebook,
     notebook,
   } = props;
+  const notebookInfo = notebook.notebookInfo.data();
+  const notesInThisNotebook = notebook.notes;
   const getCurrentUser = utils.getCurrentUser(cookies, currentUser);
   const [showMenu, setShowMenu] = useState(false);
   const [expandNotebook, setExpandNotebook] = useState(false);
@@ -39,16 +40,15 @@ const Notebook = (props) => {
   };
 
   const expandNotebookOnClickHandler = () => {
-    setExpandNotebook(expandNotebook ? false : true);
+    console.log("expandNotebookOnClickHandler");
+    setExpandNotebook((previousExpandNotebook) => !previousExpandNotebook);
   };
 
-  const renderNotes = () => {
+  const renderNotes = useCallback(() => {
     console.log("Notebook renderNotes");
     console.log(notebookId);
-    let notesInThisNotebook = null;
-    if (thisNotebook) {
-      console.log(thisNotebook);
-      notesInThisNotebook = thisNotebook.notes;
+    if (!_.isEmpty(notebook)) {
+      console.log(notebook);
       console.log(notesInThisNotebook);
       if (notesInThisNotebook) {
         notesInThisNotebook.sort((noteA, noteB) => {
@@ -78,16 +78,10 @@ const Notebook = (props) => {
         }
       }
     }
-  };
+  }, [notebookInfo.lastModifiedTime.toString()]);
 
-  const menu = [
-    {
-      name: "Set as Default Notebook",
-      onClick: setAsDefaultOnClickHandler,
-    },
-  ];
-  return (
-    <li id={notebookId} className="notebook-outer-wrap">
+  const renderNotebookInnerWrap = useCallback(() => {
+    return (
       <div className="notebook-inner-wrap">
         <div className="notebook-name-and-icon">
           <ArrowRight
@@ -96,22 +90,24 @@ const Notebook = (props) => {
           />
           <NotebookIcon className="notebook-icon" />
           <p className="notebook-name" onClick={notebookNameOnClickHandler}>
-            {notebook.name}
+            {notebookInfo.name}
           </p>
-          <span className="note-count">{`(${notebook.notes.length})`}</span>
+          <span className="note-count">{`(${notesInThisNotebook.length})`}</span>
         </div>
 
         <div className="notebook-detail-and-actions">
           <div className="note-count">
-            <span>{notebook.notes.length}</span>
-            <span>{` note${notebook.notes.length > 1 ? "s" : ""}`}</span>
+            <span>{notesInThisNotebook.length}</span>
+            <span>{` note${notesInThisNotebook.length > 1 ? "s" : ""}`}</span>
           </div>
           <p className="last-modified-time">
-            {utils.getDisplayedTime(notebook.lastModifiedTime)}
+            {utils.getDisplayedTime(notebookInfo.lastModifiedTime)}
           </p>
           {/* <p>{utils.getDisplayedDate(notebook.lastModifiedTime)}</p> */}
           <p className="is-default-notebook detail-item">
-            {notebook.defaultNotebook.toString() === "true" ? "Default" : ""}
+            {notebookInfo.defaultNotebook.toString() === "true"
+              ? "Default"
+              : ""}
           </p>
           <div className={`actions detail-item ${notebookId}`}>
             <ActionIcon className="icon" onClick={actionOnClickHandler} />
@@ -135,6 +131,19 @@ const Notebook = (props) => {
           </div>
         </div>
       </div>
+    );
+  }, [notebookInfo.lastModifiedTime.toString()]);
+
+  const menu = [
+    {
+      name: "Set as Default Notebook",
+      onClick: setAsDefaultOnClickHandler,
+    },
+  ];
+  return (
+    <li id={notebookId} className="notebook-outer-wrap">
+      {/* <h1>{notebookInfo.lastModifiedTime.toString()}</h1> */}
+      {renderNotebookInnerWrap()}
       <ul className={`note-list ${expandNotebook ? "show" : ""}`}>
         {renderNotes()}
       </ul>
@@ -142,19 +151,19 @@ const Notebook = (props) => {
   );
 };
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   const currentUser = state.currentUser;
-  const allNotebooks = state.allNotebooks;
-  const notebookId = ownProps.notebookId;
-  let thisNotebook = null;
+  // const allNotebooks = state.allNotebooks;
+  // const notebookId = ownProps.notebookId;
+  // let thisNotebook = null;
   // 可以只map allNotebooks裡面的這一個notebook嗎？
-  for (let notebook of allNotebooks) {
-    if (notebook.notebookInfo.id === notebookId) {
-      thisNotebook = notebook;
-      break;
-    }
-  }
-  return { currentUser, thisNotebook };
+  // for (let notebook of allNotebooks) {
+  //   if (notebook.notebookInfo.id === notebookId) {
+  //     thisNotebook = notebook;
+  //     break;
+  //   }
+  // }
+  return { currentUser };
 };
 
 export default connect(mapStateToProps, actions)(Notebook);
