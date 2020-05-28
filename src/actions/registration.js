@@ -18,8 +18,8 @@ export const logIn = (email, password) => async (dispatch) => {
       });
     })
     .catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
+      const errorCode = error.code;
+      const errorMessage = error.message;
       dispatch({
         type: LOG_IN,
         isLogedIn: false,
@@ -40,15 +40,14 @@ export const signUp = (email, password) => async (dispatch) => {
     //   // why cannot???
     // })
     .then((res) => {
-      var db = firebase.firestore();
-      var ref = db.collection("notebooks").doc(id);
+      const db = firebase.firestore();
+      const ref = db.collection("notebooks").doc(id);
       ref.set({
         createdTime: now,
         lastModifiedTime: now,
         name: "My Notebook",
         owner: email,
         defaultNotebook: true,
-        notes: [],
       });
     })
     .then((res) => {
@@ -64,8 +63,8 @@ export const signUp = (email, password) => async (dispatch) => {
       });
     })
     .catch(function (error) {
-      var errorCode = error.code;
-      var errorMessage = error.message;
+      const errorCode = error.code;
+      const errorMessage = error.message;
       dispatch({
         type: SIGN_UP,
         isLogedIn: false,
