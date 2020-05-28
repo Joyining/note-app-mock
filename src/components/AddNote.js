@@ -19,8 +19,8 @@ class AddNote extends Component {
     const noteId = uuidv4();
     const getCurrentUser = utils.getCurrentUser(cookies, currentUser);
     const notebook = selectedNotebook.id ? selectedNotebook : defaultNotebook;
-    addNote(noteId, getCurrentUser, notebook);
-    updateEditingNote(noteId);
+    addNote(noteId, getCurrentUser, notebook.id);
+    updateEditingNote(notebook, noteId);
     switchView("noteAndEditor");
   };
 

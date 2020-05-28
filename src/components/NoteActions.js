@@ -83,7 +83,7 @@ class NoteActions extends Component {
     }
     const getCurrentUser = utils.getCurrentUser(cookies, currentUser);
     const notebook = selectedNotebook.id ? selectedNotebook : defaultNotebook;
-    addNote(noteId, getCurrentUser, notebook, newContent);
+    addNote(noteId, getCurrentUser, notebook.id, newContent);
     updateEditingNote(noteId);
   };
 
