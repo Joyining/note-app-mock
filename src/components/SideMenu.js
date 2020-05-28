@@ -24,7 +24,7 @@ class SideMenu extends Component {
         <Notebook
           key={notebook.notebookInfo.id}
           notebookId={notebook.notebookInfo.id}
-          notebook={notebook.notebookInfo.data()}
+          notebook={notebook}
           cookies={cookies}
         />
       );
