@@ -32,7 +32,7 @@ const Notebook = (props) => {
   };
 
   const actionOnClickHandler = () => {
-    setShowMenu(showMenu ? false : true);
+    setShowMenu((previousShowMenu) => !previousShowMenu);
   };
 
   const setAsDefaultOnClickHandler = () => {
@@ -111,11 +111,7 @@ const Notebook = (props) => {
           </p>
           <div className={`actions detail-item ${notebookId}`}>
             <ActionIcon className="icon" onClick={actionOnClickHandler} />
-            <ul
-              className={
-                showMenu ? "shared-menu-list show" : "shared-menu-list"
-              }
-            >
+            <ul className="shared-menu-list">
               {menu.map((item) => {
                 return (
                   <li
@@ -141,7 +137,10 @@ const Notebook = (props) => {
     },
   ];
   return (
-    <li id={notebookId} className="notebook-outer-wrap">
+    <li
+      id={notebookId}
+      className={`notebook-outer-wrap ${showMenu ? "show-menu" : ""}`}
+    >
       {/* <h1>{notebookInfo.lastModifiedTime.toString()}</h1> */}
       {renderNotebookInnerWrap()}
       <ul className={`note-list ${expandNotebook ? "show" : ""}`}>

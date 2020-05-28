@@ -62,6 +62,16 @@
       }
     }
   }
+  .notebook-outer-wrap {
+    .shared-menu-list {
+      display: none;
+    }
+    &.show-menu {
+      .shared-menu-list {
+        display: block;
+      }
+    }
+  }
   .notebook-inner-wrap {
     display: flex;
     justify-content: space-between;
