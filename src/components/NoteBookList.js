@@ -10,18 +10,20 @@ import "../scss/components/notebookList.scss";
 class NotebookList extends Component {
   renderNotebook() {
     const { allNotebooks, cookies } = this.props;
-    const ntoebooks = _.map(allNotebooks, (notebook) => {
+    console.log(allNotebooks);
+    const notebooks = _.map(allNotebooks, (notebook) => {
+      console.log(notebook);
       return (
         <Notebook
           key={notebook.notebookInfo.id}
           notebookId={notebook.notebookInfo.id}
-          notebook={notebook.notebookInfo.data()}
+          notebook={notebook}
           cookies={cookies}
         />
       );
     });
-    if (!_.isEmpty(ntoebooks)) {
-      return ntoebooks;
+    if (!_.isEmpty(notebooks)) {
+      return notebooks;
     }
     return (
       <div>
@@ -31,9 +33,15 @@ class NotebookList extends Component {
   }
 
   componentDidMount() {
+    console.log("NotebookList componentDidMount");
     const { fetchNotebooks, cookies, currentUser } = this.props;
     const getCurrentUser = utils.getCurrentUser(cookies, currentUser);
-    fetchNotebooks(getCurrentUser);
+    // fetchNotebooks(getCurrentUser);
+    // console.log("fetchNotebooks from NotebookList");
+  }
+
+  componentDidUpdate() {
+    console.log("NotebookList componentDidUpdate");
   }
 
   render() {
@@ -69,6 +77,7 @@ class NotebookList extends Component {
 }
 const mapStateToProps = (state) => {
   const allNotebooks = state.allNotebooks;
+  console.log(allNotebooks);
   const currentUser = state.currentUser;
   return { allNotebooks, currentUser };
 };
