@@ -9,9 +9,12 @@ export const updateEditingNote = (notebookId, noteId) => async (dispatch) => {
   // ref.get() returns a Promise
   ref.get().then((snapShot) => {
     const notes = snapShot.data().notes;
-    const targetNote = notes.filter((note) => {
-      note.id === noteId;
-    });
+    let targetNote = null;
+    for (let note of notes) {
+      if (note.id === noteId) {
+        targetNote = note;
+      }
+    }
     if (targetNote) {
       const editingNote = {
         id: targetNote.id,

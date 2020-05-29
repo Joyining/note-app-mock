@@ -15,9 +15,12 @@ export const deleteNote = (notebookId, noteId) => async (dispatch) => {
 
   notebookRef.get().then((snapshot) => {
     notes = snapshot.data().notes;
-    const targetNote = notes.filter((note) => {
-      note.id === noteId;
-    });
+    let targetNote = null;
+    for (let note of notes) {
+      if (note.id === noteId) {
+        targetNote = note;
+      }
+    }
     if (targetNote) {
       notes.splice(notes.indexOf(targetNote), 1);
       notebookRef.update({
