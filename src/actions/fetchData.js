@@ -33,13 +33,20 @@ export const fetchData = (owner) => async (dispatch, getState) => {
           .get()
           .then((snapshot) => {
             allNotes = snapshot.data().notes;
-            allNotes.map((note) => {
-              note.notebookId = selectedNotebook.id;
-              note.notebookName = selectedNotebook.name;
-            });
-            allNotes = allNotes.sort((noteA, noteB) => {
-              return noteB.lastModifiedTime - noteA.lastModifiedTime;
-            });
+            if (allNotes) {
+              allNotes = allNotes.map((note) => {
+                const newNote = {
+                  ...note,
+                  notebookId: selectedNotebook.id,
+                  notebookName: selectedNotebook.name,
+                };
+                return newNote;
+              });
+              allNotes = allNotes.sort((noteA, noteB) => {
+                return noteB.lastModifiedTime - noteA.lastModifiedTime;
+              });
+            }
+
             // need to refactor
             dispatch({
               type: FETCH_DATA,

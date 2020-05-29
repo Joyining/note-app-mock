@@ -20,13 +20,19 @@ export const filterNotes = (owner, notebookId = "") => async (dispatch) => {
         selectedNotebookNotes = snap.data().notes;
         selectedNotebookLastModifiedTime = snap.data().lastModifiedTime;
         allNotes = snap.data().notes;
-        allNotes.map((note) => {
-          note.notebookId = notebookId;
-          note.notebookName = snap.data().name;
-        });
-        allNotes = allNotes.sort((noteA, noteB) => {
-          return noteB.lastModifiedTime - noteA.lastModifiedTime;
-        });
+        if (allNotes) {
+          allNotes = allNotes.map((note) => {
+            const newNote = {
+              ...note,
+              notebookId: notebookId,
+              notebookName: snap.data().name,
+            };
+            return newNote;
+          });
+          allNotes = allNotes.sort((noteA, noteB) => {
+            return noteB.lastModifiedTime - noteA.lastModifiedTime;
+          });
+        }
         // need to refactor
         dispatch({
           type: FILTER_NOTES,
@@ -49,13 +55,19 @@ export const filterNotes = (owner, notebookId = "") => async (dispatch) => {
         for (let notebook of snap.docs) {
           let newNotes = notebook.data().notes;
           allNotes = allNotes.concat(newNotes);
-          allNotes.map((note) => {
-            note.notebookId = notebook.id;
-            note.notebookName = notebook.data().name;
-          });
-          allNotes = allNotes.sort((noteA, noteB) => {
-            return noteB.lastModifiedTime - noteA.lastModifiedTime;
-          });
+          if (newNotes.length > 0) {
+            allNotes = allNotes.map((note) => {
+              const newNote = {
+                ...note,
+                notebookId: notebook.id,
+                notebookName: notebook.data().name,
+              };
+              return newNote;
+            });
+            allNotes = allNotes.sort((noteA, noteB) => {
+              return noteB.lastModifiedTime - noteA.lastModifiedTime;
+            });
+          }
         }
         // need to refactor
         dispatch({
