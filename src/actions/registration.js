@@ -25,6 +25,7 @@ export const logIn = (email, password) => async (dispatch) => {
         isLogedIn: false,
         currentUser: null,
         errorMessage: errorMessage,
+        errorCode: errorCode,
       });
     });
 };
@@ -48,6 +49,7 @@ export const signUp = (email, password) => async (dispatch) => {
         name: "My Notebook",
         owner: email,
         defaultNotebook: true,
+        notes: [],
       });
     })
     .then((res) => {
@@ -70,6 +72,7 @@ export const signUp = (email, password) => async (dispatch) => {
         isLogedIn: false,
         currentUser: null,
         errorMessage: errorMessage,
+        errorCode: errorCode,
         defaultNotebook: null,
       });
     });
