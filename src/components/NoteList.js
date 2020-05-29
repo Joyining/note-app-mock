@@ -14,8 +14,8 @@ class NoteList extends Component {
         <Note
           key={note.id}
           noteId={note.id}
-          content={note.data().content}
-          lastModifiedTime={note.data().lastModifiedTime}
+          content={note.content}
+          lastModifiedTime={note.lastModifiedTime}
           cookies={cookies}
         />
       );
