@@ -1,8 +1,8 @@
-export const getFirstNote = (snapshot) => {
-  if (snapshot.docs[0]) {
-    const firstNoteData = snapshot.docs[0].data();
+export const getFirstNote = (allNotes) => {
+  if (allNotes[0]) {
+    const firstNoteData = allNotes[0];
     return {
-      id: snapshot.docs[0].id,
+      id: firstNoteData.id ? firstNoteData.id : "",
       content: firstNoteData.content ? firstNoteData.content : "",
       title: firstNoteData.title ? firstNoteData.title : "",
       notebookId: firstNoteData.notebookId ? firstNoteData.notebookId : "",
