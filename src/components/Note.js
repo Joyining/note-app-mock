@@ -9,14 +9,15 @@ import "../scss/components/noteList.scss";
 
 class Note extends Component {
   edit = (noteId) => {
-    const { updateEditingNote } = this.props;
-    updateEditingNote(noteId);
+    const { updateEditingNote, notebookId } = this.props;
+    updateEditingNote(notebookId, noteId);
   };
 
   render() {
     const {
       noteId,
       content,
+      notebookId,
       notebookName,
       title,
       lastModifiedTime,
@@ -65,7 +66,7 @@ class Note extends Component {
               {utils.getDisplayedDate(lastModifiedTime)}
             </span>
           </p>
-          <NoteActions cookies={cookies} />
+          <NoteActions cookies={cookies} notebookId={notebookId} />
         </div>
       </div>
     );

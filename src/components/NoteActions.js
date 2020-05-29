@@ -34,9 +34,9 @@ class NoteActions extends Component {
 
   menuOnClickHandler = (e) => {
     const { showMenu } = this.state;
-    const { updateEditingNote } = this.props;
+    const { updateEditingNote, notebookId } = this.props;
     const noteId = e.target.closest(".note-info-action-wrap").id;
-    updateEditingNote(noteId);
+    updateEditingNote(notebookId, noteId);
     this.setState({
       showMenu: showMenu ? false : true,
     });
@@ -84,7 +84,7 @@ class NoteActions extends Component {
     const getCurrentUser = utils.getCurrentUser(cookies, currentUser);
     const notebook = selectedNotebook.id ? selectedNotebook : defaultNotebook;
     addNote(noteId, getCurrentUser, notebook.id, newContent);
-    updateEditingNote(noteId);
+    updateEditingNote(notebook.id, noteId);
   };
 
   viewNoteDetailOnClickHandler = (e) => {
