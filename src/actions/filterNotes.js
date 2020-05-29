@@ -12,12 +12,12 @@ export const filterNotes = (owner, notebookId = "") => async (dispatch) => {
   let selectedNotebookLastModifiedTime = null;
   let allNotes = [];
 
-  const notebooksCollection = notebooksRef
-    .where("owner", "==", owner)
-    .orderBy("lastModifiedTime", "desc");
+  // const notebooksCollection = notebooksRef
+  //   .where("owner", "==", owner)
+  //   .orderBy("lastModifiedTime", "desc");
 
   if (notebookId) {
-    notebooksCollection
+    notebooksRef
       .doc(notebookId)
       .get()
       .then((snap) => {
@@ -40,23 +40,26 @@ export const filterNotes = (owner, notebookId = "") => async (dispatch) => {
         });
       });
   } else {
-    notebooksCollection.get().then((snap) => {
-      for (let notebook of snap.docs) {
-        allNotes.concat(notebook.data().notes);
-      }
-      // need to refactor
-      dispatch({
-        type: FILTER_NOTES,
-        allNotes: allNotes,
-        firstNote: utils.getFirstNote(allNotes),
-        isEditing: false,
-        selectedNotebook: {
-          id: notebookId,
-          name: selectedNotebookName,
-          notes: selectedNotebookNotes,
-          lastModifiedTime: selectedNotebookLastModifiedTime,
-        },
+    notebooksRef
+      .where("owner", "==", owner)
+      .get()
+      .then((snap) => {
+        for (let notebook of snap.docs) {
+          allNotes.concat(notebook.data().notes);
+        }
+        // need to refactor
+        dispatch({
+          type: FILTER_NOTES,
+          allNotes: allNotes,
+          firstNote: utils.getFirstNote(allNotes),
+          isEditing: false,
+          selectedNotebook: {
+            id: notebookId,
+            name: selectedNotebookName,
+            notes: selectedNotebookNotes,
+            lastModifiedTime: selectedNotebookLastModifiedTime,
+          },
+        });
       });
-    });
   }
 };
