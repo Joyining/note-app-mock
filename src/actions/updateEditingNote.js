@@ -23,7 +23,7 @@ export const updateEditingNote = (notebookId, noteId) => async (dispatch) => {
         notebookId: snapShot.id,
         notebookName: snapShot.data().name,
         lastModifiedTime: targetNote.lastModifiedTime,
-        createdTime: data.createdTime ? data.createdTime : "",
+        createdTime: targetNote.createdTime,
       };
       dispatch({
         type: UPDATE_EDITING_NOTE,
