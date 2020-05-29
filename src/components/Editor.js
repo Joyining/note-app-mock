@@ -57,7 +57,7 @@ class Editor extends Component {
       //   accumulatedOnchangeCount === 1 ||
       //   (accumulatedOnchangeCount !== 0 && accumulatedOnchangeCount % 5 === 0)
       // ) {
-      editNote(editingNote.id, value, isEditing);
+      editNote(editingNote.notebookId, editingNote.id, value, isEditing);
       // }
     }
   };
