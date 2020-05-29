@@ -10,10 +10,10 @@ class SideMenu extends Component {
     const { switchView, filterNotes, cookies, currentUser } = this.props;
     if (e.target === e.currentTarget) {
       switchView(view);
-    }
-    if (needFilterNotes) {
-      const getCurrentUser = utils.getCurrentUser(cookies, currentUser);
-      filterNotes(getCurrentUser, filter);
+      if (needFilterNotes) {
+        const getCurrentUser = utils.getCurrentUser(cookies, currentUser);
+        filterNotes(getCurrentUser, filter);
+      }
     }
   };
 
