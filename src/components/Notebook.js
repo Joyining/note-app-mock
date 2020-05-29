@@ -36,6 +36,7 @@ const Notebook = (props) => {
 
   const setAsDefaultOnClickHandler = () => {
     setAsDefaultNotebook(notebookId, getCurrentUser);
+    setShowMenu((previousShowMenu) => !previousShowMenu);
   };
 
   const expandNotebookOnClickHandler = () => {
@@ -120,7 +121,7 @@ const Notebook = (props) => {
         </div>
       </div>
     );
-  }, [notebook.lastModifiedTime.toString()]);
+  }, [notebook]);
 
   const menu = [
     {
