@@ -6,7 +6,7 @@ import {
 export default (state = {}, action) => {
   switch (action.type) {
     case UPDATE_EDITING_NOTE:
-      return action;
+      return action.editingNote;
     case FETCH_NOTES:
       return action.firstNote;
     case FILTER_NOTES:
