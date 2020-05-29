@@ -70,6 +70,7 @@ class Editor extends Component {
         <div className="editor-top note-info-action-wrap" id={editingNote.id}>
           <Note
             noteId={editingNote.id}
+            notebookId={editingNote.notebookId}
             notebookName={editingNote.notebookName}
             lastModifiedTime={editingNote.lastModifiedTime}
             cookies={cookies}
