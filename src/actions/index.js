@@ -9,3 +9,4 @@ export * from "./addNotebook";
 export * from "./fetchNotebooks";
 export * from "./editNotebook";
 export * from "./registration";
+export * from "./fetchData";

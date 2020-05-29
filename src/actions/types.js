@@ -1,3 +1,4 @@
+export const FETCH_DATA = "FETCH_DATA";
 export const FETCH_NOTES = "FETCH_NOTES";
 export const FILTER_NOTES = "FILTER_NOTES";
 export const UPDATE_EDITING_NOTE = "UPDATE_EDITING_NOTE";
