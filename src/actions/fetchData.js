@@ -34,13 +34,20 @@ export const fetchData = (owner) => async (dispatch, getState) => {
           .get()
           .then((snapshot) => {
             allNotes = snapshot.data().notes;
+            allNotes = allNotes.sort((noteA, noteB) => {
+              return noteB.lastModifiedTime - noteA.lastModifiedTime;
+            });
             // need to refactor
             dispatch({
               type: FETCH_DATA,
               allNotebooks: querySnapshot.docs,
-              allNotes: allNotes, // 尚未排序
+              allNotes: allNotes,
               // 這裡的allNotes可能會有延遲，因為是.get()非同步操作後的結果
-              firstNote: utils.getFirstNote(allNotes),
+              firstNote: {
+                ...allNotes[0],
+                notebookId: selectedNotebook.id,
+                notebookName: selectedNotebook.name,
+              },
               defaultNotebook: {
                 id: defaultNotebookId,
                 name: defaultNotebookName,
@@ -50,15 +57,35 @@ export const fetchData = (owner) => async (dispatch, getState) => {
             });
           });
       } else {
+        let firstNoteNotebookId;
+        let firstNoteNotebookName;
         for (let notebook of querySnapshot.docs) {
-          allNotes = allNotes.concat(notebook.data().notes);
+          let newNotes = notebook.data().notes;
+          allNotes = allNotes.concat(newNotes);
+          allNotes = allNotes.sort((noteA, noteB) => {
+            return noteB.lastModifiedTime - noteA.lastModifiedTime;
+          });
+          console.log(allNotes[0]);
+          console.log(newNotes.indexOf(allNotes[0]));
+          if (newNotes.indexOf(allNotes[0]) !== -1) {
+            console.log("found firstNote notebook");
+            console.log(notebook.id);
+            firstNoteNotebookId = notebook.id;
+            firstNoteNotebookName = notebook.data().name;
+          }
         }
+
         // need to refactor
         dispatch({
           type: FETCH_DATA,
           allNotebooks: querySnapshot.docs,
-          allNotes: allNotes, // 尚未排序
-          firstNote: utils.getFirstNote(allNotes),
+          allNotes: allNotes,
+          firstNote: {
+            ...allNotes[0],
+            notebookId: firstNoteNotebookId,
+            notebookName: firstNoteNotebookName,
+          },
+          // firstNote: utils.getFirstNote(allNotes),
           defaultNotebook: {
             id: defaultNotebookId,
             name: defaultNotebookName,
