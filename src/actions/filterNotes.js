@@ -31,7 +31,7 @@ export const filterNotes = (owner, notebookId = "") => async (dispatch) => {
         dispatch({
           type: FILTER_NOTES,
           allNotes: allNotes,
-          firstNote: allNotes[0],
+          firstNote: allNotes[0] ? allNotes[0] : {},
           isEditing: false,
           selectedNotebook: {
             id: notebookId,
@@ -61,7 +61,7 @@ export const filterNotes = (owner, notebookId = "") => async (dispatch) => {
         dispatch({
           type: FILTER_NOTES,
           allNotes: allNotes,
-          firstNote: allNotes[0],
+          firstNote: allNotes[0] ? allNotes[0] : {},
           isEditing: false,
           selectedNotebook: {
             id: notebookId,

@@ -46,7 +46,7 @@ export const fetchData = (owner) => async (dispatch, getState) => {
               allNotebooks: querySnapshot.docs,
               allNotes: allNotes,
               // 這裡的allNotes可能會有延遲，因為是.get()非同步操作後的結果
-              firstNote: allNotes[0],
+              firstNote: allNotes[0] ? allNotes[0] : {},
               defaultNotebook: {
                 id: defaultNotebookId,
                 name: defaultNotebookName,
@@ -73,7 +73,7 @@ export const fetchData = (owner) => async (dispatch, getState) => {
           type: FETCH_DATA,
           allNotebooks: querySnapshot.docs,
           allNotes: allNotes,
-          firstNote: allNotes[0],
+          firstNote: allNotes[0] ? allNotes[0] : {},
           // firstNote: utils.getFirstNote(allNotes),
           defaultNotebook: {
             id: defaultNotebookId,
