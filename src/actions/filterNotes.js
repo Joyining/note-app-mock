@@ -6,45 +6,57 @@ import * as utils from "../utils";
 
 export const filterNotes = (owner, notebookId = "") => async (dispatch) => {
   const db = firebase.firestore();
-  const notesCollection = db.collection("notes");
-  const notebooksCollection = db.collection("notebooks");
-  let selectedNotesCollection = null;
+  const notebooksRef = db.collection("notebooks");
   let selectedNotebookName = "";
   let selectedNotebookNotes = null;
   let selectedNotebookLastModifiedTime = null;
+  let allNotes = [];
+
+  const notebooksCollection = notebooksRef
+    .where("owner", "==", owner)
+    .orderBy("lastModifiedTime", "desc");
+
   if (notebookId) {
-    selectedNotesCollection = notesCollection
-      .where("owner", "==", owner)
-      .where("notebookId", "==", notebookId)
-      .orderBy("lastModifiedTime", "desc");
+    notebooksCollection
+      .doc(notebookId)
+      .get()
+      .then((snap) => {
+        selectedNotebookName = snap.data().name;
+        selectedNotebookNotes = snap.data().notes;
+        selectedNotebookLastModifiedTime = snap.data().lastModifiedTime;
+        allNotes = snap.data().notes;
+        // need to refactor
+        dispatch({
+          type: FILTER_NOTES,
+          allNotes: allNotes,
+          firstNote: utils.getFirstNote(allNotes),
+          isEditing: false,
+          selectedNotebook: {
+            id: notebookId,
+            name: selectedNotebookName,
+            notes: selectedNotebookNotes,
+            lastModifiedTime: selectedNotebookLastModifiedTime,
+          },
+        });
+      });
+  } else {
     notebooksCollection.get().then((snap) => {
       for (let notebook of snap.docs) {
-        if (notebook.id === notebookId) {
-          selectedNotebookName = notebook.data().name;
-          selectedNotebookNotes = notebook.data().notes;
-          selectedNotebookLastModifiedTime = notebook.data().lastModifiedTime;
-          break;
-        }
+        allNotes.concat(notebook.data().notes);
       }
+      // need to refactor
+      dispatch({
+        type: FILTER_NOTES,
+        allNotes: allNotes,
+        firstNote: utils.getFirstNote(allNotes),
+        isEditing: false,
+        selectedNotebook: {
+          id: notebookId,
+          name: selectedNotebookName,
+          notes: selectedNotebookNotes,
+          lastModifiedTime: selectedNotebookLastModifiedTime,
+        },
+      });
     });
-  } else {
-    selectedNotesCollection = notesCollection
-      .where("owner", "==", owner)
-      .orderBy("lastModifiedTime", "desc");
   }
-
-  selectedNotesCollection.get().then((querySnapshot) => {
-    dispatch({
-      type: FILTER_NOTES,
-      allNotes: querySnapshot.docs,
-      firstNote: utils.getFirstNote(querySnapshot),
-      isEditing: false,
-      selectedNotebook: {
-        id: notebookId,
-        name: selectedNotebookName,
-        notes: selectedNotebookNotes,
-        lastModifiedTime: selectedNotebookLastModifiedTime,
-      },
-    });
-  });
 };
