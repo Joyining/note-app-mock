@@ -2,7 +2,6 @@ import "../firebase";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
 import { FETCH_DATA } from "./types";
-import * as utils from "../utils";
 
 export const fetchData = (owner) => async (dispatch, getState) => {
   const db = firebase.firestore();
@@ -34,6 +33,10 @@ export const fetchData = (owner) => async (dispatch, getState) => {
           .get()
           .then((snapshot) => {
             allNotes = snapshot.data().notes;
+            allNotes.map((note) => {
+              note.notebookId = selectedNotebook.id;
+              note.notebookName = selectedNotebook.name;
+            });
             allNotes = allNotes.sort((noteA, noteB) => {
               return noteB.lastModifiedTime - noteA.lastModifiedTime;
             });
@@ -43,11 +46,7 @@ export const fetchData = (owner) => async (dispatch, getState) => {
               allNotebooks: querySnapshot.docs,
               allNotes: allNotes,
               // 這裡的allNotes可能會有延遲，因為是.get()非同步操作後的結果
-              firstNote: {
-                ...allNotes[0],
-                notebookId: selectedNotebook.id,
-                notebookName: selectedNotebook.name,
-              },
+              firstNote: allNotes[0],
               defaultNotebook: {
                 id: defaultNotebookId,
                 name: defaultNotebookName,
@@ -57,22 +56,16 @@ export const fetchData = (owner) => async (dispatch, getState) => {
             });
           });
       } else {
-        let firstNoteNotebookId;
-        let firstNoteNotebookName;
         for (let notebook of querySnapshot.docs) {
           let newNotes = notebook.data().notes;
+          newNotes.map((note) => {
+            note.notebookId = notebook.id;
+            note.notebookName = notebook.data().name;
+          });
           allNotes = allNotes.concat(newNotes);
           allNotes = allNotes.sort((noteA, noteB) => {
             return noteB.lastModifiedTime - noteA.lastModifiedTime;
           });
-          console.log(allNotes[0]);
-          console.log(newNotes.indexOf(allNotes[0]));
-          if (newNotes.indexOf(allNotes[0]) !== -1) {
-            console.log("found firstNote notebook");
-            console.log(notebook.id);
-            firstNoteNotebookId = notebook.id;
-            firstNoteNotebookName = notebook.data().name;
-          }
         }
 
         // need to refactor
@@ -80,11 +73,7 @@ export const fetchData = (owner) => async (dispatch, getState) => {
           type: FETCH_DATA,
           allNotebooks: querySnapshot.docs,
           allNotes: allNotes,
-          firstNote: {
-            ...allNotes[0],
-            notebookId: firstNoteNotebookId,
-            notebookName: firstNoteNotebookName,
-          },
+          firstNote: allNotes[0],
           // firstNote: utils.getFirstNote(allNotes),
           defaultNotebook: {
             id: defaultNotebookId,

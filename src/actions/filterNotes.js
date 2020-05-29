@@ -2,7 +2,6 @@ import "../firebase";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
 import { FILTER_NOTES } from "./types";
-import * as utils from "../utils";
 
 export const filterNotes = (owner, notebookId = "") => async (dispatch) => {
   const db = firebase.firestore();
@@ -11,10 +10,6 @@ export const filterNotes = (owner, notebookId = "") => async (dispatch) => {
   let selectedNotebookNotes = null;
   let selectedNotebookLastModifiedTime = null;
   let allNotes = [];
-
-  // const notebooksCollection = notebooksRef
-  //   .where("owner", "==", owner)
-  //   .orderBy("lastModifiedTime", "desc");
 
   if (notebookId) {
     notebooksRef
@@ -25,6 +20,10 @@ export const filterNotes = (owner, notebookId = "") => async (dispatch) => {
         selectedNotebookNotes = snap.data().notes;
         selectedNotebookLastModifiedTime = snap.data().lastModifiedTime;
         allNotes = snap.data().notes;
+        allNotes.map((note) => {
+          note.notebookId = notebookId;
+          note.notebookName = snap.data().name;
+        });
         allNotes = allNotes.sort((noteA, noteB) => {
           return noteB.lastModifiedTime - noteA.lastModifiedTime;
         });
@@ -32,11 +31,7 @@ export const filterNotes = (owner, notebookId = "") => async (dispatch) => {
         dispatch({
           type: FILTER_NOTES,
           allNotes: allNotes,
-          firstNote: {
-            ...allNotes[0],
-            notebookId: notebookId,
-            notebookName: selectedNotebookName,
-          },
+          firstNote: allNotes[0],
           isEditing: false,
           selectedNotebook: {
             id: notebookId,
@@ -47,8 +42,6 @@ export const filterNotes = (owner, notebookId = "") => async (dispatch) => {
         });
       });
   } else {
-    let firstNoteNotebookId;
-    let firstNoteNotebookName;
     notebooksRef
       .where("owner", "==", owner)
       .get()
@@ -56,25 +49,19 @@ export const filterNotes = (owner, notebookId = "") => async (dispatch) => {
         for (let notebook of snap.docs) {
           let newNotes = notebook.data().notes;
           allNotes = allNotes.concat(newNotes);
+          allNotes.map((note) => {
+            note.notebookId = notebook.id;
+            note.notebookName = notebook.data().name;
+          });
           allNotes = allNotes.sort((noteA, noteB) => {
             return noteB.lastModifiedTime - noteA.lastModifiedTime;
           });
-          if (newNotes.indexOf(allNotes[0]) !== -1) {
-            console.log("found firstNote notebook");
-            console.log(notebook.id);
-            firstNoteNotebookId = notebook.id;
-            firstNoteNotebookName = notebook.data().name;
-          }
         }
         // need to refactor
         dispatch({
           type: FILTER_NOTES,
           allNotes: allNotes,
-          firstNote: {
-            ...allNotes[0],
-            notebookId: firstNoteNotebookId,
-            notebookName: firstNoteNotebookName,
-          },
+          firstNote: allNotes[0],
           isEditing: false,
           selectedNotebook: {
             id: notebookId,
