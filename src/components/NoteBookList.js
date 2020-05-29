@@ -15,9 +15,9 @@ class NotebookList extends Component {
       console.log(notebook);
       return (
         <Notebook
-          key={notebook.notebookInfo.id}
-          notebookId={notebook.notebookInfo.id}
-          notebook={notebook}
+          key={notebook.id}
+          notebookId={notebook.id}
+          notebook={notebook.data()}
           cookies={cookies}
         />
       );
