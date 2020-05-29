@@ -2,6 +2,7 @@ import "../firebase";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
 import { FETCH_DATA } from "./types";
+import * as utils from "../utils";
 
 export const fetchData = (owner) => async (dispatch, getState) => {
   const db = firebase.firestore();
