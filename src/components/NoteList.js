@@ -16,6 +16,7 @@ class NoteList extends Component {
           noteId={note.id}
           content={note.content}
           lastModifiedTime={note.lastModifiedTime}
+          notebookId={note.notebookId}
           cookies={cookies}
         />
       );
