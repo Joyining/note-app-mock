@@ -19,25 +19,25 @@ class SideMenu extends Component {
 
   renderNotebook() {
     const { allNotebooks, cookies } = this.props;
-    const ntoebooks = _.map(allNotebooks, (notebook) => {
+    const notebooks = _.map(allNotebooks, (notebook) => {
       return (
         <Notebook
-          key={notebook.notebookInfo.id}
-          notebookId={notebook.notebookInfo.id}
-          notebook={notebook}
+          key={notebook.id}
+          notebookId={notebook.id}
+          notebook={notebook.data()}
           cookies={cookies}
         />
       );
     });
-    if (!_.isEmpty(ntoebooks)) {
-      return ntoebooks;
+    if (!_.isEmpty(notebooks)) {
+      return notebooks;
     }
   }
 
   componentDidMount() {
-    const { fetchNotebooks, cookies, currentUser } = this.props;
+    const { fetchData, cookies, currentUser } = this.props;
     const getCurrentUser = utils.getCurrentUser(cookies, currentUser);
-    fetchNotebooks(getCurrentUser);
+    fetchData(getCurrentUser);
   }
 
   render() {
@@ -89,6 +89,7 @@ class SideMenu extends Component {
 
 const mapStateToProps = (state) => {
   const allNotebooks = state.allNotebooks;
+  console.log(allNotebooks);
   const currentUser = state.currentUser;
   return { allNotebooks, currentUser };
 };

@@ -60,9 +60,9 @@ class Main extends Component {
   };
 
   componentDidMount() {
-    const { fetchNotes, currentUser, cookies } = this.props;
+    const { fetchData, currentUser, cookies } = this.props;
     const getCurrentUser = utils.getCurrentUser(cookies, currentUser);
-    fetchNotes(getCurrentUser);
+    fetchData(getCurrentUser);
   }
 
   render() {
