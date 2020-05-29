@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { deleteNote } from "../actions";
+import * as actions from "../actions";
 import LightBoxHeading from "./LightBoxHeading";
 
 class DeleteNoteLightBox extends Component {
@@ -8,7 +8,7 @@ class DeleteNoteLightBox extends Component {
     const { editingNote, deleteNote, toggleLightBox } = this.props;
     toggleLightBox(e);
     if (editingNote.id) {
-      deleteNote(editingNote.id);
+      deleteNote(editingNote.notebookId, editingNote.id);
     }
   };
 
@@ -43,4 +43,4 @@ const mapStateToProps = (state) => {
   return { editingNote };
 };
 
-export default connect(mapStateToProps, { deleteNote })(DeleteNoteLightBox);
+export default connect(mapStateToProps, actions)(DeleteNoteLightBox);
