@@ -45,7 +45,7 @@ export const filterNotes = (owner, notebookId = "") => async (dispatch) => {
       .get()
       .then((snap) => {
         for (let notebook of snap.docs) {
-          allNotes.concat(notebook.data().notes);
+          allNotes = allNotes.concat(notebook.data().notes);
         }
         // need to refactor
         dispatch({

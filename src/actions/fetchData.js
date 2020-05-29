@@ -51,7 +51,7 @@ export const fetchData = (owner) => async (dispatch, getState) => {
           });
       } else {
         for (let notebook of querySnapshot.docs) {
-          allNotes.concat(notebook.data().notes);
+          allNotes = allNotes.concat(notebook.data().notes);
         }
         // need to refactor
         dispatch({
