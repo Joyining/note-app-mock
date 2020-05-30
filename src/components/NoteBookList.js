@@ -32,18 +32,6 @@ class NotebookList extends Component {
     );
   }
 
-  componentDidMount() {
-    console.log("NotebookList componentDidMount");
-    const { fetchNotebooks, cookies, currentUser } = this.props;
-    const getCurrentUser = utils.getCurrentUser(cookies, currentUser);
-    // fetchNotebooks(getCurrentUser);
-    // console.log("fetchNotebooks from NotebookList");
-  }
-
-  componentDidUpdate() {
-    console.log("NotebookList componentDidUpdate");
-  }
-
   render() {
     const { cookies } = this.props;
     return (
@@ -77,7 +65,6 @@ class NotebookList extends Component {
 }
 const mapStateToProps = (state) => {
   const allNotebooks = state.allNotebooks;
-  console.log(allNotebooks);
   const currentUser = state.currentUser;
   return { allNotebooks, currentUser };
 };
