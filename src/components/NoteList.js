@@ -44,11 +44,11 @@ class NoteList extends Component {
     };
     return (
       <div className="note-list-wrap">
-        {/* <Notebook
+        <Notebook
           notebookId={`${currentNotebook.id}`} // id會跟SideMenu裡的Notebook重複？
           notebook={currentNotebook}
           cookies={cookies}
-        /> */}
+        />
         <div>{this.renderNote()}</div>
       </div>
     );
