@@ -65,14 +65,20 @@ export const fetchData = (owner) => async (dispatch, getState) => {
       } else {
         for (let notebook of querySnapshot.docs) {
           let newNotes = notebook.data().notes;
-          newNotes.map((note) => {
-            note.notebookId = notebook.id;
-            note.notebookName = notebook.data().name;
-          });
-          allNotes = allNotes.concat(newNotes);
-          allNotes = allNotes.sort((noteA, noteB) => {
-            return noteB.lastModifiedTime - noteA.lastModifiedTime;
-          });
+          if (newNotes.length > 0) {
+            newNotes = newNotes.map((note) => {
+              const newNote = {
+                ...note,
+                notebookId: notebook.id,
+                notebookName: notebook.data().name,
+              };
+              return newNote;
+            });
+            allNotes = allNotes.concat(newNotes);
+            allNotes = allNotes.sort((noteA, noteB) => {
+              return noteB.lastModifiedTime - noteA.lastModifiedTime;
+            });
+          }
         }
 
         // need to refactor

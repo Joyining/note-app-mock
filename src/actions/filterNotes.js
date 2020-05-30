@@ -54,9 +54,8 @@ export const filterNotes = (owner, notebookId = "") => async (dispatch) => {
       .then((snap) => {
         for (let notebook of snap.docs) {
           let newNotes = notebook.data().notes;
-          allNotes = allNotes.concat(newNotes);
           if (newNotes.length > 0) {
-            allNotes = allNotes.map((note) => {
+            newNotes = newNotes.map((note) => {
               const newNote = {
                 ...note,
                 notebookId: notebook.id,
@@ -64,6 +63,7 @@ export const filterNotes = (owner, notebookId = "") => async (dispatch) => {
               };
               return newNote;
             });
+            allNotes = allNotes.concat(newNotes);
             allNotes = allNotes.sort((noteA, noteB) => {
               return noteB.lastModifiedTime - noteA.lastModifiedTime;
             });
