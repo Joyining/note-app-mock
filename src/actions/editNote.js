@@ -8,10 +8,20 @@ export const editNote = (notebookId, noteId, value, isEditing) => async (
 ) => {
   const db = firebase.firestore();
   const notebookRef = db.collection("notebooks").doc(notebookId);
-  let targetNote = null;
   let notes = [];
-  const now = new Date();
+  let targetNote = null;
   let title = utils.getNoteTitle(value);
+  const now = new Date();
+
+  const updateNotebooks = () => {
+    targetNote.content = value;
+    targetNote.lastModifiedTime = now;
+    targetNote.title = title;
+    notebookRef.update({
+      notes: notes,
+      lastModifiedTime: now,
+    });
+  };
 
   notebookRef.get().then((snapshot) => {
     notes = snapshot.data().notes;
@@ -25,29 +35,13 @@ export const editNote = (notebookId, noteId, value, isEditing) => async (
       if (isEditing === false) {
         // 如果前一次的Quill onChange是user click Note
         // 則檢查value是否跟database裡的資料一樣
-        console.log("need to check sameContent");
         const sameContent = value === content ? true : false;
         title = targetNote.title ? targetNote.title : ""; // 先初始化
         if (!sameContent) {
-          console.log("not same");
-          targetNote.content = value;
-          targetNote.lastModifiedTime = now;
-          targetNote.title = title;
-          notebookRef.update({
-            notes: notes,
-            lastModifiedTime: now,
-          });
-        } else {
-          console.log("same");
+          updateNotebooks();
         }
       } else {
-        targetNote.content = value;
-        targetNote.lastModifiedTime = now;
-        targetNote.title = title;
-        notebookRef.update({
-          notes: notes,
-          lastModifiedTime: now,
-        });
+        updateNotebooks();
       }
     }
   });
