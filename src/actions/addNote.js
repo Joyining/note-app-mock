@@ -3,7 +3,7 @@ import { firebase } from "@firebase/app";
 import "@firebase/auth";
 import * as utils from "../utils";
 
-export const addNote = (noteId, owner, notebookId, content = "") => async (
+export const addNote = (notebookId, noteId, owner, content = "") => async (
   dispatch
 ) => {
   const db = firebase.firestore();
