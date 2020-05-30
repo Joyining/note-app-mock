@@ -73,7 +73,7 @@ const Notebook = (props) => {
         }
       }
     }
-  }, [notebook.lastModifiedTime.toString()]);
+  }, [notebook]);
 
   const renderNotebookInnerWrap = useCallback(() => {
     return (
