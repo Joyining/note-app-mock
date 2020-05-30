@@ -26,10 +26,7 @@ class NoteList extends Component {
     }
     return <div>{/* <h4>You Don't have any Note yet!</h4> */}</div>;
   }
-  componentDidMount() {
-    const { fetchNotes } = this.props;
-    // fetchNotes();
-  }
+
   render() {
     const { selectedNotebook, defaultNotebook, cookies, allNotes } = this.props;
     const currentNotebook = {
