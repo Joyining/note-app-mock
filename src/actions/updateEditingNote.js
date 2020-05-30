@@ -7,8 +7,8 @@ export const updateEditingNote = (notebookId, noteId) => async (dispatch) => {
   var db = firebase.firestore();
   var ref = db.collection("notebooks").doc(notebookId);
   // ref.get() returns a Promise
-  ref.get().then((snapShot) => {
-    const notes = snapShot.data().notes;
+  ref.get().then((snapshot) => {
+    const notes = snapshot.data().notes;
     let targetNote = null;
     for (let note of notes) {
       if (note.id === noteId) {
@@ -20,8 +20,8 @@ export const updateEditingNote = (notebookId, noteId) => async (dispatch) => {
         id: targetNote.id,
         content: targetNote.content,
         title: targetNote.title,
-        notebookId: snapShot.id,
-        notebookName: snapShot.data().name,
+        notebookId: snapshot.id,
+        notebookName: snapshot.data().name,
         lastModifiedTime: targetNote.lastModifiedTime,
         createdTime: targetNote.createdTime,
       };
