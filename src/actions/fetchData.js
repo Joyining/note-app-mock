@@ -7,12 +7,53 @@ export const fetchData = (owner) => async (dispatch, getState) => {
   const db = firebase.firestore();
   const notebooksRef = db.collection("notebooks");
 
+  const getDefaultNotebook = (querySnapshot) => {
+    let defaultNotebook = {};
+    for (let notebook of querySnapshot.docs) {
+      if (notebook.data().defaultNotebook === true) {
+        defaultNotebook.id = notebook.id;
+        defaultNotebook.name = notebook.data().name;
+        break;
+      }
+    }
+    return defaultNotebook;
+  };
+
+  // async??
+  const fetchDataDispatch = (querySnapshot, allNotes, isEditing) => {
+    dispatch({
+      type: FETCH_DATA,
+      allNotebooks: querySnapshot.docs,
+      allNotes: allNotes,
+      firstNote: allNotes[0] ? allNotes[0] : {},
+      defaultNotebook: {
+        id: getDefaultNotebook(querySnapshot).id,
+        name: getDefaultNotebook(querySnapshot).name,
+      },
+      isEditing: isEditing,
+      isDeletingNote: false,
+    });
+  };
+
+  const setAllNotes = (presAllNotes, notebookId, notebookName, newNotes) => {
+    newNotes = newNotes.map((note) => {
+      const newNote = {
+        ...note,
+        notebookId: notebookId,
+        notebookName: notebookName,
+      };
+      return newNote;
+    });
+    presAllNotes = presAllNotes.concat(newNotes);
+    return presAllNotes.sort((noteA, noteB) => {
+      return noteB.lastModifiedTime - noteA.lastModifiedTime;
+    });
+  };
+
   notebooksRef
     .where("owner", "==", owner)
     .orderBy("lastModifiedTime", "desc")
     .onSnapshot((querySnapshot) => {
-      let defaultNotebookId = null;
-      let defaultNotebookName = null;
       let allNotes = [];
       const state = getState();
       const selectedNotebook = state.selectedNotebook;
@@ -20,81 +61,33 @@ export const fetchData = (owner) => async (dispatch, getState) => {
       const isEditingInState = state.isEditing;
       const isEditing =
         typeof isEditingInState !== "boolean" || isDeletingNote ? false : true;
-      for (let notebook of querySnapshot.docs) {
-        if (notebook.data().defaultNotebook === true) {
-          defaultNotebookId = notebook.id;
-          defaultNotebookName = notebook.data().name;
-          break;
-        }
-      }
       if (selectedNotebook && selectedNotebook.id) {
         notebooksRef
           .doc(selectedNotebook.id)
           .get()
           .then((snapshot) => {
-            allNotes = snapshot.data().notes;
-            if (allNotes) {
-              allNotes = allNotes.map((note) => {
-                const newNote = {
-                  ...note,
-                  notebookId: selectedNotebook.id,
-                  notebookName: selectedNotebook.name,
-                };
-                return newNote;
-              });
-              allNotes = allNotes.sort((noteA, noteB) => {
-                return noteB.lastModifiedTime - noteA.lastModifiedTime;
-              });
-            }
-
-            // need to refactor
-            dispatch({
-              type: FETCH_DATA,
-              allNotebooks: querySnapshot.docs,
-              allNotes: allNotes,
-              // 這裡的allNotes可能會有延遲，因為是.get()非同步操作後的結果
-              firstNote: allNotes[0] ? allNotes[0] : {},
-              defaultNotebook: {
-                id: defaultNotebookId,
-                name: defaultNotebookName,
-              },
-              isEditing: isEditing,
-              isDeletingNote: false,
-            });
+            const newNotes = snapshot.data().notes;
+            allNotes = setAllNotes(
+              [],
+              selectedNotebook.id,
+              selectedNotebook.name,
+              newNotes
+            );
+            fetchDataDispatch(querySnapshot, allNotes, isEditing);
           });
       } else {
         for (let notebook of querySnapshot.docs) {
           let newNotes = notebook.data().notes;
           if (newNotes.length > 0) {
-            newNotes = newNotes.map((note) => {
-              const newNote = {
-                ...note,
-                notebookId: notebook.id,
-                notebookName: notebook.data().name,
-              };
-              return newNote;
-            });
-            allNotes = allNotes.concat(newNotes);
-            allNotes = allNotes.sort((noteA, noteB) => {
-              return noteB.lastModifiedTime - noteA.lastModifiedTime;
-            });
+            allNotes = setAllNotes(
+              allNotes,
+              notebook.id,
+              notebook.data().name,
+              newNotes
+            );
           }
         }
-
-        // need to refactor
-        dispatch({
-          type: FETCH_DATA,
-          allNotebooks: querySnapshot.docs,
-          allNotes: allNotes,
-          firstNote: allNotes[0] ? allNotes[0] : {},
-          // firstNote: utils.getFirstNote(allNotes),
-          defaultNotebook: {
-            id: defaultNotebookId,
-            name: defaultNotebookName,
-          },
-          isEditing: isEditing,
-          isDeletingNote: false,
-        });
+        fetchDataDispatch(querySnapshot, allNotes, isEditing);
       }
     });
 };
