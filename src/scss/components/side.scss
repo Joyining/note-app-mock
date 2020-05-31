@@ -58,10 +58,12 @@
           }
 
           .notebook-detail-and-actions,
-          .note-count,
-          .note-list {
+          .note-count {
             display: none;
           }
+        }
+        .note-list {
+          display: none;
         }
       }
     }

@@ -10,58 +10,69 @@ $--note-outer-wrap-paddingX: 26px;
   overflow-y: scroll;
   background-color: $--alabaster;
   border-right: 1px solid $--mercury;
-  .notebook-inner-wrap {
-    padding: 16px 26px;
-    box-sizing: border-box;
-    height: 102px;
-    border-bottom: 1px solid $--mercury;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    .notebook-name-and-icon {
-      .notebook-name {
-        color: $--title-gray;
-        font-size: 20px;
-        height: 28px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-      .expand-icon,
-      .note-count {
-        display: none;
+  .notebook-outer-wrap {
+    .shared-menu-list {
+      display: none;
+    }
+    &.show-menu {
+      .shared-menu-list {
+        display: block;
       }
     }
-
-    .notebook-detail-and-actions {
+    .notebook-inner-wrap {
+      padding: 16px 26px;
+      box-sizing: border-box;
+      height: 102px;
+      border-bottom: 1px solid $--mercury;
       display: flex;
+      flex-direction: column;
       justify-content: space-between;
-      align-items: center;
-      .last-modified-time {
-        display: none;
-      }
-      .note-count {
-        font-size: 13px;
-        color: $--silver-chalice;
-      }
-      .actions {
-        position: relative;
-        &.allNotes {
+      .notebook-name-and-icon {
+        .notebook-name {
+          color: $--title-gray;
+          font-size: 20px;
+          height: 28px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .expand-icon,
+        .note-count {
           display: none;
         }
-        .icon {
-          width: 20px;
-          height: 20px;
-          svg {
-            fill: $--silver-chalice;
+      }
+
+      .notebook-detail-and-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .last-modified-time {
+          display: none;
+        }
+        .note-count {
+          font-size: 13px;
+          color: $--silver-chalice;
+        }
+        .actions {
+          position: relative;
+          &.allNotes {
+            display: none;
+          }
+          .icon {
+            width: 20px;
+            height: 20px;
+            svg {
+              fill: $--silver-chalice;
+            }
           }
         }
       }
-    }
-    .notebook-icon,
-    .is-default-notebook {
-      display: none;
+      .notebook-icon,
+      .is-default-notebook {
+        display: none;
+      }
     }
   }
+
   .note-list {
     display: none;
   }
