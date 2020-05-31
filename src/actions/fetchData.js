@@ -3,6 +3,26 @@ import { firebase } from "@firebase/app";
 import "@firebase/auth";
 import { FETCH_DATA } from "./types";
 
+export const setAllNotes = (
+  presAllNotes,
+  notebookId,
+  notebookName,
+  newNotes
+) => {
+  newNotes = newNotes.map((note) => {
+    const newNote = {
+      ...note,
+      notebookId: notebookId,
+      notebookName: notebookName,
+    };
+    return newNote;
+  });
+  presAllNotes = presAllNotes.concat(newNotes);
+  return presAllNotes.sort((noteA, noteB) => {
+    return noteB.lastModifiedTime - noteA.lastModifiedTime;
+  });
+};
+
 export const fetchData = (owner) => async (dispatch, getState) => {
   const db = firebase.firestore();
   const notebooksRef = db.collection("notebooks");
@@ -32,21 +52,6 @@ export const fetchData = (owner) => async (dispatch, getState) => {
       },
       isEditing: isEditing,
       isDeletingNote: false,
-    });
-  };
-
-  const setAllNotes = (presAllNotes, notebookId, notebookName, newNotes) => {
-    newNotes = newNotes.map((note) => {
-      const newNote = {
-        ...note,
-        notebookId: notebookId,
-        notebookName: notebookName,
-      };
-      return newNote;
-    });
-    presAllNotes = presAllNotes.concat(newNotes);
-    return presAllNotes.sort((noteA, noteB) => {
-      return noteB.lastModifiedTime - noteA.lastModifiedTime;
     });
   };
 
