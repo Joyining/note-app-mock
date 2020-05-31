@@ -23,7 +23,7 @@ class NotebookList extends Component {
       );
     });
     if (!_.isEmpty(notebooks)) {
-      return notebooks;
+      return <div className="notebook-list">{notebooks}</div>;
     }
     return (
       <div>
@@ -57,7 +57,7 @@ class NotebookList extends Component {
               <p className="actions detail-item">Actions</p>
             </li>
           </ul>
-          {this.renderNotebook()}
+          <div>{this.renderNotebook()}</div>
         </div>
       </div>
     );

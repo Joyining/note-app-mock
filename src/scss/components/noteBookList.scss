@@ -1,6 +1,18 @@
 .notebook-list-outer-wrap {
   @import "../base/_base.scss";
-  padding: 30px;
+
+  $--notebook-list-outer-wrap-padding: 30px;
+  $--main-title-wrap-height: 50px;
+  $--secondary-title-wrap-height: 24px;
+  $--secondary-title-wrap-padding: 10px;
+  $--secondary-title-wrap-border-width: 2px;
+  $--table-heading-height: 33px;
+  $--note-list-fixed-height: (2 * $--notebook-list-outer-wrap-padding) +
+    ($--main-title-wrap-height) + ($--secondary-title-wrap-height) +
+    (2 * $--secondary-title-wrap-padding) +
+    ($--secondary-title-wrap-border-width) + ($--table-heading-height);
+
+  padding: $--notebook-list-outer-wrap-padding;
   box-sizing: border-box;
   width: 100%;
   &.show {
@@ -16,12 +28,12 @@
   .main-title-wrap {
     font-size: 20px;
     color: $--title-gray;
-    height: 50px;
+    height: $--main-title-wrap-height;
   }
   .secondary-title-wrap {
-    height: 24px;
-    padding: 10px 0;
-    border-bottom: 2px solid $--nevada;
+    height: $--secondary-title-wrap-height;
+    padding: $--secondary-title-wrap-padding 0;
+    border-bottom: $--secondary-title-wrap-border-width solid $--nevada;
     font: {
       size: 15px;
       weight: 500;
@@ -60,6 +72,10 @@
           width: 117px;
         }
       }
+    }
+    .notebook-list {
+      overflow-y: scroll;
+      height: calc(100vh - #{$--note-list-fixed-height});
     }
   }
   .notebook-outer-wrap {
