@@ -61,15 +61,13 @@ class NoteActions extends Component {
   };
 
   copyNoteOnClickHandler = (e) => {
-    console.log("click copy notebook");
     const {
       addNote,
       currentUser,
       updateEditingNote,
       editingNote,
       cookies,
-      defaultNotebook,
-      selectedNotebook,
+      notebookId,
     } = this.props;
     const noteId = uuidv4();
     this.menuOnClickHandler(e);
@@ -82,9 +80,8 @@ class NoteActions extends Component {
       )}Copy of ${editingNote.content.slice(insertPoint + 1)}`;
     }
     const getCurrentUser = utils.getCurrentUser(cookies, currentUser);
-    const notebook = selectedNotebook.id ? selectedNotebook : defaultNotebook;
-    addNote(notebook.id, noteId, getCurrentUser, newContent);
-    updateEditingNote(notebook.id, noteId);
+    addNote(notebookId, noteId, getCurrentUser, newContent);
+    updateEditingNote(notebookId, noteId);
   };
 
   viewNoteDetailOnClickHandler = (e) => {
@@ -137,16 +134,10 @@ class NoteActions extends Component {
 
 const mapStateToProps = (state) => {
   const editingNote = state.editingNote;
-  const isEditing = state.isEditing;
   const currentUser = state.currentUser;
-  const defaultNotebook = state.defaultNotebook;
-  const selectedNotebook = state.selectedNotebook;
   return {
     editingNote,
-    isEditing,
     currentUser,
-    defaultNotebook,
-    selectedNotebook,
   };
 };
 
