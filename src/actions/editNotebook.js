@@ -39,9 +39,6 @@ export const renameNotebook = (notebookId, notebookName) => async (
 ) => {
   const db = firebase.firestore();
   const notebookRef = db.collection("notebooks").doc(notebookId);
-  notebookRef.update({
-    name: notebookName,
-  });
   notebookRef.get().then((snapshot) => {
     dispatch({
       type: RENAME_NOTEBOOK,
@@ -51,6 +48,9 @@ export const renameNotebook = (notebookId, notebookName) => async (
         notes: snapshot.data().notes,
         lastModifiedTime: snapshot.data().lastModifiedTime,
       },
+    });
+    notebookRef.update({
+      name: notebookName,
     });
   });
 };
