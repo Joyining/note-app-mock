@@ -32,3 +32,11 @@ export const setAsDefaultNotebook = (notebookId, owner) => async (dispatch) => {
       });
     });
 };
+
+export const renameNotebook = (notebookId, notebookName) => async () => {
+  const db = firebase.firestore();
+  const notebookRef = db.collection("notebooks").doc(notebookId);
+  notebookRef.update({
+    name: notebookName,
+  });
+};

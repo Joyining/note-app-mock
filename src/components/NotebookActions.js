@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import * as actions from "../actions";
 import * as utils from "../utils";
 import LightBoxBg from "./LightBoxBg";
+import RenameNotebookLightBox from "./RenameNotebookLightBox";
 import DeleteNotebookLightBox from "./DeleteNotebookLightBox";
 import { ReactComponent as ActionIcon } from "../images/actionHorizontal.svg";
 import "../scss/components/notebookList.scss";
@@ -30,6 +31,14 @@ const NotebookActions = (props) => {
             notebookId={notebookId}
           />
         );
+      case "renameNotebook":
+        return (
+          <RenameNotebookLightBox
+            toggleLightBox={toggleLightBox}
+            notebook={notebook}
+            notebookId={notebookId}
+          />
+        );
       default:
         break;
     }
@@ -45,6 +54,12 @@ const NotebookActions = (props) => {
     }
   };
 
+  const renameNotebookOnClickHandler = (e) => {
+    setCurrentLightBox("renameNotebook");
+    toggleLightBox(e);
+    setShowMenu((previousShowMenu) => !previousShowMenu);
+  };
+
   const setAsDefaultOnClickHandler = () => {
     setAsDefaultNotebook(notebookId, getCurrentUser);
     setShowMenu((previousShowMenu) => !previousShowMenu);
@@ -57,6 +72,10 @@ const NotebookActions = (props) => {
   };
 
   const menu = [
+    {
+      name: "Rename Notebook",
+      onClick: renameNotebookOnClickHandler,
+    },
     {
       name: "Set as Default Notebook",
       onClick: setAsDefaultOnClickHandler,
