@@ -49,6 +49,9 @@ const Notebook = (props) => {
     if (!_.isEmpty(notebook)) {
       console.log(notesInThisNotebook);
       if (notesInThisNotebook) {
+        notesInThisNotebook.sort((noteA, noteB) => {
+          return noteB.lastModifiedTime - noteA.lastModifiedTime;
+        });
         const result = notesInThisNotebook.map((note) => {
           console.log(note.id);
           return (
