@@ -11,14 +11,6 @@ $--note-outer-wrap-paddingX: 26px;
   background-color: $--alabaster;
   border-right: 1px solid $--mercury;
   .notebook-outer-wrap {
-    .shared-menu-list {
-      display: none;
-    }
-    &.show-menu {
-      .shared-menu-list {
-        display: block;
-      }
-    }
     .notebook-inner-wrap {
       padding: 16px 26px;
       box-sizing: border-box;

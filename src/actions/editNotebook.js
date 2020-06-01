@@ -2,6 +2,7 @@ import "../firebase";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
 import { SET_AS_DEFAULT_NOTEBOOK } from "./types";
+import { RENAME_NOTEBOOK } from "./types";
 
 export const setAsDefaultNotebook = (notebookId, owner) => async (dispatch) => {
   const db = firebase.firestore();
@@ -33,10 +34,23 @@ export const setAsDefaultNotebook = (notebookId, owner) => async (dispatch) => {
     });
 };
 
-export const renameNotebook = (notebookId, notebookName) => async () => {
+export const renameNotebook = (notebookId, notebookName) => async (
+  dispatch
+) => {
   const db = firebase.firestore();
   const notebookRef = db.collection("notebooks").doc(notebookId);
   notebookRef.update({
     name: notebookName,
+  });
+  notebookRef.get().then((snapshot) => {
+    dispatch({
+      type: RENAME_NOTEBOOK,
+      selectedNotebook: {
+        id: notebookId,
+        name: notebookName,
+        notes: snapshot.data().notes,
+        lastModifiedTime: snapshot.data().lastModifiedTime,
+      },
+    });
   });
 };
