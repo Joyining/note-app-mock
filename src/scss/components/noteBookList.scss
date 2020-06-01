@@ -166,11 +166,17 @@
             p {
               padding: 0.5rem;
             }
-            .note-name-and-icon {
+            .note-title-and-icon {
               display: flex;
               align-items: center;
               flex-basis: 30%;
               padding-left: 52px;
+              .note-title {
+                cursor: pointer;
+                &:hover {
+                  text-decoration: underline;
+                }
+              }
             }
             .last-modified-date {
               display: block;

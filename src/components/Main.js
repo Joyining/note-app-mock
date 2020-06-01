@@ -39,6 +39,12 @@ class Main extends Component {
               <NotebookList cookies={cookies} />
             </div>
           );
+        case "editorOnly":
+          return (
+            <div className="main-wrap">
+              <Editor cookies={cookies} />
+            </div>
+          );
         case "noteAndEditor":
         default:
           if (allNotes.length === 0) {
