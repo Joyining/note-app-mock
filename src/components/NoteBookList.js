@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import _ from "lodash";
 import * as actions from "../actions";
-import * as utils from "../utils";
 import AddNotebook from "./AddNotebook";
 import Notebook from "./Notebook";
 import "../scss/components/notebookList.scss";

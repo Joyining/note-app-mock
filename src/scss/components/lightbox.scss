@@ -27,6 +27,7 @@
       color: $--note-item-font-gray;
       .cancel-icon {
         fill: $--silver-chalice;
+        background-color: transparent;
       }
     }
     .message {
@@ -36,7 +37,8 @@
       }
       color: $--note-item-font-gray;
       padding: 16px 0;
-      .note-title {
+      .note-title,
+      .notebook-name {
         font-weight: bold;
       }
       .detail-wrap {
