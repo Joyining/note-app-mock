@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import * as actions from "../actions";
 import Side from "./Side";
 import Main from "./Main";
+import MobileBottom from "./MobileBottom";
 import Registration from "./Registration";
 import "../scss/base/_base.scss";
 
@@ -21,6 +22,7 @@ const HomeContainer = (props) => {
       <div className="home-container-wrap">
         <Side cookies={cookies} />
         <Main cookies={cookies} />
+        <MobileBottom cookies={cookies} />
       </div>
     );
   } else {

@@ -1,0 +1,21 @@
+@import "../base/_base.scss";
+.mobile-bottom-wrap {
+  display: none;
+  @include phone-width {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $--cod-gray;
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+    .note-menu {
+      fill: white;
+    }
+    .add-btn {
+      .add-note-text {
+        display: none;
+      }
+    }
+  }
+}
