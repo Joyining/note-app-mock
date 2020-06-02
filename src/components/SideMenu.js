@@ -71,10 +71,10 @@ class SideMenu extends Component {
       <div>
         <div className="side-menu-wrap">
           <ul className="menu-list">
-            {menu.map((item) => {
+            {menu.map((item, index) => {
               return (
                 <li
-                  key={item.name}
+                  key={index}
                   className={`menu-item ${
                     !item.mobile ? "hide-in-mobile" : "hide-in-pc"
                   }`}
