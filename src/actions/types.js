@@ -9,4 +9,5 @@ export const LOG_OUT = "LOG_OUT";
 export const SIGN_UP = "SIGN_UP";
 export const SET_AS_DEFAULT_NOTEBOOK = "SET_AS_DEFAULT_NOTEBOOK";
 export const DELETE_NOTE = "DELETE_NOTE";
+export const DELETE_NOTEBOOK = "DELETE_NOTEBOOK";
 export const RENAME_NOTEBOOK = "RENAME_NOTEBOOK";
