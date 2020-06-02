@@ -39,7 +39,21 @@ export const fetchData = (owner) => async (dispatch, getState) => {
     return defaultNotebook;
   };
 
-  // async??
+  const setAllNotesFromAllNotebooks = (querySnapshot, allNotes) => {
+    for (let notebook of querySnapshot.docs) {
+      let newNotes = notebook.data().notes;
+      if (newNotes.length > 0) {
+        allNotes = setAllNotes(
+          allNotes,
+          notebook.id,
+          notebook.data().name,
+          newNotes
+        );
+      }
+    }
+    return allNotes;
+  };
+
   const fetchDataDispatch = (querySnapshot, allNotes, isEditing) => {
     dispatch({
       type: FETCH_DATA,
@@ -71,27 +85,22 @@ export const fetchData = (owner) => async (dispatch, getState) => {
           .doc(selectedNotebook.id)
           .get()
           .then((snapshot) => {
-            const newNotes = snapshot.data().notes;
-            allNotes = setAllNotes(
-              [],
-              selectedNotebook.id,
-              selectedNotebook.name,
-              newNotes
-            );
-            fetchDataDispatch(querySnapshot, allNotes, isEditing);
+            if (snapshot.data()) {
+              const newNotes = snapshot.data().notes;
+              allNotes = setAllNotes(
+                [],
+                selectedNotebook.id,
+                selectedNotebook.name,
+                newNotes
+              );
+              fetchDataDispatch(querySnapshot, allNotes, isEditing);
+            } else {
+              allNotes = setAllNotesFromAllNotebooks(querySnapshot, allNotes);
+              fetchDataDispatch(querySnapshot, allNotes, isEditing);
+            }
           });
       } else {
-        for (let notebook of querySnapshot.docs) {
-          let newNotes = notebook.data().notes;
-          if (newNotes.length > 0) {
-            allNotes = setAllNotes(
-              allNotes,
-              notebook.id,
-              notebook.data().name,
-              newNotes
-            );
-          }
-        }
+        allNotes = setAllNotesFromAllNotebooks(querySnapshot, allNotes);
         fetchDataDispatch(querySnapshot, allNotes, isEditing);
       }
     });
