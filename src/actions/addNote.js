@@ -1,6 +1,7 @@
 import "../firebase";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
+import { ADD_NOTE } from "./types";
 import * as utils from "../utils";
 
 export const addNote = (notebookId, noteId, owner, content = "") => async (
@@ -25,6 +26,10 @@ export const addNote = (notebookId, noteId, owner, content = "") => async (
     notebookRef.update({
       lastModifiedTime: now,
       notes: notes,
+    });
+    dispatch({
+      type: ADD_NOTE,
+      view: "addNoteView",
     });
   });
 };

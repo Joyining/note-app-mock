@@ -12,6 +12,7 @@ $--evernote-green: #00a82d;
 $--tomato: #e54e40;
 $--light-box-bg: rgba(42, 51, 60, 0.4);
 $--note-actions-icon-width: 24px;
+$--phone-media: 760px;
 
 * {
   margin: 0;
@@ -20,38 +21,9 @@ $--note-actions-icon-width: 24px;
   border: none;
 }
 
-.home-container-wrap {
-  width: 100vw;
-}
-.home-container-wrap,
-.main-wrap {
-  display: flex;
-  height: 100vh;
-}
-.main-wrap {
-  width: calc(100vw - 241px); // flex-grow: 1;
-  .empty-note-message {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-}
-.input-text {
-  height: 38px;
-  width: 100%;
-  padding: 0 5px;
-  box-sizing: border-box;
-  border-radius: 5px;
-  border: 1px solid $--silver-chalice;
-}
-.small-warning-message {
-  font-size: 8px;
-  color: $--tomato;
-  visibility: hidden;
-  &.show {
-    visibility: visible;
+@mixin phone-width() {
+  @media all and (max-width: $--phone-media) {
+    @content;
   }
 }
 
@@ -75,6 +47,99 @@ $--note-actions-icon-width: 24px;
   }
 }
 
+%general-btn-style {
+  color: $--silver-chalice;
+  border: 1px solid $--silver-chalice;
+  background-color: white;
+}
+
+%warning-btn-style {
+  color: white;
+  border: 1px solid $--tomato;
+  background-color: $--tomato;
+}
+
+%highlight-btn-style {
+  color: white;
+  border: 1px solid $--evernote-green;
+  background-color: $--evernote-green;
+}
+
+.home-container-wrap {
+  width: 100vw;
+  @include phone-width {
+    flex-direction: column;
+    .side-wrap {
+      display: none;
+    }
+  }
+}
+.home-container-wrap,
+.main-wrap {
+  display: flex;
+  height: 100vh;
+}
+.home-container-wrap {
+  @include phone-width {
+    position: relative;
+  }
+  .main-wrap {
+    width: calc(100vw - 241px); // flex-grow: 1;
+    @include phone-width {
+      width: 100vw;
+      .note-list-wrap {
+        display: block;
+        flex: initial;
+        width: 100%;
+      }
+      .editor-wrap {
+        display: none;
+      }
+      &.addNoteView {
+        .note-list-wrap {
+          display: none;
+        }
+        .editor-wrap {
+          display: block;
+          flex: initial;
+          width: 100%;
+        }
+      }
+    }
+    .side-wrap {
+      display: none;
+      @include phone-width {
+        display: block;
+        flex: initial;
+        width: 100%;
+      }
+    }
+    .empty-note-message {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+.input-text {
+  height: 38px;
+  width: 100%;
+  padding: 0 5px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid $--silver-chalice;
+}
+.small-warning-message {
+  font-size: 8px;
+  color: $--tomato;
+  visibility: hidden;
+  &.show {
+    visibility: visible;
+  }
+}
 .shared-menu-list {
   display: none;
   position: absolute;
@@ -96,22 +161,4 @@ $--note-actions-icon-width: 24px;
       size: 14px;
     }
   }
-}
-
-%general-btn-style {
-  color: $--silver-chalice;
-  border: 1px solid $--silver-chalice;
-  background-color: white;
-}
-
-%warning-btn-style {
-  color: white;
-  border: 1px solid $--tomato;
-  background-color: $--tomato;
-}
-
-%highlight-btn-style {
-  color: white;
-  border: 1px solid $--evernote-green;
-  background-color: $--evernote-green;
 }

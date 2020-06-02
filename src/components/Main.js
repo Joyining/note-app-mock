@@ -5,6 +5,7 @@ import NoteList from "./NoteList";
 import Editor from "./Editor";
 import NotebookList from "./NotebookList";
 import AddNote from "./AddNote";
+import Side from "./Side";
 import * as actions from "../actions";
 import * as utils from "../utils";
 import "../scss/base/_base.scss";
@@ -33,6 +34,13 @@ class Main extends Component {
       );
     } else {
       switch (currentView) {
+        case "addNoteView":
+          return (
+            <div className={`main-wrap ${currentView}`}>
+              <NoteList cookies={cookies} />
+              <Editor cookies={cookies} />
+            </div>
+          );
         case "notebookList":
           return (
             <div className="main-wrap">
@@ -43,6 +51,12 @@ class Main extends Component {
           return (
             <div className="main-wrap">
               <Editor cookies={cookies} />
+            </div>
+          );
+        case "side":
+          return (
+            <div className="main-wrap">
+              <Side cookies={cookies} />
             </div>
           );
         case "noteAndEditor":
