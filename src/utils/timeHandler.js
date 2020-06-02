@@ -1,7 +1,7 @@
 export const getDisplayedTimeAgo = (originTime) => {
   let result = "";
   const now = new Date();
-  const dateObj = originTime.toDate();
+  const dateObj = originTime instanceof Date ? originTime : originTime.toDate();
   const lastModifiedDay = `${dateObj.getFullYear()}/${
     dateObj.getMonth() + 1
   }/${dateObj.getDate()}`;
@@ -29,7 +29,8 @@ export const getDisplayedTimeAgo = (originTime) => {
 
 export const getDisplayedDate = (originTime) => {
   if (originTime) {
-    const dateObj = originTime.toDate();
+    const dateObj =
+      originTime instanceof Date ? originTime : originTime.toDate();
     return dateObj
       ? `${dateObj.getFullYear()}/${
           dateObj.getMonth() + 1
@@ -40,7 +41,8 @@ export const getDisplayedDate = (originTime) => {
 
 export const getDisplayedTime = (originTime) => {
   if (originTime) {
-    const dateObj = originTime.toDate();
+    const dateObj =
+      originTime instanceof Date ? originTime : originTime.toDate();
     return dateObj
       ? `${dateObj.getFullYear()}/${
           dateObj.getMonth() + 1
