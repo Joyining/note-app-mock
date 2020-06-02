@@ -1,5 +1,19 @@
+@import "../base/_base.scss";
 .add-notebook-wrap {
-  @import "../base/_base.scss";
+  .add-notebook-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $--evernote-green;
+    cursor: pointer;
+    @include phone-width {
+      justify-content: flex-start;
+      margin-bottom: 16px;
+    }
+    svg {
+      fill: $--evernote-green;
+    }
+  }
   .input-text {
     margin-bottom: 10px;
   }

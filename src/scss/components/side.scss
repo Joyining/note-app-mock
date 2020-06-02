@@ -5,6 +5,17 @@
   color: $--white;
   padding: 24px;
   box-sizing: border-box;
+  .add-notebook-wrap {
+    display: none;
+  }
+  @include phone-width {
+    .add-notebook-wrap {
+      display: block;
+    }
+    .add-btn {
+      display: none;
+    }
+  }
   .account-menu-wrap {
     position: relative;
     height: 40px;
@@ -30,6 +41,18 @@
         height: 32px;
         line-height: 32px;
         cursor: pointer;
+        &.hide-in-pc {
+          display: none;
+        }
+        @include phone-width {
+          &.hide-in-mobile {
+            display: none;
+          }
+          &.hide-in-pc {
+            display: block;
+          }
+        }
+
         .notebook-inner-wrap {
           padding-left: 16px;
           box-sizing: border-box;

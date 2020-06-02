@@ -5,6 +5,7 @@ import * as utils from "../utils";
 import { v4 as uuidv4 } from "uuid";
 import LightBoxBg from "./LightBoxBg";
 import LightBoxHeading from "./LightBoxHeading";
+import { ReactComponent as AddNotebookIcon } from "../images/addNotebook.svg";
 import "../scss/components/addNotebook.scss";
 
 const AddNotebook = (props) => {
@@ -75,7 +76,8 @@ const AddNotebook = (props) => {
   return (
     <div className="add-notebook-wrap">
       <div className="add-notebook-btn" onClick={clickAddNotebook}>
-        New Notebook
+        <AddNotebookIcon />
+        <span>New Notebook</span>
       </div>
       <LightBoxBg
         showLightBox={showLightBox}
