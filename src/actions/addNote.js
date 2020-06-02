@@ -30,6 +30,11 @@ export const addNote = (notebookId, noteId, owner, content = "") => async (
     dispatch({
       type: ADD_NOTE,
       view: "addNoteView",
+      editingNote: {
+        ...newNote,
+        notebookId: notebookId,
+        notebookName: snapShot.data().name,
+      },
     });
   });
 };
