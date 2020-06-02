@@ -48,6 +48,7 @@ class SideMenu extends Component {
         child: null,
         needFilterNotes: true,
         filter: "",
+        pc: true,
         mobile: true,
       },
       {
@@ -56,6 +57,7 @@ class SideMenu extends Component {
         child: this.renderNotebook(),
         needFilterNotes: true,
         filter: "",
+        pc: true,
         mobile: false,
       },
       {
@@ -64,6 +66,7 @@ class SideMenu extends Component {
         child: this.renderNotebook(),
         needFilterNotes: false,
         filter: "",
+        pc: false,
         mobile: true,
       },
     ];
@@ -76,8 +79,8 @@ class SideMenu extends Component {
                 <li
                   key={index}
                   className={`menu-item ${
-                    !item.mobile ? "hide-in-mobile" : "hide-in-pc"
-                  }`}
+                    !item.mobile ? "hide-in-mobile" : ""
+                  } ${!item.pc ? "hide-in-pc" : ""}`}
                   onClick={(e) => {
                     this.menuItemOnClickHandler(
                       item.view,
