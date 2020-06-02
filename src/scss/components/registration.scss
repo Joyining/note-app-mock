@@ -9,6 +9,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  @include phone-width {
+    width: 90vw;
+    padding: 16px;
+  }
 }
 .login-wrap,
 .signup-wrap {
