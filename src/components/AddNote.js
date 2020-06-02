@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import * as actions from "../actions";
 import * as utils from "../utils";
 import { v4 as uuidv4 } from "uuid";
+import { ReactComponent as AddIcon } from "../images/add.svg";
 import "../scss/components/addNote.scss";
 
 class AddNote extends Component {
@@ -27,7 +28,8 @@ class AddNote extends Component {
   render() {
     return (
       <div className="add-btn" onClick={this.clickAddNote}>
-        Add
+        <AddIcon />
+        <span className="add-note-text">New Note</span>
       </div>
     );
   }
