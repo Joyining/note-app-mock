@@ -1,0 +1,27 @@
+@import "../base/_base.scss";
+.mobile-top-wrap {
+  display: none;
+  @include phone-width {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $--cod-gray;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 50px;
+    .back-icon {
+      position: absolute;
+      left: 10px;
+      width: 20px;
+      height: 20px;
+      fill: $--evernote-green;
+      &.hide {
+        display: none;
+      }
+    }
+    .current-position {
+      color: $--evernote-green;
+    }
+  }
+}

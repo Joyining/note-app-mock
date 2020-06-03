@@ -87,6 +87,7 @@ $--phone-media: 760px;
     width: calc(100vw - 241px); // flex-grow: 1;
     @include phone-width {
       width: 100vw;
+      margin-top: 50px;
       .note-list-wrap {
         display: block;
         flex: initial;
