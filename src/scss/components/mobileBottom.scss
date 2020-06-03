@@ -9,12 +9,24 @@
     position: fixed;
     bottom: 0;
     width: 100vw;
+    height: 40px;
+    padding: 0 10px;
+    box-sizing: border-box;
     .note-menu {
       fill: white;
     }
     .add-btn {
+      position: absolute;
+      margin: 0;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
       .add-note-text {
         display: none;
+      }
+      svg {
+        width: 50px;
+        height: 50px;
       }
     }
   }
