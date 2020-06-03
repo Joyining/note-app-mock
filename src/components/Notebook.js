@@ -22,12 +22,6 @@ const Notebook = (props) => {
   const getCurrentUser = utils.getCurrentUser(cookies, currentUser);
   const [expandNotebook, setExpandNotebook] = useState(false);
 
-  const notebookNameOnClickHandler = (e) => {
-    const notebookId = e.target.closest("li").id;
-    switchView("noteAndEditor");
-    filterNotes(getCurrentUser, notebookId);
-  };
-
   const expandNotebookOnClickHandler = () => {
     setExpandNotebook((previousExpandNotebook) => !previousExpandNotebook);
   };
@@ -62,9 +56,14 @@ const Notebook = (props) => {
         }
       }
     }
-  }, [notebook]);
+  }, [notebook, cookies, notebookId, notesInThisNotebook]);
 
   const renderNotebookInnerWrap = useCallback(() => {
+    const notebookNameOnClickHandler = (e) => {
+      const notebookId = e.target.closest("li").id;
+      switchView("noteAndEditor");
+      filterNotes(getCurrentUser, notebookId);
+    };
     return (
       <div className="notebook-inner-wrap">
         <div className="notebook-name-and-icon">
@@ -100,7 +99,16 @@ const Notebook = (props) => {
         </div>
       </div>
     );
-  }, [notebook]);
+  }, [
+    notebook,
+    cookies,
+    currentUser,
+    notebookId,
+    notesInThisNotebook.length,
+    filterNotes,
+    getCurrentUser,
+    switchView,
+  ]);
 
   return (
     <li id={notebookId} className="notebook-outer-wrap">
