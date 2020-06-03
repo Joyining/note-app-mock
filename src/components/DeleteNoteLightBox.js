@@ -5,10 +5,13 @@ import LightBoxHeading from "./LightBoxHeading";
 
 class DeleteNoteLightBox extends Component {
   confirmDeleteNote = (e) => {
-    const { editingNote, deleteNote, toggleLightBox } = this.props;
+    const { editingNote, deleteNote, toggleLightBox, switchView } = this.props;
     toggleLightBox(e);
     if (editingNote.id) {
       deleteNote(editingNote.notebookId, editingNote.id);
+      if (e.target.closest(".note-in-editor")) {
+        switchView("deleteNoteView");
+      }
     }
   };
 
