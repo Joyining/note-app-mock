@@ -159,8 +159,14 @@
               align-items: center;
               flex-basis: 30%;
               padding-left: 52px;
+              .note-icon {
+                flex-shrink: 0;
+              }
               .note-title {
                 cursor: pointer;
+                height: 20px;
+                overflow: hidden;
+                text-overflow: ellipsis;
                 &:hover {
                   text-decoration: underline;
                 }
