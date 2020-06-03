@@ -41,6 +41,17 @@
         height: 32px;
         line-height: 32px;
         cursor: pointer;
+        .icon-and-name {
+          display: flex;
+          align-items: center;
+          svg {
+            fill: $--mercury;
+            flex-shrink: 0;
+            margin-right: 3px;
+            width: 24px;
+            height: 24px;
+          }
+        }
         &.hide-in-pc {
           display: none;
         }

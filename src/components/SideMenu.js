@@ -4,16 +4,16 @@ import _ from "lodash";
 import * as actions from "../actions";
 import * as utils from "../utils";
 import Notebook from "./Notebook";
+import { ReactComponent as AllNotesIcon } from "../images/allNote.svg";
+import { ReactComponent as NotebookIcon } from "../images/notebookFill.svg";
 
 class SideMenu extends Component {
   menuItemOnClickHandler = (view, needFilterNotes, filter, e) => {
     const { switchView, filterNotes, cookies, currentUser } = this.props;
-    if (e.target === e.currentTarget) {
-      switchView(view);
-      if (needFilterNotes) {
-        const getCurrentUser = utils.getCurrentUser(cookies, currentUser);
-        filterNotes(getCurrentUser, filter);
-      }
+    switchView(view);
+    if (needFilterNotes) {
+      const getCurrentUser = utils.getCurrentUser(cookies, currentUser);
+      filterNotes(getCurrentUser, filter);
     }
   };
 
@@ -44,6 +44,7 @@ class SideMenu extends Component {
     const menu = [
       {
         name: "All Notes",
+        icon: <AllNotesIcon />,
         view: "noteAndEditor",
         child: null,
         needFilterNotes: true,
@@ -53,6 +54,7 @@ class SideMenu extends Component {
       },
       {
         name: "Notebooks",
+        icon: <NotebookIcon />,
         view: "notebookList",
         child: this.renderNotebook(),
         needFilterNotes: true,
@@ -62,6 +64,7 @@ class SideMenu extends Component {
       },
       {
         name: "Notebooks",
+        icon: <NotebookIcon />,
         view: "side",
         child: this.renderNotebook(),
         needFilterNotes: false,
@@ -81,16 +84,21 @@ class SideMenu extends Component {
                   className={`menu-item ${
                     !item.mobile ? "hide-in-mobile" : ""
                   } ${!item.pc ? "hide-in-pc" : ""}`}
-                  onClick={(e) => {
-                    this.menuItemOnClickHandler(
-                      item.view,
-                      item.needFilterNotes,
-                      item.filter,
-                      e
-                    );
-                  }}
                 >
-                  {item.name}
+                  <p
+                    className="icon-and-name"
+                    onClick={(e) => {
+                      this.menuItemOnClickHandler(
+                        item.view,
+                        item.needFilterNotes,
+                        item.filter,
+                        e
+                      );
+                    }}
+                  >
+                    {item.icon}
+                    <span>{item.name}</span>
+                  </p>
                   <ul>{item.child}</ul>
                 </li>
               );
