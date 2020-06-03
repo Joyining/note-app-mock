@@ -23,8 +23,6 @@ class Editor extends Component {
       localEditorValue,
     } = this.state;
     const { editNote, editingNote, isEditing } = this.props;
-    console.log(`onChange !!!!!!! ${value}`);
-    console.log(editingNote.id);
 
     if (isEditing !== true && isEditing !== false) {
       this.setState({
@@ -76,10 +74,6 @@ class Editor extends Component {
             cookies={cookies}
           />
         </div>
-
-        {console.log("isEditing: " + isEditing)}
-        {console.log(`localNoteId: ${localNoteId}`)}
-        {console.log(`editingNote.id: ${editingNote.id}`)}
         <div>
           <ReactQuill
             value={
