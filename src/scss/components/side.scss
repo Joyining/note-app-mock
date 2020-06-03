@@ -88,6 +88,9 @@
               width: 124px;
               overflow: hidden;
               text-overflow: ellipsis;
+              @include phone-width {
+                width: 100%;
+              }
             }
           }
 

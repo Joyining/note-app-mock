@@ -22,6 +22,11 @@
     }
     .current-position {
       color: $--evernote-green;
+      width: 80vw;
+      height: 22px;
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 }
