@@ -9,7 +9,7 @@ export const deleteNotebook = (notebookId) => async (dispatch) => {
   notebookRef.delete().then((res) => {
     dispatch({
       type: DELETE_NOTEBOOK,
-      view: "notebookList",
+      view: "deleteNotebookView",
       selectedNotebook: {
         id: "",
         name: "",

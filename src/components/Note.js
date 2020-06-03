@@ -11,7 +11,10 @@ class Note extends Component {
   edit = (e, noteId) => {
     const { updateEditingNote, notebookId, switchView } = this.props;
     updateEditingNote(notebookId, noteId);
-    if (!e.target.classList.contains("note-title")) {
+    if (
+      !e.target.classList.contains("note-title") &&
+      !e.target.classList.contains("delete-btn")
+    ) {
       switchView("editNoteView");
     }
   };

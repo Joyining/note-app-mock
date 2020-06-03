@@ -52,9 +52,17 @@ class Main extends Component {
               <Side cookies={cookies} />
             </div>
           );
+        case "deleteNotebookView":
+          return (
+            <div className={`main-wrap ${currentView}`}>
+              <Side cookies={cookies} />
+              <NotebookList cookies={cookies} />
+            </div>
+          );
         case "noteAndEditor":
         case "addNoteView":
         case "editNoteView":
+        case "deleteNoteView":
         default:
           if (allNotes.length === 0) {
             return (

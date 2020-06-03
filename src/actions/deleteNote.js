@@ -11,6 +11,7 @@ export const deleteNote = (notebookId, noteId) => async (dispatch) => {
   dispatch({
     type: DELETE_NOTE,
     isDeletingNote: true,
+    view: "deleteNoteView",
   });
 
   notebookRef.get().then((snapshot) => {

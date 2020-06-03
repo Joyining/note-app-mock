@@ -29,7 +29,10 @@ class DeleteNoteLightBox extends Component {
           <button className="general-btn btn" onClick={toggleLightBox}>
             Cancel
           </button>
-          <button className="warning-btn btn" onClick={this.confirmDeleteNote}>
+          <button
+            className="delete-btn warning-btn btn"
+            onClick={this.confirmDeleteNote}
+          >
             Delete
           </button>
         </div>

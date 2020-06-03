@@ -106,6 +106,16 @@ $--phone-media: 760px;
           width: 100%;
         }
       }
+      &.deleteNoteView {
+        .editor-wrap {
+          display: none;
+        }
+      }
+      &.deleteNotebookView {
+        .notebook-list-outer-wrap {
+          display: none;
+        }
+      }
     }
     .side-wrap {
       display: none;
