@@ -16,8 +16,9 @@ class Note extends Component {
     }
   };
 
-  noteTitleOnClickHandler = () => {
-    const { switchView } = this.props;
+  noteTitleOnClickHandler = (noteId) => {
+    const { updateEditingNote, notebookId, switchView } = this.props;
+    updateEditingNote(notebookId, noteId);
     switchView("editor");
   };
 
@@ -76,7 +77,12 @@ class Note extends Component {
         <div className="note-in-notebook-list note-info">
           <p className="note-title-and-icon">
             <NoteIcon className="note-icon" />
-            <span className="note-title" onClick={this.noteTitleOnClickHandler}>
+            <span
+              className="note-title"
+              onClick={() => {
+                this.noteTitleOnClickHandler(noteId);
+              }}
+            >
               {title}
             </span>
           </p>
