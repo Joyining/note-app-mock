@@ -8,14 +8,17 @@ import { ReactComponent as NoteIcon } from "../images/note.svg";
 import "../scss/components/noteList.scss";
 
 class Note extends Component {
-  edit = (noteId) => {
-    const { updateEditingNote, notebookId } = this.props;
+  edit = (e, noteId) => {
+    const { updateEditingNote, notebookId, switchView } = this.props;
     updateEditingNote(notebookId, noteId);
+    if (!e.target.classList.contains("note-title")) {
+      switchView("editNoteView");
+    }
   };
 
   noteTitleOnClickHandler = () => {
     const { switchView } = this.props;
-    switchView("editorOnly");
+    switchView("editor");
   };
 
   render() {
@@ -35,7 +38,7 @@ class Note extends Component {
         className={`note-outer-wrap ${
           editingNote.id === noteId ? "active" : ""
         }`}
-        onClick={() => this.edit(noteId)}
+        onClick={(e) => this.edit(e, noteId)}
       >
         <div
           className="partial-content"

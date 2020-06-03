@@ -34,20 +34,13 @@ class Main extends Component {
       );
     } else {
       switch (currentView) {
-        case "addNoteView":
-          return (
-            <div className={`main-wrap ${currentView}`}>
-              <NoteList cookies={cookies} />
-              <Editor cookies={cookies} />
-            </div>
-          );
         case "notebookList":
           return (
             <div className="main-wrap">
               <NotebookList cookies={cookies} />
             </div>
           );
-        case "editorOnly":
+        case "editor":
           return (
             <div className="main-wrap">
               <Editor cookies={cookies} />
@@ -60,16 +53,18 @@ class Main extends Component {
             </div>
           );
         case "noteAndEditor":
+        case "addNoteView":
+        case "editNoteView":
         default:
           if (allNotes.length === 0) {
             return (
-              <div className="main-wrap">
+              <div className={`main-wrap ${currentView}`}>
                 <NoteList cookies={cookies} />
               </div>
             );
           } else {
             return (
-              <div className="main-wrap">
+              <div className={`main-wrap ${currentView}`}>
                 <NoteList cookies={cookies} />
                 <Editor cookies={cookies} />
               </div>

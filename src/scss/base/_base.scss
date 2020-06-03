@@ -95,7 +95,8 @@ $--phone-media: 760px;
       .editor-wrap {
         display: none;
       }
-      &.addNoteView {
+      &.addNoteView,
+      &.editNoteView {
         .note-list-wrap {
           display: none;
         }
