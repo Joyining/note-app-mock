@@ -20,10 +20,20 @@
         display: flex;
         justify-content: space-between;
       }
-      p {
+      .notebook-name {
         height: 18px;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        display: flex;
+        align-items: center;
+        .notebook-icon {
+          margin-right: 3px;
+          fill: $--silver-chalice;
+          flex-shrink: 0;
+        }
+        .text {
+          height: 100%;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
       }
       .icon {
         .horizontal {

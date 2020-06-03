@@ -5,6 +5,7 @@ import * as utils from "../utils";
 import DOMPurify from "dompurify";
 import NoteActions from "./NoteActions";
 import { ReactComponent as NoteIcon } from "../images/note.svg";
+import { ReactComponent as NotebookIcon } from "../images/notebook.svg";
 import "../scss/components/noteList.scss";
 
 class Note extends Component {
@@ -65,7 +66,10 @@ class Note extends Component {
               {utils.getDisplayedTime(lastModifiedTime)}
             </p>
             {/* remove later */}
-            <p className="notebook-name">{notebookName}</p>
+            <p className="notebook-name">
+              <NotebookIcon className="notebook-icon" />
+              <span className="text">{notebookName}</span>
+            </p>
             <p className="last-modified-date">
               Last Modified At: {utils.getDisplayedDate(lastModifiedTime)}
             </p>
