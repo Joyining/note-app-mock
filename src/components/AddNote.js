@@ -12,7 +12,6 @@ class AddNote extends Component {
       addNote,
       currentUser,
       updateEditingNote,
-      switchView,
       cookies,
       defaultNotebook,
       selectedNotebook,
@@ -22,7 +21,6 @@ class AddNote extends Component {
     const notebook = selectedNotebook.id ? selectedNotebook : defaultNotebook;
     addNote(notebook.id, noteId, getCurrentUser);
     updateEditingNote(notebook.id, noteId);
-    switchView("noteAndEditor");
   };
 
   render() {
