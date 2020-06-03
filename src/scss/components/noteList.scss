@@ -78,11 +78,11 @@ $--note-outer-wrap-paddingX: 26px;
     &.active {
       background-color: $--concrete;
     }
-    .last-modified-time,
-    .last-modified-date,
-    .notebook-name,
-    .note-info {
+    & > div {
       display: none;
+    }
+    & > div.note-in-note-list {
+      display: block;
     }
 
     .partial-content {

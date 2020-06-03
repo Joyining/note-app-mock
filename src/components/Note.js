@@ -11,10 +11,7 @@ class Note extends Component {
   edit = (e, noteId) => {
     const { updateEditingNote, notebookId, switchView } = this.props;
     updateEditingNote(notebookId, noteId);
-    if (
-      !e.target.classList.contains("note-title") &&
-      !e.target.classList.contains("delete-btn")
-    ) {
+    if (!e.target.classList.contains("delete-btn")) {
       switchView("editNoteView");
     }
   };
@@ -41,32 +38,42 @@ class Note extends Component {
         className={`note-outer-wrap ${
           editingNote.id === noteId ? "active" : ""
         }`}
-        onClick={(e) => this.edit(e, noteId)}
       >
+        {/* for Note inside NoteList */}
         <div
-          className="partial-content"
-          dangerouslySetInnerHTML={{
-            __html: DOMPurify.sanitize(content),
-          }}
-        ></div>
-        <p className="last-modified-ago">
-          {utils.getDisplayedTimeAgo(lastModifiedTime)}
-        </p>
-
-        <div>
-          {/* remove later */}
-          <p className="last-modified-time">
-            will be removed >>> Last Modified At:{" "}
-            {utils.getDisplayedTime(lastModifiedTime)}
-          </p>
-          {/* remove later */}
-          <p className="notebook-name">{notebookName}</p>
-          <p className="last-modified-date">
-            Last Modified At: {utils.getDisplayedDate(lastModifiedTime)}
+          className="note-in-note-list"
+          onClick={(e) => this.edit(e, noteId)}
+        >
+          <div
+            className="partial-content"
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(content),
+            }}
+          ></div>
+          <p className="last-modified-ago">
+            {utils.getDisplayedTimeAgo(lastModifiedTime)}
           </p>
         </div>
 
-        <div className="note-info">
+        {/* for Note on the top of Editor, 也需要用到 Noteactions */}
+        <div className="note-in-editor">
+          <div>
+            {/* remove later */}
+            <p className="last-modified-time">
+              will be removed >>> Last Modified At:{" "}
+              {utils.getDisplayedTime(lastModifiedTime)}
+            </p>
+            {/* remove later */}
+            <p className="notebook-name">{notebookName}</p>
+            <p className="last-modified-date">
+              Last Modified At: {utils.getDisplayedDate(lastModifiedTime)}
+            </p>
+          </div>
+          <NoteActions cookies={cookies} notebookId={notebookId} />
+        </div>
+
+        {/* for Note inside NotebookList */}
+        <div className="note-in-notebook-list note-info">
           <p className="note-title-and-icon">
             <NoteIcon className="note-icon" />
             <span className="note-title" onClick={this.noteTitleOnClickHandler}>

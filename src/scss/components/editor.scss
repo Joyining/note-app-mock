@@ -13,18 +13,17 @@
       width: 100%;
       color: $--silver-chalice;
       font-size: 13px;
-      display: flex;
-      justify-content: space-between;
+      & > div {
+        display: none;
+      }
+      & > div.note-in-editor {
+        display: flex;
+        justify-content: space-between;
+      }
       p {
         height: 18px;
         overflow: hidden;
         text-overflow: ellipsis;
-      }
-      .partial-content,
-      .last-modified-ago,
-      .note-title-and-icon,
-      .note-detail {
-        display: none;
       }
       .icon {
         .horizontal {

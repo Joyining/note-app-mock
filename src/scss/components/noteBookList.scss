@@ -142,14 +142,10 @@
         display: flex;
         .note-outer-wrap {
           width: 100%;
-          .partial-content,
-          .last-modified-ago,
-          .last-modified-time,
-          .last-modified-date,
-          .notebook-name {
+          & > div {
             display: none;
           }
-          .note-info {
+          & > div.note-in-notebook-list {
             display: flex;
             justify-content: space-between;
             align-items: center;
