@@ -13,8 +13,13 @@ const HomeContainer = (props) => {
 
   useEffect(() => {
     if (isLogedIn === true) {
-      cookies.set("isLogedIn", true, { path: "/" });
-      cookies.set("currentUser", currentUser, { path: "/" });
+      let targetDate = new Date();
+      targetDate.setHours(targetDate.getHours() + 48);
+      cookies.set("isLogedIn", true, { path: "/", expires: targetDate });
+      cookies.set("currentUser", currentUser, {
+        path: "/",
+        expires: targetDate,
+      });
     }
   });
 
