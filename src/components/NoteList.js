@@ -30,7 +30,7 @@ class NoteList extends Component {
   render() {
     const { selectedNotebook, defaultNotebook, cookies, allNotes } = this.props;
     const currentNotebook = {
-      id: selectedNotebook.id ? selectedNotebook.id : "allNotes",
+      id: selectedNotebook.id ? selectedNotebook.id : "",
       name: selectedNotebook.name ? selectedNotebook.name : "All Notes",
       notes: allNotes,
       defaultNotebook:
