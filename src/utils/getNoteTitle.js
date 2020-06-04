@@ -1,3 +1,5 @@
+import * as utils from "../utils";
+
 export const getNoteTitle = (noteContent) => {
   let title = "";
   if (noteContent) {
@@ -13,7 +15,9 @@ export const getNoteTitle = (noteContent) => {
     };
     const firstIndex = findTitleStart(noteContent);
     let temp = noteContent.substring(firstIndex);
-    title = noteContent.substring(firstIndex, temp.indexOf("<") + firstIndex);
+    title = utils.htmlDecoder(
+      noteContent.substring(firstIndex, temp.indexOf("<") + firstIndex)
+    );
     return title;
   }
 };
