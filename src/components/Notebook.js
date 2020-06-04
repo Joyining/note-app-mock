@@ -66,7 +66,7 @@ const Notebook = (props) => {
     };
     return (
       <div className="notebook-inner-wrap">
-        <div className="notebook-name-and-icon">
+        <div className="title-and-icon cell">
           <ArrowRight
             className="expand-icon"
             onClick={expandNotebookOnClickHandler}
@@ -78,16 +78,18 @@ const Notebook = (props) => {
           <span className="note-count">{`(${notesInThisNotebook.length})`}</span>
         </div>
 
-        <div className="notebook-detail-and-actions">
+        <div className="detail-and-actions">
           <div className="note-count">
             <span>{notesInThisNotebook.length}</span>
             <span>{` note${notesInThisNotebook.length > 1 ? "s" : ""}`}</span>
           </div>
-          <p className="last-modified-time">
+          {/* <p className="last-modified-time">
             {utils.getDisplayedTime(notebook.lastModifiedTime)}
+          </p> */}
+          <p className="last-modified-time cell">
+            {utils.getDisplayedDate(notebook.lastModifiedTime)}
           </p>
-          {/* <p>{utils.getDisplayedDate(notebook.lastModifiedTime)}</p> */}
-          <p className="is-default-notebook detail-item">
+          <p className="is-default-notebook cell">
             {notebook.defaultNotebook.toString() === "true" ? "Default" : ""}
           </p>
           <NotebookActions

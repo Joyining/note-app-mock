@@ -19,7 +19,7 @@ $--note-outer-wrap-paddingX: 26px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      .notebook-name-and-icon {
+      .title-and-icon {
         .notebook-name {
           color: $--title-gray;
           font-size: 20px;
@@ -33,7 +33,7 @@ $--note-outer-wrap-paddingX: 26px;
         }
       }
 
-      .notebook-detail-and-actions {
+      .detail-and-actions {
         display: flex;
         justify-content: space-between;
         align-items: center;

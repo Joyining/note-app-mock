@@ -69,7 +69,7 @@
           box-sizing: border-box;
           height: 32px;
           cursor: pointer;
-          .notebook-name-and-icon {
+          .title-and-icon {
             display: flex;
             align-items: center;
             height: 100%;
@@ -94,7 +94,7 @@
             }
           }
 
-          .notebook-detail-and-actions,
+          .detail-and-actions,
           .note-count {
             display: none;
           }

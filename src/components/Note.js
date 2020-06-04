@@ -78,8 +78,8 @@ class Note extends Component {
         </div>
 
         {/* for Note inside NotebookList */}
-        <div className="note-in-notebook-list note-info">
-          <p className="note-title-and-icon">
+        <div className="note-in-notebook-list">
+          <p className="title-and-icon cell">
             <NoteIcon className="note-icon" />
             <span
               className="note-title"
@@ -91,12 +91,14 @@ class Note extends Component {
             </span>
           </p>
 
-          <p className="note-detail">
-            <span className="last-modified-date">
-              {utils.getDisplayedDate(lastModifiedTime)}
-            </span>
-          </p>
-          <NoteActions cookies={cookies} notebookId={notebookId} />
+          <div className="detail-and-actions">
+            <p className="note-detail cell">
+              <span className="last-modified-date">
+                {utils.getDisplayedDate(lastModifiedTime)}
+              </span>
+            </p>
+            <NoteActions cookies={cookies} notebookId={notebookId} />
+          </div>
         </div>
       </div>
     );

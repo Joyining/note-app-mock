@@ -102,7 +102,10 @@ class NoteActions extends Component {
     return (
       <div>
         <div className="note-actions-wrap">
-          <div className="icon" onClick={this.menuOnClickHandler}>
+          <div
+            className="actions-icon actions cell"
+            onClick={this.menuOnClickHandler}
+          >
             <ActionVertical className="vertical" />
             <ActionHorizontal className="horizontal" />
           </div>

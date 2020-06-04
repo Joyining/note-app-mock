@@ -1,6 +1,5 @@
+@import "../base/_base.scss";
 .notebook-list-outer-wrap {
-  @import "../base/_base.scss";
-
   $--notebook-list-outer-wrap-padding: 30px;
   $--main-title-wrap-height: 50px;
   $--secondary-title-wrap-height: 24px;
@@ -42,160 +41,140 @@
       color: $--evernote-green;
     }
   }
-  .detail-item,
-  .title {
-    padding: 0.5rem;
-    box-sizing: border-box;
-    &.is-default-notebook {
-      width: 117px;
-    }
-  }
-  .actions {
-    width: 53px;
-  }
+
   .notebook-list-inner-wrap {
+    .title-and-icon,
+    .detail-and-actions {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+    }
+    .title-and-icon {
+      flex-basis: 30%;
+    }
+    .detail-and-actions {
+      flex-basis: 70%;
+      justify-content: space-between;
+      .actions {
+        width: 53px;
+      }
+    }
+    .cell {
+      padding: 0.5rem;
+      box-sizing: border-box;
+    }
+
     .table-heading {
       display: flex;
       justify-content: space-between;
-      li {
-        font-size: 11px;
-        color: $--silver-chalice;
-        font-weight: bold;
-        .title {
-          flex-basis: 30%;
-        }
-        &.notebook-detail-and-actions {
-          display: flex;
-          justify-content: space-between;
-        }
-        .is-default-notebook {
-          width: 117px;
-        }
-      }
+      font-size: 11px;
+      color: $--silver-chalice;
+      font-weight: bold;
     }
     .notebook-list {
       overflow-y: scroll;
       height: calc(100vh - #{$--note-list-fixed-height});
-    }
-  }
-  .notebook-outer-wrap {
-    .notebook-inner-wrap {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      .notebook-name-and-icon,
-      .notebook-detail-and-actions {
-        display: flex;
-        align-items: center;
-        font-size: 14px;
-      }
-      .notebook-name-and-icon {
-        justify-content: flex-start;
-        padding: 0.5rem;
-        box-sizing: border-box;
-        flex-basis: 30%;
-        .expand-icon,
-        .notebook-icon {
-          margin-right: 5px;
-          flex-shrink: 0;
-        }
-        .notebook-name {
-          color: $--title-gray;
-          font-weight: 500;
-          cursor: pointer;
-          max-width: 196px;
-          height: 20px;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-        .note-count {
-          color: $--silver-chalice;
-          margin-left: 5px;
-        }
-      }
-      .notebook-detail-and-actions {
-        justify-content: space-between;
-        color: $--boulder;
-
-        .note-count {
-          display: none;
-        }
-        .actions {
-          position: relative;
+      .notebook-outer-wrap {
+        .notebook-inner-wrap {
           display: flex;
-          justify-content: center;
+          justify-content: space-between;
           align-items: center;
-          .icon {
-            width: 20px;
-            height: 20px;
-            fill: $--boulder;
+          font-size: 14px;
+          .title-and-icon {
+            .expand-icon,
+            .notebook-icon {
+              margin-right: 5px;
+              flex-shrink: 0;
+            }
+            .notebook-name {
+              color: $--title-gray;
+              font-weight: 500;
+              cursor: pointer;
+              max-width: 196px;
+              height: 20px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+            .note-count {
+              color: $--silver-chalice;
+              margin-left: 5px;
+            }
           }
-        }
-      }
-    }
-    .note-list {
-      display: none;
-      &.show {
-        display: block;
-      }
-      .note {
-        display: flex;
-        .note-outer-wrap {
-          width: 100%;
-          & > div {
-            display: none;
-          }
-          & > div.note-in-notebook-list {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 14px;
-            box-sizing: border-box;
-            p {
-              padding: 0.5rem;
+          .detail-and-actions {
+            color: $--boulder;
+            .note-count {
+              display: none;
             }
-            .note-title-and-icon {
-              display: flex;
-              align-items: center;
-              flex-basis: 30%;
-              padding-left: 52px;
-              .note-icon {
-                flex-shrink: 0;
-              }
-              .note-title {
-                cursor: pointer;
-                height: 20px;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                &:hover {
-                  text-decoration: underline;
-                }
-              }
-            }
-            .last-modified-date {
-              display: block;
-            }
-            .note-actions-wrap {
-              width: 53px;
+            .actions {
+              position: relative;
               display: flex;
               justify-content: center;
               align-items: center;
-              padding: 0.5rem;
-              box-sizing: border-box;
               .icon {
                 width: 20px;
                 height: 20px;
-                svg {
-                  fill: $--boulder;
-                }
-                .vertical {
-                  display: none;
-                }
+                fill: $--boulder;
               }
-              .shared-menu-list {
+            }
+          }
+        }
+        .note-list {
+          display: none;
+          &.show {
+            display: block;
+          }
+          .note {
+            display: flex;
+            .note-outer-wrap {
+              width: 100%;
+              & > div {
                 display: none;
-                &.show {
+              }
+              & > div.note-in-notebook-list {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 14px;
+                box-sizing: border-box;
+                .title-and-icon {
+                  padding-left: 52px;
+                  .note-icon {
+                    flex-shrink: 0;
+                  }
+                  .note-title {
+                    cursor: pointer;
+                    height: 20px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    &:hover {
+                      text-decoration: underline;
+                    }
+                  }
+                }
+                .last-modified-date {
                   display: block;
+                }
+                .note-actions-wrap {
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  box-sizing: border-box;
+                  .actions-icon {
+                    width: 20px;
+                    height: 20px;
+                    svg {
+                      fill: $--boulder;
+                    }
+                    .vertical {
+                      display: none;
+                    }
+                  }
+                  .shared-menu-list {
+                    display: none;
+                    &.show {
+                      display: block;
+                    }
+                  }
                 }
               }
             }

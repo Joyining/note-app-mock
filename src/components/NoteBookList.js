@@ -11,7 +11,6 @@ class NotebookList extends Component {
     const { allNotebooks, cookies } = this.props;
     console.log(allNotebooks);
     const notebooks = _.map(allNotebooks, (notebook) => {
-      console.log(notebook);
       return (
         <Notebook
           key={notebook.id}
@@ -44,18 +43,16 @@ class NotebookList extends Component {
         </div>
 
         <div className="notebook-list-inner-wrap">
-          <ul className="table-heading">
-            <li className="notebook-name-and-icon">
-              <p className="title">Title</p>
-            </li>
-            <li className="notebook-detail-and-actions">
-              <p className="last-modified detail-item">Last Modified</p>
-              <p className="is-default-notebook detail-item">
-                Default Notebook
-              </p>
-              <p className="actions detail-item">Actions</p>
-            </li>
-          </ul>
+          <div className="table-heading">
+            <p className="title-and-icon">
+              <span className="cell">Title</span>
+            </p>
+            <div className="detail-and-actions">
+              <p className="last-modified cell">Last Modified</p>
+              <p className="is-default-notebook cell">Default Notebook</p>
+              <p className="actions cell">Actions</p>
+            </div>
+          </div>
           <div>{this.renderNotebook()}</div>
         </div>
       </div>
