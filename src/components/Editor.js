@@ -37,6 +37,8 @@ class Editor extends Component {
         localNoteId: editingNote.id,
       });
     } else if (isEditing === false) {
+      const qlEditor = document.getElementsByClassName("ql-editor")[0];
+      qlEditor.scrollTop = 0;
       this.setState({
         // accumulatedOnchangeCount: 1,
         localEditorValue: value,
