@@ -87,7 +87,11 @@ const NotebookActions = (props) => {
   ];
   return (
     <div>
-      <div className={`actions detail-item ${notebookId}`}>
+      <div
+        className={`actions detail-item ${
+          notebookId ? notebookId : "allNotes"
+        }`}
+      >
         <ActionIcon className="icon" onClick={actionOnClickHandler} />
         <ul className={`shared-menu-list ${showMenu ? "show" : ""}`}>
           {menu.map((item) => {
