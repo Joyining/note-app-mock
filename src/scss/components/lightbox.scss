@@ -9,7 +9,7 @@
   background-color: $--light-box-bg;
   align-items: center;
   justify-content: center;
-  z-index: 1;
+  z-index: 2;
   &.show {
     display: flex;
   }
@@ -17,7 +17,7 @@
     @extend %box-style;
     padding: 20px;
     position: relative;
-    z-index: 2;
+    z-index: 3;
     width: 500px;
     box-sizing: border-box;
     .heading-wrap {
