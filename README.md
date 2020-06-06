@@ -1,3 +1,40 @@
+This is a side project mocking [Evernote](https://evernote.com/intl/en/) with the following [tech stacks](#builtWith).
+
+## Table of Contents
+
+## About the Project
+
+### Quick Demo
+
+### Built With
+
+- [React v16.13.1](https://github.com/facebook/react/)
+- [Create React App](https://github.com/facebook/create-react-app)
+- [Redux v4.0.5](https://github.com/reduxjs/redux)
+- [Redux Thunk v2.3.0](https://github.com/reduxjs/redux-thunk)
+- [React Quill v1.3.5](https://www.npmjs.com/package/react-quill)
+- [Node Sass v4.14.1](https://www.npmjs.com/package/node-sass)
+- [Firebase v7.14.2](https://firebase.google.com/)
+
+## Usage/ Features
+
+## Roadmap
+
+### Refactor
+
+- Firebase user authentication
+- Unit tests
+
+### Feature
+
+- Search notes/ notebooks with keywords
+- Tags for notes
+- Sort notes/ notebooks by title, last modified time, created time
+- Co-edit notes with other users
+- Move notes to other notebooks
+
+## Contact
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
