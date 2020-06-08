@@ -87,8 +87,8 @@ class Editor extends Component {
           />
         </div>
         <div className="editor-bottom">
-          <p>tag area</p>
-          <p>current editing: {editingNote.id}</p>
+          {/* <p>tag area</p>
+          <p>current editing: {editingNote.id}</p> */}
         </div>
       </div>
     );

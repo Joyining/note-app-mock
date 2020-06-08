@@ -61,10 +61,10 @@ class Note extends Component {
         <div className="note-in-editor">
           <div>
             {/* remove later */}
-            <p className="last-modified-time">
+            {/* <p className="last-modified-time">
               will be removed >>> Last Modified At:{" "}
               {utils.getDisplayedTime(lastModifiedTime)}
-            </p>
+            </p> */}
             {/* remove later */}
             <p className="notebook-name">
               <NotebookIcon className="notebook-icon" />
