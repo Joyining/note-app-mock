@@ -18,7 +18,9 @@ This is a side project mocking [Evernote](https://evernote.com/intl/en/) with th
 
 #### Quick Demo
 
-![evernote-mock-demo04](https://user-images.githubusercontent.com/12509334/84001755-dc56fc00-a999-11ea-96f1-d4659aa9475a.gif)
+![demo01-2](https://user-images.githubusercontent.com/12509334/84006740-d107ce80-a9a1-11ea-8d95-822df13a73a9.gif)
+![demo02](https://user-images.githubusercontent.com/12509334/84007740-71122780-a9a3-11ea-9789-d6aa9a65c705.gif)
+![demo04](https://user-images.githubusercontent.com/12509334/84008739-d61a4d00-a9a4-11ea-9b3f-2b702a7c1a6a.gif)
 
 #### Built With
 
