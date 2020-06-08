@@ -1,12 +1,26 @@
 This is a side project mocking [Evernote](https://evernote.com/intl/en/) with the following [tech stacks](#built-with).
 
+![image](https://user-images.githubusercontent.com/12509334/83991571-bfadca80-a97f-11ea-90dd-6d33c9e5ab3c.png)
+
 ## Table of Contents
+
+- [About the Project](#about-the-project)
+  - [Quick Demo](#quick-demo)
+  - [Built With](#built-with)
+- [Available Scripts](#)
+- [Features](#features)
+- [Roadmap](#roadmap)
+  - [Tech](#tech)
+  - [More Features](#more-features)
+- [Contact](#contact)
 
 ## About the Project
 
-### Quick Demo
+#### Quick Demo
 
-### Built With
+![evernote-mock-demo04](https://user-images.githubusercontent.com/12509334/84001755-dc56fc00-a999-11ea-96f1-d4659aa9475a.gif)
+
+#### Built With
 
 - [React v16.13.1](https://github.com/facebook/react/)
 - [Create React App](https://github.com/facebook/create-react-app)
@@ -15,27 +29,6 @@ This is a side project mocking [Evernote](https://evernote.com/intl/en/) with th
 - [React Quill v1.3.5](https://www.npmjs.com/package/react-quill)
 - [Node Sass v4.14.1](https://www.npmjs.com/package/node-sass)
 - [Firebase v7.14.2](https://firebase.google.com/)
-
-## Usage/ Features
-
-## Roadmap
-
-### Refactor
-
-- Firebase user authentication
-- Unit tests
-
-### Feature
-
-- Search notes/ notebooks with keywords
-- Tags for notes
-- Sort notes/ notebooks by title, last modified time, created time
-- Co-edit notes with other users
-- Move notes to other notebooks
-
-## Contact
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
@@ -74,32 +67,33 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## Features
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Create Note to save text, links and images data.
+- Edit, copy and delete notes.
+- Create Notebook to group and filter your Notes.
+- Rename, delete notebooks.
+- User login, logout and signup.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Roadmap
 
-### Code Splitting
+#### Tech
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+- Firebase user authentication to enhance data security
+- Performance tuning
+- Unit tests
 
-### Analyzing the Bundle Size
+#### More Features
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+- Search notes/ notebooks with keywords
+- Tags for notes
+- Sort notes/ notebooks by title, last modified time, created time
+- Co-edit notes with other users
+- Move notes to other notebooks
 
-### Making a Progressive Web App
+## Contact
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+Reach out to me at one of the following places!
 
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- Email (yining1204@gmail.com)
+- [LinkedIn](https://www.linkedin.com/in/joy-yining-huang-984865b8/)
