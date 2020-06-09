@@ -4,10 +4,10 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import { CookiesProvider } from "react-cookie";
 import reduxThunk from "redux-thunk";
-import reducers from "./reducers";
+import rootReducer from "./reducers";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
+const store = createStore(rootReducer, {}, applyMiddleware(reduxThunk));
 ReactDOM.render(
   <CookiesProvider>
     <Provider store={store}>
