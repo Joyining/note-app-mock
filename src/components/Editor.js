@@ -10,55 +10,26 @@ class Editor extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // accumulatedOnchangeCount: 1,
       localEditorValue: "",
       localNoteId: "",
     };
   }
 
   onchangeHandler = (value) => {
-    let {
-      // accumulatedOnchangeCount,
-      localNoteId,
-      localEditorValue,
-    } = this.state;
     const { editNote, editingNote, isEditing } = this.props;
 
-    if (isEditing !== true && isEditing !== false) {
-      this.setState({
-        // accumulatedOnchangeCount: 1,
-        localEditorValue: value,
-        localNoteId: editingNote.id,
-      });
-    } else if (isEditing === true) {
-      this.setState({
-        // accumulatedOnchangeCount: accumulatedOnchangeCount + 1,
-        localEditorValue: value,
-        localNoteId: editingNote.id,
-      });
-    } else if (isEditing === false) {
+    this.setState({
+      localEditorValue: value,
+      localNoteId: editingNote.id,
+    });
+
+    if (isEditing === false) {
       const qlEditor = document.getElementsByClassName("ql-editor")[0];
       qlEditor.scrollTop = 0;
-      this.setState({
-        // accumulatedOnchangeCount: 1,
-        localEditorValue: value,
-        localNoteId: editingNote.id,
-      });
-      // 前一次動作為切換note時，將之前的編輯結果edit出去
-      // if (localNoteId) {
-      //   editNote( localNoteId, localEditorValue, isEditing);
-      // }
     }
 
-    // console.log("after: " + accumulatedOnchangeCount); // 加一後，下一次才會生效
-
     if (editingNote.id) {
-      // if (
-      //   accumulatedOnchangeCount === 1 ||
-      //   (accumulatedOnchangeCount !== 0 && accumulatedOnchangeCount % 5 === 0)
-      // ) {
       editNote(editingNote.notebookId, editingNote.id, value, isEditing);
-      // }
     }
   };
 
