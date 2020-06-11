@@ -12,11 +12,14 @@ class Editor extends Component {
     this.state = {
       localEditorValue: "",
       localNoteId: "",
+      editNoteSchedule: [],
     };
   }
 
   onchangeHandler = (value) => {
     const { editNote, editingNote, isEditing } = this.props;
+    const { editNoteSchedule } = this.state;
+    const now = new Date();
 
     this.setState({
       localEditorValue: value,
@@ -29,7 +32,22 @@ class Editor extends Component {
     }
 
     if (editingNote.id) {
-      editNote(editingNote.notebookId, editingNote.id, value, isEditing);
+      const latestEditNoteTime = editNoteSchedule[0];
+      if (!latestEditNoteTime || now - latestEditNoteTime > 1000) {
+        editNoteSchedule.unshift(now);
+        this.setState({
+          editNoteSchedule: editNoteSchedule,
+        });
+        setTimeout(() => {
+          const { localEditorValue } = this.state;
+          editNote(
+            editingNote.notebookId,
+            editingNote.id,
+            localEditorValue,
+            isEditing
+          );
+        }, 1000);
+      }
     }
   };
 
